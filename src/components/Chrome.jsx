@@ -52,7 +52,7 @@ export function Nav() {
         ))}
       </nav>
       <div className="nav__tools">
-        <a className="btn btn--volt nav__talk" href="#contato">
+        <a className="btn btn--volt nav__talk" href="#perfil">
           {t.talk}
         </a>
         <LangSwitch />

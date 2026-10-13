@@ -11,14 +11,14 @@ Botão **Entrar** vira a moldura do cabeçalho (View Transitions).
 ## `/inicio` Landing (uma página só, centrada no Keven)
 | # | Âncora | Conteúdo |
 |---|---|---|
-| — | `#inicio` | "Oi, eu sou o *sorry.*" · meio-tom do "s." · cartão do Discord ao vivo · faixa com status e jogo aberto |
+| — | `#inicio` | "Código, design e *movimento.*" · meio-tom do "s." · faixa com status e jogo aberto |
 | — | — | faixa rolando com jogos, filmes, artistas e interesses |
 | 01 | `#jogos` | 8 jogos; o cartão acende sozinho quando o Discord mostra o jogo aberto |
 | 02 | `#tela` | Filmes (Jumper, Nolan com a filmografia, Marvel, DC) e séries (Suits, Território da Máfia, HBO, Marvel & DC) |
 | 03 | `#musica` | 7 artistas favoritos; o artista acende quando está tocando no Spotify |
 | 04 | `#projetos` | IA e projetos pessoais · Smart7 (tela real que segue o tema) · 8 módulos em abas com temporizador e a tela real de cada um (`#catalogo`) |
 | 05 | `#sobre` | Dev · Design · Motion + ferramentas |
-| 06 | `#contato` | GitHub, TikTok, Discord |
+| 06 | `#perfil` | Ficha do Discord ao vivo (avatar, tag, status, atividade, desde quando) + links: GitHub, TikTok, X, Pinterest, Discord |
 
 Gostos em `src/data/me.js`, na grafia do Keven. Artes dos jogos: Steam e Microsoft Store (CDN delas). Filmes e séries: TMDB (`scripts/fetch-tmdb.mjs`).
 

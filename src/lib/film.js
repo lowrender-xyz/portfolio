@@ -20,7 +20,6 @@ export const getLenis = () => state.lenis;
 // [cena, alvo dentro da cena, efeito(progresso, índice do alvo, alvo)] → { t: transform, o: opacity }
 const FX = [
   ["#inicio", ".lhero__grid", ({ out }) => ({ t: `translate3d(0,${-out * 140}px,0) scale(${1 - out * 0.08})`, o: 1 - out * 1.5 })],
-  ["#inicio", ".lhero__card", ({ out }) => ({ t: `translate3d(0,${-out * 180}px,0)` })],
   ["#inicio", ".lhero__dots", ({ out }) => ({ t: `translate3d(${out * 6}%,0,0) scale(${1 + out * 0.55})`, o: 0.95 - out * 1.1 })],
   ["#inicio", ".lhero__strip", ({ out }) => ({ t: `translate3d(0,${out * 40}px,0)` })],
   // títulos: a palavra em destaque chega deslizando da direita e para quando a cena chega ao meio da tela
@@ -49,6 +48,15 @@ const FX = [
   ["#catalogo", ".mx__stage", ({ p }) => {
     const e = clamp((p - 0.05) * 3.2);
     return { t: `perspective(1600px) rotateX(${(1 - e) * 16}deg) scale(${0.9 + e * 0.1})` };
+  }],
+  // perfil: a ficha e os links chegam de lados opostos e se encontram no meio
+  ["#perfil", ".pf__card", ({ p }) => {
+    const e = clamp((p - 0.05) * 3.2);
+    return { t: `translate3d(${(1 - e) * -12}vw,0,0)`, o: e };
+  }],
+  ["#perfil", ".pf__links > li", ({ p }, i) => {
+    const e = clamp((p - 0.08 - i * 0.03) * 4);
+    return { t: `translate3d(${(1 - e) * 10}vw,0,0)`, o: e };
   }],
   // rodapé: o "sorry." final cresce até o fim da página
   // (o rodapé nunca sai por cima da tela: o efeito termina, parado no lugar, antes do fim da página)

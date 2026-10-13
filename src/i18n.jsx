@@ -12,6 +12,7 @@ const dict = {
       ["#musica", "Música"],
       ["#projetos", "Projetos"],
       ["#sobre", "Sobre"],
+      ["#perfil", "Perfil"],
     ],
     talk: "Contato",
     landing: {
@@ -87,6 +88,15 @@ const dict = {
         demo: "Telas reais do Smart7 rodando num ambiente local com dados de demonstração fictícios.",
         demoShort: "dados de demonstração",
       },
+      profile: {
+        kicker: "Perfil",
+        title: ["Perfil e\n", { em: "links." }],
+        lead: "Discord ao vivo e as redes, num lugar só.",
+        now: "AGORA",
+        since: "NO DISCORD DESDE",
+        name: "NOME",
+        idle: "Sem atividade no momento",
+      },
       contact: {
         kicker: "Contato",
         title: ["Projetos, ideias,\n", { em: "parcerias." }],
@@ -142,6 +152,7 @@ const dict = {
       ["#musica", "Music"],
       ["#projetos", "Projects"],
       ["#sobre", "About"],
+      ["#perfil", "Profile"],
     ],
     talk: "Contact",
     landing: {
@@ -216,6 +227,15 @@ const dict = {
         enlarge: "Enlarge",
         demo: "Real Smart7 screens running locally with fictional demo data.",
         demoShort: "demo data",
+      },
+      profile: {
+        kicker: "Profile",
+        title: ["Profile &\n", { em: "links." }],
+        lead: "Live Discord and every network, in one place.",
+        now: "NOW",
+        since: "ON DISCORD SINCE",
+        name: "NAME",
+        idle: "No activity right now",
       },
       contact: {
         kicker: "Contact",

@@ -2479,6 +2479,260 @@ html.lenis body {
   }
 }
 
+
+/* ── perfil: ficha do Discord ao vivo + links ── */
+.pf {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+#perfil .reveal.is-in {
+  clip-path: none;
+}
+.pf__card {
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0) 0 0 / 14px 14px,
+    var(--panel);
+  clip-path: var(--chamfer);
+  --cut: 22px;
+}
+.pf__bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--line);
+  color: var(--mute);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pf__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--paper);
+}
+.pf__status i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #80848e;
+}
+[data-status="online"] .pf__status i { background: #23a55a; }
+[data-status="idle"] .pf__status i { background: #f0b232; }
+[data-status="dnd"] .pf__status i { background: #f23f43; }
+.pf__id {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 26px 22px 22px;
+}
+.pf__avatar {
+  flex: none;
+  width: clamp(96px, 9vw, 132px);
+  aspect-ratio: 1;
+  padding: 4px;
+  border: 1px solid var(--line);
+  clip-path: var(--chamfer);
+  --cut: 14px;
+  background: var(--ink);
+}
+.pf__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: var(--chamfer);
+  --cut: 11px;
+}
+.pf__name {
+  font: 700 clamp(2.2rem, 4.4vw, 3.6rem) / 0.95 var(--display);
+  letter-spacing: -0.05em;
+}
+.pf__handle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  color: var(--mute);
+  font-size: 0.78rem;
+}
+.pf__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-size: 0.66rem;
+}
+.pf__custom {
+  margin-top: 10px;
+  color: var(--paper);
+}
+.pf__spec {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.pf__spec div {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 12px;
+  padding: 13px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.pf__spec dt {
+  color: var(--mute);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  padding-top: 3px;
+}
+.pf__spec dd {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pf__track {
+  display: flex;
+  gap: 16px;
+  padding: 18px 22px 22px;
+}
+.pf__track img {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  clip-path: var(--chamfer);
+  --cut: 8px;
+}
+.pf__track > div {
+  flex: 1;
+  min-width: 0;
+}
+.pf__song {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pf__artist {
+  color: var(--mute);
+  font-size: 0.88rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pf__bar-line {
+  display: block;
+  height: 2px;
+  margin-top: 10px;
+  background: var(--line);
+}
+.pf__bar-line i {
+  display: block;
+  height: 100%;
+  background: var(--volt);
+  transition: width 1s linear;
+}
+.pf__time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: var(--mute);
+  font-size: 0.62rem;
+}
+/* links: linhas grandes que enchem de azul ao passar o mouse */
+.pf__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.pf__links a {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px 110px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  isolation: isolate;
+}
+.pf__links a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--volt);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.45s var(--heavy);
+}
+.pf__links a:hover::before,
+.pf__links a:focus-visible::before {
+  transform: scaleY(1);
+}
+.pf__n,
+.pf__label {
+  color: var(--mute);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.pf__h {
+  font: 600 clamp(1.4rem, 2.6vw, 2.2rem) / 1 var(--display);
+  letter-spacing: -0.035em;
+  transition: transform 0.45s var(--snappy), color 0.3s;
+}
+.pf__go {
+  font-size: 1.2rem;
+  transition: transform 0.45s var(--snappy);
+}
+.pf__links a:hover .pf__h {
+  transform: translateX(8px);
+  color: #fff;
+}
+.pf__links a:hover .pf__n,
+.pf__links a:hover .pf__label {
+  color: #dbe6ff;
+}
+.pf__links a:hover .pf__go {
+  transform: translate(4px, -4px);
+  color: #fff;
+}
+@media (max-width: 960px) {
+  .pf {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .pf__links a {
+    grid-template-columns: 26px 1fr auto;
+  }
+  .pf__label {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .pf__h {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .pf__go {
+    grid-row: 1 / 3;
+    grid-column: 3;
+  }
+  .pf__spec div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

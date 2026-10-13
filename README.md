@@ -23,7 +23,7 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Módulos do Smart7 (abas com temporizador + tela real) | `src/components/ModuleExplorer.jsx` |
 | Meio-tom do hero | `src/components/Halftone.jsx` |
 | Reel da abertura (canvas) | `src/lib/reel.js` · `src/components/Opening.jsx` |
-| Cartão do Discord ao vivo | `src/components/DiscordCard.jsx` · `src/lib/lanyard.js` |
+| Perfil (Discord ao vivo + links) | `src/components/Profile.jsx` · `src/lib/lanyard.js` |
 | Rolagem de filme (efeitos amarrados ao scroll) | `src/lib/film.js` (lista `FX`) |
 | Moldura de interface (trilho, mira, progresso) | `src/components/Hud.jsx` |
 | Linha de terminal ao vivo · tela de carregamento | `src/components/Ticker.jsx` · `src/components/Loader.jsx` |

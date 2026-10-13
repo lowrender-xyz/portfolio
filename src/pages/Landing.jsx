@@ -3,7 +3,7 @@ import { useLocale } from "../i18n.jsx";
 import { site } from "../data/site.js";
 import { SHOTS, STATS, MODULES } from "../data/smart7.js";
 import { GAMES, SCREEN, TOOLS, ARTISTS, sameArtist } from "../data/me.js";
-import DiscordCard from "../components/DiscordCard.jsx";
+import Profile from "../components/Profile.jsx";
 import Halftone from "../components/Halftone.jsx";
 import ModuleExplorer from "../components/ModuleExplorer.jsx";
 import Shot from "../components/Shot.jsx";
@@ -83,7 +83,7 @@ export default function Landing() {
   const hearing = spotify ? spotify.artist.split(/;\s*/) : [];
   const [shelf, setShelf] = useState("films");
   // capítulos da barra de reprodução: "01 · Jogos", "02 · Filmes e séries"...
-  const chapter = (n) => `${String(n).padStart(2, "0")} · ${n === 0 ? t.nav.home : n === 6 ? t.talk : t.landingNav[n - 1][1]}`;
+  const chapter = (n) => `${String(n).padStart(2, "0")} · ${n === 0 ? t.nav.home : t.landingNav[n - 1][1]}`;
   const marquee = [...GAMES.map((g) => g.title), "Interestelar", "Suits", "Jumper", ...ARTISTS.slice(0, 4), pick(SCREEN.genres[1]), L.marqueeAi];
 
   return (
@@ -111,9 +111,6 @@ export default function Landing() {
               </a>
             </Reveal>
           </div>
-          <Reveal delay={220} className="lhero__card">
-            <DiscordCard presence={presence} />
-          </Reveal>
         </div>
         <div className="lhero__strip mono">
           <span>FIG. 01 · {L.hero.fig}</span>
@@ -244,23 +241,12 @@ export default function Landing() {
         </Reveal>
       </section>
 
-      {/* ── contato ──────────────────────────────────────── */}
-      <section className="lcontact" id="contato" data-scene data-chapter={chapter(6)}>
-        <Kicker n="006">{L.contact.kicker}</Kicker>
+      {/* ── perfil ───────────────────────────────────────── */}
+      <section className="lsec" id="perfil" data-scene data-chapter={chapter(6)}>
+        <Head n="06" k={L.profile.kicker} title={L.profile.title} lead={L.profile.lead} big="@" />
         <Reveal>
-          <Title parts={L.contact.title} />
+          <Profile presence={presence} />
         </Reveal>
-        <div className="lcontact__links">
-          {site.socials.map((s, i) => (
-            <Reveal key={s.id} delay={i * 70}>
-              <a href={s.url} target="_blank" rel="noreferrer">
-                <span className="mono">{s.label}</span>
-                <span>{s.handle}</span>
-                <span aria-hidden="true">↗</span>
-              </a>
-            </Reveal>
-          ))}
-        </div>
       </section>
     </main>
   );
