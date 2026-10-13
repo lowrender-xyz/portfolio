@@ -3,7 +3,35 @@ import { useLocale } from "../i18n.jsx";
 
 // Tela de carregamento com progresso real: fontes e as imagens que já estão no HTML. Some quando tudo
 // carregou (ou depois de 4 s, para nunca prender o visitante). Uma vez por sessão.
+// Vindo da abertura, a tela termina toda azul: aqui essa cortina recolhe e revela a landing.
+function BootCurtain() {
+  const [on, setOn] = useState(() => {
+    try {
+      return sessionStorage.getItem("boot") === "1";
+    } catch (e) {
+      return false;
+    }
+  });
+  useEffect(() => {
+    if (!on) return;
+    try {
+      sessionStorage.removeItem("boot");
+    } catch (e) {}
+  }, [on]);
+  if (!on) return null;
+  return <div className="boot-curtain" aria-hidden="true" onAnimationEnd={() => setOn(false)} />;
+}
+
 export default function Loader() {
+  return (
+    <>
+      <BootCurtain />
+      <FileLoader />
+    </>
+  );
+}
+
+function FileLoader() {
   const { t } = useLocale();
   const [pct, setPct] = useState(0);
   const [done, setDone] = useState(() => {

@@ -22,7 +22,7 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Landing (seções) | `src/pages/Landing.jsx` |
 | Módulos do Smart7 (abas com temporizador + tela real) | `src/components/ModuleExplorer.jsx` |
 | Meio-tom do hero | `src/components/Halftone.jsx` |
-| Reel da abertura (canvas) | `src/lib/reel.js` · `src/components/Opening.jsx` |
+| Abertura (pontos formam "sorry.") | `src/lib/boot.js` · `src/components/Opening.jsx` |
 | Perfil (Discord ao vivo + links) | `src/components/Profile.jsx` · `src/lib/lanyard.js` |
 | Rolagem de filme (efeitos amarrados ao scroll) | `src/lib/film.js` (lista `FX`) |
 | Moldura de interface (trilho, mira, progresso) | `src/components/Hud.jsx` |
@@ -50,8 +50,8 @@ O gerador respeita o limite de requisições da API (100/min), por isso leva alg
   o progresso de cada cena e escreve `transform`/`opacity` só nos elementos que se movem. Para um efeito novo,
   acrescente uma linha em `FX` (cena, alvo, função do progresso). Com "reduzir movimento", tudo fica parado.
 
-- **Reel:** `drawReel(t)` é função pura do tempo (loop de 12 s, 4 takes). `/?t=8.5` congela um quadro;
-  `window.seek(t)` pinta qualquer instante. Com "reduzir movimento" ativo, mostra um still.
+- **Abertura:** a montagem é função pura do tempo; `/?t=2.4` congela um quadro e `window.seek(t)` pinta
+  qualquer instante. Com "reduzir movimento" ativo, abre direto montada.
 - **Discord:** presença via [Lanyard](https://github.com/Phineas/lanyard). Precisa continuar no servidor
   `discord.gg/lanyard` para o status funcionar.
 - **Novas telas no catálogo:** acrescente em `SHOTS` e no `shots` do módulo em `src/data/smart7.js`.

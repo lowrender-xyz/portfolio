@@ -5,8 +5,10 @@ Referência de gramática: landing de produto com seções numeradas, título co
 serifado, cartões A–D e catálogo em anel (velmax.llc). Só os princípios; conteúdo e marca são do Keven.
 
 ## `/` Abertura
-Showreel em canvas (`src/lib/reel.js`), 12 s em loop, 4 takes: Código, Design, Motion, Produto (Smart7).
-Botão **Entrar** vira a moldura do cabeçalho (View Transitions).
+Inicialização do sistema (`src/lib/boot.js`): o terminal digita dados reais (perfil, Discord ao vivo, 8 jogos,
+7 artistas, Smart7) enquanto milhares de pontos convergem e formam "sorry."; a mira trava no ponto azul e o
+botão Entrar aparece. Parado, os pontos respiram e fogem do ponteiro. Ao entrar, eles se espalham, o ponto
+azul cobre a tela e recolhe como cortina sobre a landing. `?t=2.4` congela um quadro da montagem.
 
 ## `/inicio` Landing (uma página só, centrada no Keven)
 | # | Âncora | Conteúdo |

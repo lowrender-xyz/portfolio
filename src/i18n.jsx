@@ -3,8 +3,16 @@ import { createContext, useContext, useEffect, useState } from "react";
 const dict = {
   pt: {
     enter: "Entrar",
-    role: "dev, design & motion",
-    takes: ["Código", "Design", "Motion", "Produto"],
+    boot: {
+      init: "INICIALIZANDO SORRY.SYS",
+      profile: "PERFIL",
+      games: "JOGOS",
+      artists: "ARTISTAS",
+      project: "PROJETO",
+      ok: "PRONTO",
+      role: "CÓDIGO, DESIGN E MOVIMENTO",
+      counts: "■ 06 SEÇÕES · DISCORD AO VIVO",
+    },
     nav: { home: "Início", projects: "Projetos", skills: "Skills" },
     landingNav: [
       ["#jogos", "Jogos"],
@@ -143,8 +151,16 @@ const dict = {
   },
   en: {
     enter: "Enter",
-    role: "dev, design & motion",
-    takes: ["Code", "Design", "Motion", "Product"],
+    boot: {
+      init: "BOOTING SORRY.SYS",
+      profile: "PROFILE",
+      games: "GAMES",
+      artists: "ARTISTS",
+      project: "PROJECT",
+      ok: "READY",
+      role: "CODE, DESIGN AND MOTION",
+      counts: "■ 06 SECTIONS · LIVE DISCORD",
+    },
     nav: { home: "Home", projects: "Projects", skills: "Skills" },
     landingNav: [
       ["#jogos", "Games"],

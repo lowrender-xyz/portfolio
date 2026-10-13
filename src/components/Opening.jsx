@@ -1,109 +1,159 @@
-import { useEffect, useRef } from "react";
-import { drawReel, timecode, LOOP, TAKE } from "../lib/reel.js";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { buildScene, drawBoot, INTRO } from "../lib/boot.js";
 import { useLocale } from "../i18n.jsx";
-import { useTransitionNavigate } from "../lib/transition.js";
+import { useLanyard } from "../lib/lanyard.js";
+import { GAMES, ARTISTS } from "../data/me.js";
 import LangSwitch from "./LangSwitch.jsx";
 
+const EXIT = 0.95; // segundos da saída (pontos se espalham, o azul cobre a tela)
+
+// Abertura: inicialização do sistema. O terminal digita dados reais enquanto os pontos montam "sorry.";
+// a mira trava no ponto azul e o botão Entrar aparece. ?t=2.4 congela um quadro da montagem.
 export default function Opening() {
-  const { t, lang } = useLocale();
-  const go = useTransitionNavigate();
-  const canvasRef = useRef(null);
-  const tcRef = useRef(null);
-  const takeRef = useRef(null);
-  const langRef = useRef(lang);
-  langRef.current = lang;
+  const { t } = useLocale();
+  const B = t.boot;
+  const navigate = useNavigate();
+  const presence = useLanyard();
+  const canvas = useRef(null);
+  const term = useRef(null);
+  const clock = useRef(null);
+  const exitAt = useRef(null);
+  const [ready, setReady] = useState(false);
+
+  const status = presence ? t.discord[presence.discord_status] : t.discord.loading;
+  const lines = [
+    ["//", B.init],
+    [B.profile, "KEVEN"],
+    ["DISCORD", `@XSXRY · ${status.toUpperCase()}`],
+    [B.games, String(GAMES.length).padStart(2, "0")],
+    [B.artists, String(ARTISTS.length).padStart(2, "0")],
+    [B.project, "SMART7"],
+    ["//", B.ok],
+  ];
+  const linesRef = useRef(lines);
+  linesRef.current = lines;
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    const mark = new Image();
-    mark.src = "/brand/smart7-mark.png";
+    const cv = canvas.current;
+    const ctx = cv.getContext("2d");
     const params = new URLSearchParams(location.search);
     const frozen = params.has("t") ? Number(params.get("t")) : null;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let W = 0, H = 0, raf = 0, start = performance.now(), lastTake = -1, alive = true;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let scene = null, raf = 0, alive = true, start = 0, shown = false;
+    const pointer = { x: -9999, y: -9999 };
+    let dpr = 1;
 
-    const resize = () => {
-      const dpr = Math.min(2, window.devicePixelRatio || 1);
-      W = canvas.clientWidth;
-      H = canvas.clientHeight;
-      canvas.width = Math.round(W * dpr);
-      canvas.height = Math.round(H * dpr);
+    const build = () => {
+      dpr = Math.min(2, devicePixelRatio || 1);
+      const W = cv.clientWidth, H = cv.clientHeight;
+      cv.width = Math.round(W * dpr);
+      cv.height = Math.round(H * dpr);
+      scene = buildScene(W, H);
     };
-    const paint = (time) => {
-      if (!alive || !tcRef.current) return;
-      drawReel(ctx, W, H, time, mark, langRef.current, canvas.width / W);
-      tcRef.current.textContent = timecode(time);
-      const take = Math.floor(time / TAKE);
-      if (take !== lastTake) {
-        lastTake = take;
-        takeRef.current.dataset.take = take;
+    // o terminal acompanha a montagem: uma linha a cada ~0,42 s, digitada caractere a caractere
+    const type = (time) => {
+      const el = term.current;
+      if (!el) return;
+      const ls = linesRef.current;
+      el.querySelectorAll("li").forEach((li, i) => {
+        const [k, v] = ls[i];
+        const full = k === "//" ? `// ${v}` : `> ${k.padEnd(10, ".")} ${v}`;
+        const n = Math.floor(Math.max(0, time - 0.15 - i * 0.42) * 60);
+        li.textContent = full.slice(0, n);
+        li.dataset.on = n > 0 ? "1" : "0";
+      });
+      const f = Math.floor(Math.min(time, 99) * 24);
+      clock.current.textContent = `BOOT 00:00:${String(Math.floor(f / 24)).padStart(2, "0")}:${String(f % 24).padStart(2, "0")}`;
+    };
+    const paint = (time, exit = 0) => {
+      drawBoot(ctx, scene, time, { dpr, pointer: frozen === null ? pointer : null, exit });
+      type(time);
+      if (!shown && time >= INTRO - 0.4) {
+        shown = true;
+        setReady(true);
       }
     };
-    resize();
-    window.seek = (time) => paint(((time % LOOP) + LOOP) % LOOP);
-
     const loop = (now) => {
       if (!alive) return;
-      paint(((now - start) / 1000) % LOOP);
+      const time = (now - start) / 1000;
+      const exit = exitAt.current ? (now - exitAt.current) / 1000 / EXIT : 0;
+      paint(time, exit);
+      if (exit >= 1) {
+        try {
+          sessionStorage.setItem("loaded", "1");
+          sessionStorage.setItem("boot", "1");
+        } catch (e) {}
+        navigate("/inicio");
+        return;
+      }
       raf = requestAnimationFrame(loop);
     };
-    const still = frozen ?? (reduce ? TAKE * 3 + 2.4 : null);
-    Promise.all([document.fonts.ready, mark.decode().catch(() => {})]).then(() => {
-      if (!alive) return;
-      window.ready = true;
-      if (still !== null) paint(still);
-      else {
-        start = performance.now();
-        raf = requestAnimationFrame(loop);
-      }
-    });
-    const onResize = () => {
-      resize();
-      if (still !== null) paint(still);
+    const move = (e) => {
+      const r = cv.getBoundingClientRect();
+      pointer.x = e.clientX - r.left;
+      pointer.y = e.clientY - r.top;
     };
-    window.addEventListener("resize", onResize);
+    const resize = () => {
+      build();
+      if (frozen !== null) paint(frozen);
+    };
+
+    document.fonts.ready.then(() => {
+      if (!alive) return;
+      build();
+      window.ready = true;
+      window.seek = (time) => paint(time);
+      if (frozen !== null) return paint(frozen);
+      start = performance.now() - (reduce ? INTRO * 1000 + 500 : 0);
+      raf = requestAnimationFrame(loop);
+    });
+    addEventListener("pointermove", move);
+    addEventListener("resize", resize);
     return () => {
       alive = false;
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", onResize);
+      removeEventListener("pointermove", move);
+      removeEventListener("resize", resize);
     };
-  }, []);
+  }, [navigate]);
+
+  const enter = () => {
+    if (exitAt.current) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return navigate("/inicio");
+    exitAt.current = performance.now();
+  };
 
   return (
-    <main className="opening">
-      <canvas ref={canvasRef} className="opening__reel" aria-hidden="true" />
-      <div className="opening__vignette" />
-      <div className="opening__bar opening__bar--top" />
-      <div className="opening__bar opening__bar--bottom" />
+    <main className={`boot ${ready ? "is-ready" : ""}`} onKeyDown={(e) => e.key === "Enter" && ready && enter()}>
+      <canvas ref={canvas} className="boot__canvas" aria-hidden="true" />
+      <div className="boot__frame" aria-hidden="true" />
 
-      <div className="opening__meta mono">
-        <span className="rec" />
-        REEL 01 · <span ref={tcRef}>00:00:00:00</span>
-      </div>
-      <div className="opening__take mono" ref={takeRef} data-take="0">
-        {t.takes.map((name, i) => (
-          <span key={name} data-i={i}>
-            {String(i + 1).padStart(2, "0")} / 04 · {name}
-          </span>
+      <header className="boot__top mono">
+        <span className="boot__clock">
+          <i /> <span ref={clock}>BOOT 00:00:00:00</span>
+        </span>
+        <LangSwitch />
+      </header>
+
+      <ol className="boot__term mono" ref={term} aria-hidden="true">
+        {lines.map((_, i) => (
+          <li key={i} />
         ))}
-      </div>
+      </ol>
 
-      <div className="opening__title">
-        <h1 className="opening__nick" style={{ viewTransitionName: "brand" }}>
-          sorry<span className="dot">.</span>
-        </h1>
-        <p className="opening__role">
-          <span>Keven</span> · {t.role}
+      <h1 className="sr-only">sorry. · Keven</h1>
+
+      <div className="boot__foot">
+        <p className="boot__role mono">
+          <span className="boot__sq" />
+          KEVEN · {B.role}
         </p>
-        <button className="opening__enter" style={{ viewTransitionName: "frame" }} onClick={() => go("/inicio")}>
+        <button className="boot__enter" onClick={enter} disabled={!ready}>
           {t.enter} <span aria-hidden="true">→</span>
         </button>
       </div>
-
-      <div className="opening__lang">
-        <LangSwitch />
-      </div>
+      <p className="boot__hint mono">{B.counts}</p>
     </main>
   );
 }
