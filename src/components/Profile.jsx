@@ -1,6 +1,7 @@
 import { useLocale } from "../i18n.jsx";
 import { site } from "../data/site.js";
 import { useNow, fmt } from "../lib/lanyard.js";
+import { BRAND_ICONS } from "../data/icons.js";
 
 // Área do perfil: ficha técnica do Discord ao vivo (Lanyard) e os links. A data da conta sai do próprio ID
 // do Discord (os 42 bits altos de um "snowflake" são milissegundos desde 2015-01-01).
@@ -88,20 +89,18 @@ export default function Profile({ presence }) {
         )}
       </article>
 
-      <ol className="pf__links">
-        {site.socials.map((s, i) => (
+      {/* só o símbolo de cada rede; o nome aparece ao passar o mouse e é lido por leitores de tela */}
+      <ul className="pf__icons">
+        {site.socials.map((s) => (
           <li key={s.id}>
-            <a href={s.url} target="_blank" rel="noreferrer">
-              <span className="pf__n mono">{String(i + 1).padStart(2, "0")}</span>
-              <span className="pf__label mono">{s.label}</span>
-              <span className="pf__h">{s.handle}</span>
-              <span className="pf__go" aria-hidden="true">
-                ↗
-              </span>
+            <a href={s.url} target="_blank" rel="noreferrer" aria-label={`${s.label} · ${s.handle}`} data-label={s.label}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d={BRAND_ICONS[s.id]} />
+              </svg>
             </a>
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   );
 }

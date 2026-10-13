@@ -54,9 +54,9 @@ const FX = [
     const e = clamp((p - 0.05) * 3.2);
     return { t: `translate3d(${(1 - e) * -12}vw,0,0)`, o: e };
   }],
-  ["#perfil", ".pf__links > li", ({ p }, i) => {
-    const e = clamp((p - 0.08 - i * 0.03) * 4);
-    return { t: `translate3d(${(1 - e) * 10}vw,0,0)`, o: e };
+  ["#perfil", ".pf__icons > li", ({ p }, i) => {
+    const e = clamp((p - 0.08 - i * 0.04) * 4);
+    return { t: `translate3d(0,${(1 - e) * 60}px,0) rotate(${(1 - e) * 12}deg)`, o: e };
   }],
   // rodapé: o "sorry." final cresce até o fim da página
   // (o rodapé nunca sai por cima da tela: o efeito termina, parado no lugar, antes do fim da página)
