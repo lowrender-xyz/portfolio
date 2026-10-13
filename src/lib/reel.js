@@ -32,7 +32,7 @@ function roundRect(ctx, x, y, w, h, r) {
 // ── Take 1 · Código ─────────────────────────────────────────────────────────
 const K = "k", S = "s", M = "m", P = "p", F = "f";
 const CODE = [
-  [["// pdv.ts · smart loja", M]],
+  [["// pdv.ts · smart7", M]],
   [["export async function ", K], ["finalizarVenda", F], ["(caixa, itens) {", P]],
   [["  if ", K], ["(!caixa.aberto) ", P], ["throw new ", K], ["Erro", F], ["(", P], ['"caixa fechado"', S], [")", P]],
   [["  const ", K], ["total = itens.", P], ["reduce", F], ["((s, i) => s + i.preco * i.qtd, 0)", P]],
@@ -359,7 +359,7 @@ function takeMotion(ctx, R, lt) {
 
 // ── Take 4 · Produto ────────────────────────────────────────────────────────
 const STATS = [
-  { n: 80, label: { pt: "permissões", en: "permissions" } },
+  { n: 82, label: { pt: "permissões", en: "permissions" } },
   { n: 5, label: { pt: "perfis de acesso", en: "access roles" } },
   { n: 44, label: { pt: "dígitos na chave da NF-e", en: "digits in the NF-e key" } },
 ];
@@ -386,7 +386,7 @@ function takeProduct(ctx, R, lt, mark, lang) {
   ctx.fillStyle = C.paper;
   ctx.font = `700 ${u * 0.95}px ${DISPLAY}`;
   ctx.textBaseline = "top";
-  ctx.fillText("Smart Loja ERP", mx, my + size + u * 0.35 + (1 - nameA) * u * 1.4);
+  ctx.fillText("Smart7", mx, my + size + u * 0.35 + (1 - nameA) * u * 1.4);
   ctx.restore();
   alpha(ctx, nameA);
   ctx.fillStyle = C.mute;

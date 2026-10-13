@@ -1,43 +1,7 @@
 import { useEffect, useState } from "react";
+import { useLanyard } from "../lib/lanyard.js";
 import { site } from "../data/site.js";
 import { useLocale } from "../i18n.jsx";
-
-// Presença ao vivo pelo Lanyard (https://github.com/Phineas/lanyard): REST na carga e WebSocket depois.
-const API = `https://api.lanyard.rest/v1/users/${site.discord.id}`;
-const WS = "wss://api.lanyard.rest/socket";
-
-function useLanyard() {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    let ws, beat, retry, alive = true;
-    fetch(API)
-      .then((r) => r.json())
-      .then((j) => alive && j.success && setData(j.data))
-      .catch(() => {});
-    const connect = () => {
-      ws = new WebSocket(WS);
-      ws.onmessage = (e) => {
-        const msg = JSON.parse(e.data);
-        if (msg.op === 1) {
-          ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: site.discord.id } }));
-          beat = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ op: 3 })), msg.d.heartbeat_interval);
-        } else if (msg.op === 0 && alive) setData(msg.d);
-      };
-      ws.onclose = () => {
-        clearInterval(beat);
-        if (alive) retry = setTimeout(connect, 5000);
-      };
-    };
-    connect();
-    return () => {
-      alive = false;
-      clearInterval(beat);
-      clearTimeout(retry);
-      ws?.close();
-    };
-  }, []);
-  return data;
-}
 
 function useNow(active) {
   const [now, setNow] = useState(Date.now());
@@ -63,9 +27,10 @@ function assetUrl(app, img) {
   return `https://cdn.discordapp.com/app-assets/${app}/${img}.png`;
 }
 
-export default function DiscordCard() {
+export default function DiscordCard({ presence }) {
   const { t } = useLocale();
-  const d = useLanyard();
+  const own = useLanyard(presence === undefined);
+  const d = presence === undefined ? own : presence;
   const user = d?.discord_user;
   const status = d?.discord_status ?? "offline";
   const custom = d?.activities?.find((a) => a.type === 4);

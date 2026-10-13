@@ -1,13 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLocale } from "../i18n.jsx";
-import { site } from "../data/site.js";
 import { mulberry32 } from "../lib/motion.js";
 import LangSwitch from "./LangSwitch.jsx";
+
+// Seção visível agora (para marcar o item do menu)
+function useActiveSection(ids) {
+  const [active, setActive] = useState(null);
+  const key = ids.join();
+  useEffect(() => {
+    const els = ids.map((h) => document.querySelector(h)).filter(Boolean);
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(`#${e.target.id}`)),
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [key]);
+  return active;
+}
 
 export function Nav() {
   const { t } = useLocale();
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || "dark");
+  const active = useActiveSection(t.landingNav.map(([h]) => h));
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
@@ -21,11 +37,16 @@ export function Nav() {
         sorry<span className="dot">.</span>
       </Link>
       <nav className="nav__links">
-        <NavLink to="/inicio">{t.nav.home}</NavLink>
-        <NavLink to="/projetos">{t.nav.projects}</NavLink>
-        <NavLink to="/skills">{t.nav.skills}</NavLink>
+        {t.landingNav.map(([href, label]) => (
+          <a key={href} href={href} className={active === href ? "active" : ""}>
+            {label}
+          </a>
+        ))}
       </nav>
       <div className="nav__tools">
+        <a className="btn btn--volt nav__talk" href="#contato">
+          {t.talk}
+        </a>
         <LangSwitch />
         <button
           className="theme mono"
@@ -55,16 +76,6 @@ export function Footer() {
       <div className="footer__big">
         sorry<span className="dot">.</span>
       </div>
-      <ul className="footer__socials">
-        {site.socials.map((s) => (
-          <li key={s.id}>
-            <a href={s.url} target="_blank" rel="noreferrer">
-              <span className="mono">{s.label}</span>
-              <span>{s.handle} ↗</span>
-            </a>
-          </li>
-        ))}
-      </ul>
       <p className="footer__note mono">
         © 2026 Keven · {t.footer}
       </p>
