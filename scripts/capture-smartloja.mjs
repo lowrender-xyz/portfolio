@@ -1,5 +1,5 @@
 // Captura telas REAIS do Smart Loja (clone isolado, dados de demonstração) para o portfólio.
-// Uso: node scripts/capture-smartloja.mjs <clone>/frontend [nome...]
+// Uso: [TEMA=claro] node scripts/capture-smartloja.mjs <clone>/frontend [nome...]
 // Requer: API do clone em :3344 e Vite do clone em :5180 (nunca as portas padrão 5173/3333).
 import { createRequire } from "node:module";
 import path from "node:path";
@@ -78,8 +78,9 @@ const PREP = {
 };
 
 const ctx = await browser.newContext(ctxOpts);
-// tema escuro do próprio produto (o mesmo que o usuário liga no app)
-await ctx.addInitScript(() => localStorage.setItem("smartloja-tema", "escuro"));
+// tema do próprio produto (o mesmo que o usuário escolhe no app): TEMA=claro gera as versões claras
+const CLARO = process.env.TEMA === "claro";
+await ctx.addInitScript((tema) => localStorage.setItem("smartloja-tema", tema), CLARO ? "claro" : "escuro");
 const page = await ctx.newPage();
 await login(page);
 const report = [];
@@ -94,7 +95,10 @@ for (const shot of SHOTS.filter((s) => !only.length || only.includes(s.name))) {
     await PREP[shot.prep](page);
     await settle(page);
   }
-  const file = path.join(OUT, `${shot.name}.jpg`);
+  const file = path.join(OUT, `${shot.name}${CLARO ? "-claro" : ""}.jpg`);
+  // confere que o tema pedido foi aplicado (o app marca o escuro com a classe "dark" no <html>)
+  const escuro = await page.evaluate(() => document.documentElement.classList.contains("dark"));
+  if (escuro === CLARO) throw new Error(`${shot.name}: tema errado (${escuro ? "escuro" : "claro"})`);
   await page.screenshot({ path: file, type: "jpeg", quality: 88 });
   report.push(`${shot.name}: ${url.pathname} → ${path.relative(process.cwd(), file)} (${await page.title()})`);
 }

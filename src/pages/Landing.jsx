@@ -4,6 +4,7 @@ import { SHOTS, STATS, HIGHLIGHTS, METHOD, MODULES } from "../data/smart7.js";
 import DiscordCard from "../components/DiscordCard.jsx";
 import Halftone from "../components/Halftone.jsx";
 import Catalog from "../components/Catalog.jsx";
+import Shot from "../components/Shot.jsx";
 import { Reveal } from "../components/Chrome.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 
@@ -101,7 +102,7 @@ export default function Landing() {
             <span>smart7 · {L.product.screen}</span>
             <span>{L.product.demo}</span>
           </div>
-          <img src={SHOTS.dashboard.src} alt={pick(SHOTS.dashboard.alt)} />
+          <Shot shot={SHOTS.dashboard} loading="eager" />
         </Reveal>
         <dl className="lstats">
           {STATS.map((s, i) => (
@@ -146,7 +147,7 @@ export default function Landing() {
               )}
               {h.shot && (
                 <div className="hl__shot">
-                  <img src={SHOTS[h.shot].src} alt={pick(SHOTS[h.shot].alt)} loading="lazy" />
+                  <Shot shot={SHOTS[h.shot]} />
                 </div>
               )}
               {h.flow && (

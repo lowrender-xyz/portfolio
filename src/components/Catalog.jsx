@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocale } from "../i18n.jsx";
 import { MODULES, SHOTS } from "../data/smart7.js";
 import { spring } from "../lib/motion.js";
+import Shot from "./Shot.jsx";
 
 const N = MODULES.length;
 const STEP = 30; // graus entre cartões no arco
@@ -142,7 +143,7 @@ export default function Catalog() {
                   <span>{pick(m.tag)}</span>
                   <span>{m.code}</span>
                 </span>
-                <span className="mod__media">{cover && <img src={cover.src} alt="" draggable="false" loading="lazy" />}</span>
+                <span className="mod__media">{cover && <Shot shot={cover} alt="" />}</span>
                 <span className="mod__title">{pick(m.title)}</span>
                 <span className="mod__line">{pick(m.line)}</span>
                 <span className="mod__foot mono">
@@ -223,7 +224,7 @@ function ModulePanel({ module: m, onClose }) {
             {m.shots.map((k) => (
               <figure key={k}>
                 <button onClick={() => setZoom(SHOTS[k])} aria-label={`${t.landing.catalog.enlarge}: ${pick(SHOTS[k].alt)}`}>
-                  <img src={SHOTS[k].src} alt={pick(SHOTS[k].alt)} loading="lazy" />
+                  <Shot shot={SHOTS[k]} />
                 </button>
                 <figcaption className="mono">{pick(SHOTS[k].alt)}</figcaption>
               </figure>
@@ -234,7 +235,7 @@ function ModulePanel({ module: m, onClose }) {
       </aside>
       {zoom && (
         <button className="zoom" onClick={() => setZoom(null)} aria-label={t.landing.catalog.close}>
-          <img src={zoom.src} alt={pick(zoom.alt)} />
+          <Shot shot={zoom} loading="eager" />
         </button>
       )}
     </div>
