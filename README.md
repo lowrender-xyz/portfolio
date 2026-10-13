@@ -24,6 +24,8 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Meio-tom do hero | `src/components/Halftone.jsx` |
 | Reel da abertura (canvas) | `src/lib/reel.js` · `src/components/Opening.jsx` |
 | Cartão do Discord ao vivo | `src/components/DiscordCard.jsx` · `src/lib/lanyard.js` |
+| Rolagem de filme (efeitos amarrados ao scroll) | `src/lib/film.js` (lista `FX`) |
+| Barra de reprodução | `src/components/PlayerBar.jsx` |
 | Cores, fontes, layout | `src/styles.css` (tokens no topo) |
 | Direção de arte e estrutura | `docs/style_guide.md` · `docs/estrutura.md` |
 
@@ -42,6 +44,10 @@ node scripts/capture-smartloja.mjs <pasta>/smartloja/frontend           # 8 tela
 O gerador respeita o limite de requisições da API (100/min), por isso leva alguns minutos.
 
 ## Notas
+
+- **Rolagem de filme:** [Lenis](https://github.com/darkroomengineering/lenis) dá a inércia; `src/lib/film.js` calcula, a cada quadro,
+  o progresso de cada cena e escreve `transform`/`opacity` só nos elementos que se movem. Para um efeito novo,
+  acrescente uma linha em `FX` (cena, alvo, função do progresso). Com "reduzir movimento", tudo fica parado.
 
 - **Reel:** `drawReel(t)` é função pura do tempo (loop de 12 s, 4 takes). `/?t=8.5` congela um quadro;
   `window.seek(t)` pinta qualquer instante. Com "reduzir movimento" ativo, mostra um still.

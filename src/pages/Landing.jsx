@@ -66,12 +66,14 @@ export default function Landing() {
   // o Spotify manda os artistas separados por "; "
   const hearing = spotify ? spotify.artist.split(/;\s*/) : [];
   const [shelf, setShelf] = useState("films");
+  // capítulos da barra de reprodução: "01 · Jogos", "02 · Filmes e séries"...
+  const chapter = (n) => `${String(n).padStart(2, "0")} · ${n === 0 ? t.nav.home : n === 6 ? t.talk : t.landingNav[n - 1][1]}`;
   const marquee = [...GAMES.map((g) => g.title), "Interestelar", "Suits", "Jumper", ...ARTISTS.slice(0, 4), pick(SCREEN.genres[1]), L.marqueeAi];
 
   return (
     <main className="landing">
       {/* ── hero ─────────────────────────────────────────── */}
-      <section className="lhero" id="inicio">
+      <section className="lhero" id="inicio" data-scene data-chapter={chapter(0)}>
         <Halftone className="lhero__dots" />
         <div className="lhero__grid">
           <div className="lhero__copy">
@@ -116,24 +118,24 @@ export default function Landing() {
       </div>
 
       {/* ── 01 · jogos ───────────────────────────────────── */}
-      <section className="lsec" id="jogos">
+      <section className="lsec" id="jogos" data-scene data-chapter={chapter(1)}>
         <Head n="01" k={L.games.kicker} title={L.games.title} lead={L.games.lead} />
-        <ol className="shelf-games">
+        <ol className="shelf-games" data-scene>
           {GAMES.map((g, i) => (
-            <Reveal as="li" key={g.title} delay={(i % 8) * 60} className={`gcard ${live === g.title ? "is-live" : ""}`}>
+            <li key={g.title} className={`gcard ${live === g.title ? "is-live" : ""}`} style={{ "--i": i }}>
               <GameCover game={g} live={live === g.title} label={L.games.now} />
               <p className="gcard__title">
                 {g.title}
                 {g.sub && <span> {g.sub}</span>}
               </p>
               <p className="gcard__meta mono">{pick(g.genre)}</p>
-            </Reveal>
+            </li>
           ))}
         </ol>
       </section>
 
       {/* ── 02 · filmes e séries ─────────────────────────── */}
-      <section className="lsec" id="tela">
+      <section className="lsec" id="tela" data-scene data-chapter={chapter(2)}>
         <Head n="02" k={L.screen.kicker} title={L.screen.title} lead={L.screen.lead} />
         <div className="shelf-tabs" role="tablist">
           {["films", "series"].map((k) => (
@@ -151,22 +153,22 @@ export default function Landing() {
       </section>
 
       {/* ── 03 · música ──────────────────────────────────── */}
-      <section className="lsec" id="musica">
+      <section className="lsec" id="musica" data-scene data-chapter={chapter(3)}>
         <Head n="03" k={L.music.kicker} title={L.music.title} lead={L.music.lead} />
-        <div className="music">
+        <div className="music" data-scene>
           <ol className="artists">
             {ARTISTS.map((a, i) => {
               const on = hearing.some((h) => sameArtist(h, a));
               // inclinação e rasgo próprios de cada tira, sempre os mesmos
               const tilt = [-1.6, 1.1, -0.6, 1.8, -1.2, 0.7, -1.9][i % 7];
               return (
-                <Reveal as="li" key={a} delay={i * 60} className={on ? "is-live" : ""}>
+                <li key={a} className={on ? "is-live" : ""} style={{ "--i": i, "--s": i % 2 ? 1 : -1 }}>
                   <TornPaper seed={i * 7 + 3} tilt={tilt} className="strip">
                     <span className="strip__n mono">{String(i + 1).padStart(2, "0")}</span>
                     <span className="strip__name">{a}</span>
                     {on && <b className="strip__live mono">● {L.music.now}</b>}
                   </TornPaper>
-                </Reveal>
+                </li>
               );
             })}
           </ol>
@@ -179,7 +181,7 @@ export default function Landing() {
       </section>
 
       {/* ── 04 · IA e projetos ───────────────────────────── */}
-      <section className="lsec" id="projetos">
+      <section className="lsec" id="projetos" data-scene data-chapter={chapter(4)}>
         <Head n="04" k={L.lab.kicker} title={L.lab.title} lead={L.lab.lead} />
         <Reveal className="project">
           <div>
@@ -198,13 +200,13 @@ export default function Landing() {
             ))}
           </dl>
         </Reveal>
-        <Reveal delay={100} id="catalogo" className="catalog-wrap">
+        <Reveal delay={100} id="catalogo" className="catalog-wrap" data-scene>
           <ModuleExplorer />
         </Reveal>
       </section>
 
       {/* ── 05 · sobre ───────────────────────────────────── */}
-      <section className="lsec" id="sobre">
+      <section className="lsec" id="sobre" data-scene data-chapter={chapter(5)}>
         <Head n="05" k={L.about.kicker} title={L.about.title} lead={L.about.lead} />
         <div className="crafts crafts--landing">
           {L.about.crafts.map((c, i) => (
@@ -225,7 +227,7 @@ export default function Landing() {
       </section>
 
       {/* ── contato ──────────────────────────────────────── */}
-      <section className="lcontact" id="contato">
+      <section className="lcontact" id="contato" data-scene data-chapter={chapter(6)}>
         <Kicker n="06">{L.contact.kicker}</Kicker>
         <Reveal>
           <Title parts={L.contact.title} />

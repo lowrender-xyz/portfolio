@@ -22,6 +22,9 @@ Botão **Entrar** vira a moldura do cabeçalho (View Transitions).
 
 Gostos em `src/data/me.js`, na grafia do Keven. Artes dos jogos: Steam e Microsoft Store (CDN delas). Filmes e séries: TMDB (`scripts/fetch-tmdb.mjs`).
 
+**Fluxo:** rolagem suave (Lenis) e cada seção animada pelo scroll como quadros de um vídeo; barra de
+reprodução fixa com timecode, capítulo atual e linha do tempo clicável.
+
 `/projetos/*` e `/skills` (endereços antigos) redirecionam para as âncoras.
 
 ## Conteúdo

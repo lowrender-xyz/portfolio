@@ -744,6 +744,8 @@ p {
 .landing {
   position: relative;
   z-index: 1;
+  /* os efeitos de entrada começam fora da tela de lado; não podem alargar a página */
+  overflow-x: clip;
 }
 .chips {
   display: flex;
@@ -2075,6 +2077,151 @@ p {
 @media (max-width: 400px) {
   .nav__brand {
     font-size: 1.2rem;
+  }
+}
+
+/* ── filme: cenas amarradas ao scroll (variáveis em src/lib/film.js) ── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* alvos dos efeitos de scroll (src/lib/film.js escreve transform/opacity direto neles) */
+.lsec__head .ltitle > em {
+  display: inline-block;
+}
+.shelf-games {
+  perspective: 1200px;
+}
+.shelf-games > li {
+  transform-origin: 50% 100%;
+}
+.catalog-wrap .mx__stage {
+  transform-origin: 50% 0;
+}
+.footer .footer__big {
+  transform-origin: 0 100%;
+}
+.lhero__grid {
+  transform-origin: 30% 80%;
+}
+.lhero__dots {
+  transform-origin: 80% 60%;
+}
+/* com o mouse em cima, o leque abre por inteiro (vence o valor que o scroll escreve) */
+#tela .deck__hand:hover:not(:disabled),
+#tela .deck__hand:focus-visible {
+  --step: 7.5deg !important;
+}
+
+/* barra de reprodução fixa */
+.player-bar {
+  position: fixed;
+  z-index: 60;
+  left: 50%;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(560px, calc(100% - 32px));
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  backdrop-filter: blur(12px);
+  color: var(--mute);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  transform: translateX(-50%);
+  box-shadow: 0 20px 50px -24px #000c;
+}
+.player-bar__icon {
+  position: relative;
+  flex: none;
+  width: 12px;
+  height: 12px;
+}
+/* ❚❚ parado; as duas barras viram ▶ tocando */
+.player-bar__icon i {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 12px;
+  background: var(--paper);
+  transition: clip-path 0.25s, transform 0.25s;
+}
+.player-bar__icon i:first-child {
+  left: 0;
+}
+.player-bar__icon i:last-child {
+  left: 7px;
+}
+.player-bar[data-playing="1"] .player-bar__icon i {
+  background: var(--volt);
+}
+.player-bar[data-playing="1"] .player-bar__icon i:first-child {
+  width: 12px;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.player-bar[data-playing="1"] .player-bar__icon i:last-child {
+  transform: scaleY(0);
+}
+.player-bar__time {
+  flex: none;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+.player-bar__track {
+  position: relative;
+  flex: 1;
+  height: 16px;
+  cursor: pointer;
+}
+.player-bar__track::before,
+.player-bar__track span {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 7px;
+  height: 2px;
+  border-radius: 2px;
+}
+.player-bar__track::before {
+  background: var(--line);
+}
+.player-bar__track span {
+  background: var(--volt);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.player-bar__chapter {
+  flex: none;
+  min-width: 128px;
+  text-align: right;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+@media (max-width: 520px) {
+  .player-bar {
+    gap: 10px;
+    bottom: 12px;
+  }
+  .player-bar__chapter {
+    min-width: 0;
+    max-width: 38%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 

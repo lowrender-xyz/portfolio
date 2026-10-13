@@ -82,9 +82,16 @@ export default function Halftone({ text = "s.", accentFrom = 1, className = "" }
       ctx.globalAlpha = 1;
     };
 
+    // 30 quadros por segundo bastam para o brilho; durante a rolagem, só redesenha se o cursor estiver perto
+    let lastPaint = 0, lastScroll = scrollY;
     const loop = (now) => {
       pointer.k += ((pointer.on ? 1 : 0) - pointer.k) * 0.08;
-      if (visible) paint(now / 1000);
+      const scrolling = scrollY !== lastScroll;
+      lastScroll = scrollY;
+      if (visible && now - lastPaint > 33 && !(scrolling && pointer.k < 0.05)) {
+        lastPaint = now;
+        paint(now / 1000);
+      }
       raf = requestAnimationFrame(loop);
     };
     const move = (e) => {

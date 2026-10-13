@@ -6,21 +6,27 @@ import Opening from "./components/Opening.jsx";
 import { Nav, Footer, Grain, CursorLight } from "./components/Chrome.jsx";
 import Landing from "./pages/Landing.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import PlayerBar from "./components/PlayerBar.jsx";
+import { startFilm, getLenis } from "./lib/film.js";
 import "./styles.css";
 
 function Site({ children }) {
   const { pathname, hash } = useLocation();
+  // rolagem de filme (inércia + cenas amarradas ao scroll) enquanto o site está aberto
+  useEffect(() => startFilm(), []);
   useEffect(() => {
     // com âncora (#catalogo), rola até a seção; sem âncora, volta ao topo
     const el = hash && document.querySelector(hash);
-    if (el) requestAnimationFrame(() => el.scrollIntoView());
-    else window.scrollTo(0, 0);
+    const lenis = getLenis();
+    if (el) requestAnimationFrame(() => (lenis ? lenis.scrollTo(el, { offset: -80, immediate: true }) : el.scrollIntoView()));
+    else lenis ? lenis.scrollTo(0, { immediate: true }) : window.scrollTo(0, 0);
   }, [pathname, hash]);
   return (
     <>
       <Nav />
       {children}
       <Footer />
+      <PlayerBar />
     </>
   );
 }

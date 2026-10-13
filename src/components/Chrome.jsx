@@ -72,7 +72,7 @@ export function Nav() {
 export function Footer() {
   const { t } = useLocale();
   return (
-    <footer className="footer">
+    <footer className="footer" data-scene>
       <div className="footer__big">
         sorry<span className="dot">.</span>
       </div>
