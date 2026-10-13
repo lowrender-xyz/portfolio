@@ -7,17 +7,22 @@ import Shot from "./Shot.jsx";
 const N = MODULES.length;
 const STEP = 30; // graus entre cartões no arco
 const PX = 170; // pixels de arrasto por cartão
+const DRIFT = 0.14; // giro automático, em cartões por segundo (~1 cartão a cada 7 s)
+const RESUME = 2500; // ms parado depois de uma interação até voltar a girar
 
 // Anel 3D de módulos em loop: a posição p (em cartões, contínua) gira o arco; cada cartão fica no ângulo
 // da sua distância até p, então o anel não tem começo nem fim. Soltar encaixa no cartão mais próximo com
 // uma mola em forma fechada. O cartão da frente abre o painel (clique, Enter ou o botão "Abrir").
+// Parado, o anel gira sozinho devagar; a velocidade sobe e desce suave, e qualquer interação o pausa.
 export default function Catalog() {
   const { t, pick } = useLocale();
   const [open, setOpen] = useState(null);
   const [front, setFront] = useState(0);
   const ringRef = useRef(null);
   const stage = useRef(null);
-  const st = useRef({ angle: 0, from: 0, target: 0, t0: 0, drag: null, moved: 0, raf: 0 });
+  const st = useRef({ angle: 0, from: 0, target: 0, t0: 0, drag: null, moved: 0, raf: 0, snapping: false, hold: 0, speed: 0 });
+  const openRef = useRef(null);
+  openRef.current = open;
 
   const apply = (p) => {
     const f = ((Math.round(p) % N) + N) % N;
@@ -39,13 +44,18 @@ export default function Catalog() {
     s.from = s.angle;
     s.target = target;
     s.t0 = performance.now();
+    s.snapping = true;
+    s.hold = performance.now() + RESUME;
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const tick = (now) => {
       const k = reduce ? 1 : spring((now - s.t0) / 1000, 170, 26);
       s.angle = s.from + (s.target - s.from) * k;
       apply(s.angle);
       if (k < 0.999) s.raf = requestAnimationFrame(tick);
-      else apply((s.angle = s.target));
+      else {
+        apply((s.angle = s.target));
+        s.snapping = false;
+      }
     };
     s.raf = requestAnimationFrame(tick);
   };
@@ -58,6 +68,8 @@ export default function Catalog() {
     const down = (e) => {
       if (e.button !== 0) return;
       cancelAnimationFrame(s.raf);
+      s.snapping = false;
+      s.speed = 0;
       s.drag = { x: e.clientX, a: s.angle, last: e.clientX, lt: performance.now(), v: 0 };
       s.moved = 0;
     };
@@ -81,12 +93,45 @@ export default function Catalog() {
       s.drag = null;
       snapTo(Math.round(s.angle + fling));
     };
+    // giro automático: roda sempre que ninguém está mexendo no anel
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let hover = false, visible = false, last = performance.now(), drift = 0;
+    const enter = () => (hover = true);
+    const leave = () => {
+      hover = false;
+      s.hold = performance.now() + 600;
+    };
+    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
+    io.observe(el);
+    const loop = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      const idle = !reduce && visible && !hover && !s.drag && !s.snapping && !openRef.current && !document.hidden &&
+        now > s.hold && !el.contains(document.activeElement);
+      // a velocidade persegue o alvo (0 ou DRIFT): acelera e freia sem tranco
+      s.speed += ((idle ? DRIFT : 0) - s.speed) * Math.min(1, dt * 1.6);
+      if (idle || Math.abs(s.speed) > 0.002) {
+        if (!s.drag && !s.snapping) {
+          s.angle += s.speed * dt;
+          s.target = s.angle;
+          apply(s.angle);
+        }
+      }
+      drift = requestAnimationFrame(loop);
+    };
+    drift = requestAnimationFrame(loop);
+    el.addEventListener("pointerenter", enter);
+    el.addEventListener("pointerleave", leave);
     el.addEventListener("pointerdown", down);
     el.addEventListener("pointermove", move);
     el.addEventListener("pointerup", up);
     el.addEventListener("pointercancel", up);
     return () => {
       cancelAnimationFrame(s.raf);
+      cancelAnimationFrame(drift);
+      io.disconnect();
+      el.removeEventListener("pointerenter", enter);
+      el.removeEventListener("pointerleave", leave);
       el.removeEventListener("pointerdown", down);
       el.removeEventListener("pointermove", move);
       el.removeEventListener("pointerup", up);

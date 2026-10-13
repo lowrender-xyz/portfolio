@@ -1,24 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLanyard } from "../lib/lanyard.js";
+import { useLanyard, useNow, fmt } from "../lib/lanyard.js";
 import { site } from "../data/site.js";
 import { useLocale } from "../i18n.jsx";
-
-function useNow(active) {
-  const [now, setNow] = useState(Date.now());
-  useEffect(() => {
-    if (!active) return;
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, [active]);
-  return now;
-}
-
-const fmt = (ms) => {
-  const s = Math.max(0, Math.floor(ms / 1000));
-  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), r = s % 60;
-  const p = (n) => String(n).padStart(2, "0");
-  return h ? `${h}:${p(m)}:${p(r)}` : `${m}:${p(r)}`;
-};
 
 function assetUrl(app, img) {
   if (!img) return null;

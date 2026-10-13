@@ -7,10 +7,12 @@ import DiscordCard from "../components/DiscordCard.jsx";
 import Halftone from "../components/Halftone.jsx";
 import Catalog from "../components/Catalog.jsx";
 import Shot from "../components/Shot.jsx";
+import NowPlaying from "../components/NowPlaying.jsx";
+import TornPaper from "../components/TornPaper.jsx";
 import { Reveal } from "../components/Chrome.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 
-// Título com uma palavra de destaque em itálico: "Oi, eu sou o / *sorry.*"
+// Título com uma palavra de destaque em itálico: "Código, design / e *movimento.*"
 function Title({ as: Tag = "h2", parts, className = "" }) {
   return (
     <Tag className={`ltitle ${className}`}>
@@ -118,14 +120,18 @@ export default function Landing() {
           {GAMES.map((g, i) => {
             const on = live === g.title;
             return (
-              <Reveal key={g.title} delay={(i % 4) * 70} className={`game ${on ? "is-live" : ""}`}>
+              <Reveal key={g.title} delay={(i % 4) * 70} className={`game ${on ? "is-live" : ""} ${g.art ? "game--art" : ""}`}>
                 <span className="game__top mono">
                   <span>{String(i + 1).padStart(2, "0")}</span>
                   <span>{on ? <b className="game__live">● {L.games.now}</b> : pick(g.genre)}</span>
                 </span>
-                <span className="game__art" aria-hidden="true">
-                  {g.title.replace(/[^A-Za-z0-9]/g, "").slice(0, 2)}
-                </span>
+                {g.art ? (
+                  <img className="game__img" src={g.art} alt="" loading="lazy" referrerPolicy="no-referrer" />
+                ) : (
+                  <span className="game__art" aria-hidden="true">
+                    {g.title.replace(/[^A-Za-z0-9]/g, "").slice(0, 2)}
+                  </span>
+                )}
                 <span className="game__title">
                   {g.title}
                   {g.sub && <small> {g.sub}</small>}
@@ -189,29 +195,23 @@ export default function Landing() {
           <ol className="artists">
             {ARTISTS.map((a, i) => {
               const on = hearing.some((h) => sameArtist(h, a));
+              // inclinação e rasgo próprios de cada tira, sempre os mesmos
+              const tilt = [-1.6, 1.1, -0.6, 1.8, -1.2, 0.7, -1.9][i % 7];
               return (
                 <Reveal as="li" key={a} delay={i * 60} className={on ? "is-live" : ""}>
-                  <span className="mono">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="artists__name">{a}</span>
-                  {on && <b className="game__live mono">● {L.music.now}</b>}
+                  <TornPaper seed={i * 7 + 3} tilt={tilt} className="strip">
+                    <span className="strip__n mono">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="strip__name">{a}</span>
+                    {on && <b className="strip__live mono">● {L.music.now}</b>}
+                  </TornPaper>
                 </Reveal>
               );
             })}
           </ol>
           <Reveal delay={150} className="music__now">
-            <p className="mono kicker">{L.music.nowKicker}</p>
-            {spotify ? (
-              <div className="music__track">
-                <img src={spotify.album_art_url} alt="" />
-                <div>
-                  <p className="music__song">{spotify.song}</p>
-                  <p className="music__artist">{spotify.artist.replace(/;\s*/g, ", ")}</p>
-                  <p className="mono music__album">{spotify.album}</p>
-                </div>
-              </div>
-            ) : (
-              <p className="music__idle">{L.music.idle}</p>
-            )}
+            <TornPaper seed={91} tilt={1.4} className="paper--tape music__paper" depth={9}>
+              <NowPlaying spotify={spotify} />
+            </TornPaper>
           </Reveal>
         </div>
       </section>
