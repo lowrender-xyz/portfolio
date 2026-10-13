@@ -29,7 +29,7 @@ const dict = {
       games: {
         kicker: "Jogos",
         title: ["Em\n", { em: "rotação." }],
-        lead: "Do tático ao mundo aberto. O cartão acende sozinho quando o jogo está aberto no Discord.",
+        lead: "Do tático ao mundo aberto.",
         now: "jogando agora",
       },
       screen: {
@@ -37,8 +37,6 @@ const dict = {
         title: ["Na\n", { em: "tela." }],
         lead: "Heróis, máfia, tribunal e espaço. Ficção científica e viagens espaciais sempre na frente.",
         tabs: { films: "Filmes", series: "Séries" },
-        note: "Pôsteres e títulos:",
-        credit: "Este site usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.",
         favorite: "Favorito",
         films: "filmes",
         shows: "séries",
@@ -48,7 +46,7 @@ const dict = {
       music: {
         kicker: "Música",
         title: ["No\n", { em: "fone." }],
-        lead: "Os artistas que mais tocam no Spotify. Quando um deles está tocando agora, o nome acende.",
+        lead: "Os artistas que mais tocam no Spotify.",
         now: "tocando",
         nowKicker: "Tocando agora no Spotify",
         idle: "Nada tocando no momento.",
@@ -82,7 +80,6 @@ const dict = {
         open: "Abrir módulo",
         prev: "Módulo anterior",
         next: "Próximo módulo",
-        hint: "ARRASTE O ANEL · ← → NO TECLADO · ENTER ABRE",
         close: "Fechar",
         enlarge: "Ampliar",
         demo: "Telas reais do Smart7 rodando num ambiente local com dados de demonstração fictícios.",
@@ -128,6 +125,7 @@ const dict = {
       profile: "Ver perfil",
     },
     footer: "Feito em código, quadro a quadro.",
+    tmdb: "Filmes e séries: TMDB. Este site usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.",
     notFound: "Essa cena não existe.",
   },
   en: {
@@ -158,7 +156,7 @@ const dict = {
       games: {
         kicker: "Games",
         title: ["In\n", { em: "rotation." }],
-        lead: "From tactical to open world. A card lights up on its own when the game is running on Discord.",
+        lead: "From tactical to open world.",
         now: "playing now",
       },
       screen: {
@@ -166,8 +164,6 @@ const dict = {
         title: ["On\n", { em: "screen." }],
         lead: "Heroes, mafia, courtrooms and space. Science fiction and space travel always come first.",
         tabs: { films: "Movies", series: "Series" },
-        note: "Posters and titles:",
-        credit: "This product uses the TMDB API but is not endorsed or certified by TMDB.",
         favorite: "Favorite",
         films: "films",
         shows: "series",
@@ -177,7 +173,7 @@ const dict = {
       music: {
         kicker: "Music",
         title: ["On\n", { em: "repeat." }],
-        lead: "The artists that play the most on Spotify. When one of them is playing right now, the name lights up.",
+        lead: "The artists that play the most on Spotify.",
         now: "playing",
         nowKicker: "Playing now on Spotify",
         idle: "Nothing playing right now.",
@@ -211,7 +207,6 @@ const dict = {
         open: "Open module",
         prev: "Previous module",
         next: "Next module",
-        hint: "DRAG THE RING · ← → ON KEYBOARD · ENTER OPENS",
         close: "Close",
         enlarge: "Enlarge",
         demo: "Real Smart7 screens running locally with fictional demo data.",
@@ -257,6 +252,7 @@ const dict = {
       profile: "View profile",
     },
     footer: "Made in code, frame by frame.",
+    tmdb: "Movies and series: TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.",
     notFound: "This scene doesn't exist.",
   },
 };

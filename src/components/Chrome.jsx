@@ -79,6 +79,12 @@ export function Footer() {
       <p className="footer__note mono">
         © 2026 Keven · {t.footer}
       </p>
+      {/* atribuição exigida pelos termos da API do TMDB */}
+      <p className="footer__credit mono">
+        <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
+          {t.tmdb}
+        </a>
+      </p>
     </footer>
   );
 }

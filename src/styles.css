@@ -717,6 +717,15 @@ p {
   color: var(--volt);
   padding-left: 6px;
 }
+.footer__credit {
+  grid-column: 1 / -1;
+  margin-top: -16px;
+  font-size: 0.6rem;
+  opacity: 0.6;
+}
+.footer__credit a {
+  color: var(--mute);
+}
 .footer__note {
   grid-column: 1 / -1;
   color: var(--mute);
@@ -1255,14 +1264,6 @@ p {
   }
 }
 
-.shelf-note {
-  margin-top: 28px;
-  color: var(--mute);
-  font-size: 0.66rem;
-}
-.shelf-note a {
-  color: var(--volt);
-}
 
 /* música */
 .music {
@@ -1776,13 +1777,6 @@ p {
 .ring-btn:hover {
   border-color: var(--volt);
   color: var(--volt);
-}
-.ring-hint {
-  margin-top: 18px;
-  text-align: center;
-  color: var(--mute);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
 }
 
 /* painel do módulo */

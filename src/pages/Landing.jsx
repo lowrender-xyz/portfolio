@@ -148,13 +148,6 @@ export default function Landing() {
           </span>
         </div>
         <Decks tab={shelf} key={shelf} />
-        <p className="shelf-note mono">
-          {L.screen.note}{" "}
-          <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
-            TMDB
-          </a>
-          . {L.screen.credit}
-        </p>
       </section>
 
       {/* ── 03 · música ──────────────────────────────────── */}

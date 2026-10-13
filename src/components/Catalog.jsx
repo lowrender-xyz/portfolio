@@ -214,7 +214,6 @@ export default function Catalog() {
           →
         </button>
       </div>
-      <p className="ring-hint mono">{t.landing.catalog.hint}</p>
       {open && <ModulePanel module={open} onClose={() => setOpen(null)} />}
     </>
   );
