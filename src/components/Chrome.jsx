@@ -1,0 +1,137 @@
+import { useEffect, useRef, useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useLocale } from "../i18n.jsx";
+import { site } from "../data/site.js";
+import { mulberry32 } from "../lib/motion.js";
+import LangSwitch from "./LangSwitch.jsx";
+
+export function Nav() {
+  const { t } = useLocale();
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || "dark");
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem("theme", theme);
+    } catch (e) {}
+  }, [theme]);
+
+  return (
+    <header className="nav" style={{ viewTransitionName: "frame" }}>
+      <Link to="/" className="nav__brand" style={{ viewTransitionName: "brand" }} aria-label="sorry · abertura">
+        sorry<span className="dot">.</span>
+      </Link>
+      <nav className="nav__links">
+        <NavLink to="/inicio">{t.nav.home}</NavLink>
+        <NavLink to="/projetos">{t.nav.projects}</NavLink>
+        <NavLink to="/skills">{t.nav.skills}</NavLink>
+      </nav>
+      <div className="nav__tools">
+        <LangSwitch />
+        <button
+          className="theme mono"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label={theme === "dark" ? "Tema claro" : "Tema escuro"}
+        >
+          <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
+            {theme === "dark" ? (
+              <g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                <circle cx="8" cy="8" r="3" />
+                <path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M3 13l1.1-1.1M11.9 4.1 13 3" />
+              </g>
+            ) : (
+              <path d="M13.5 9.6A6 6 0 0 1 6.4 2.5a6 6 0 1 0 7.1 7.1Z" fill="currentColor" />
+            )}
+          </svg>
+        </button>
+      </div>
+    </header>
+  );
+}
+
+export function Footer() {
+  const { t } = useLocale();
+  return (
+    <footer className="footer">
+      <div className="footer__big">
+        sorry<span className="dot">.</span>
+      </div>
+      <ul className="footer__socials">
+        {site.socials.map((s) => (
+          <li key={s.id}>
+            <a href={s.url} target="_blank" rel="noreferrer">
+              <span className="mono">{s.label}</span>
+              <span>{s.handle} ↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p className="footer__note mono">
+        © 2026 Keven · {t.footer}
+      </p>
+    </footer>
+  );
+}
+
+// Grão de filme: um ladrilho de ruído gerado uma vez, com semente fixa.
+export function Grain() {
+  const [url, setUrl] = useState(null);
+  useEffect(() => {
+    const c = document.createElement("canvas");
+    c.width = c.height = 160;
+    const ctx = c.getContext("2d");
+    const img = ctx.createImageData(160, 160);
+    const rnd = mulberry32(21);
+    for (let i = 0; i < img.data.length; i += 4) {
+      const v = rnd() * 255;
+      img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+      img.data[i + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    setUrl(c.toDataURL());
+  }, []);
+  return <div className="grain" aria-hidden="true" style={url ? { backgroundImage: `url(${url})` } : undefined} />;
+}
+
+// A luz do projetor: um halo volt que segue o ponteiro.
+export function CursorLight() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!matchMedia("(pointer: fine)").matches) return;
+    const move = (e) => {
+      ref.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      ref.current.style.opacity = 1;
+    };
+    window.addEventListener("pointermove", move);
+    return () => window.removeEventListener("pointermove", move);
+  }, []);
+  return <div className="cursor-light" ref={ref} aria-hidden="true" />;
+}
+
+// Revelação por máscara: o conteúdo sobe de dentro da própria linha quando entra na tela.
+export function Reveal({ as: Tag = "div", delay = 0, className = "", children, ...rest }) {
+  const ref = useRef(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <Tag
+      ref={ref}
+      className={`reveal ${shown ? "is-in" : ""} ${className}`}
+      style={{ "--d": `${delay}ms` }}
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
