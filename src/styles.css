@@ -2763,3 +2763,17 @@ html.lenis body {
     animation: none;
   }
 }
+
+/* troca de tema: sem a mistura padrão; o tema novo entra por cima num círculo (Chrome.jsx) */
+.theme-switching::view-transition-old(root),
+.theme-switching::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+.theme-switching::view-transition-new(root) {
+  z-index: 2;
+}
+/* durante a troca, as peças com nome próprio (logo, moldura) não fazem morph */
+.theme-switching::view-transition-group(*) {
+  animation-duration: 0s;
+}

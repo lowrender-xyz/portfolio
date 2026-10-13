@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { Link } from "react-router-dom";
 import { useLocale } from "../i18n.jsx";
 import { mulberry32 } from "../lib/motion.js";
@@ -26,6 +27,30 @@ export function Nav() {
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || "dark");
   const active = useActiveSection(t.landingNav.map(([h]) => h));
   const progress = useRef(null);
+  // troca de tema: o tema novo se abre num círculo a partir do botão (View Transitions);
+  // sem suporte ou com "reduzir movimento", troca na hora
+  const toggleTheme = (e) => {
+    const next = theme === "dark" ? "light" : "dark";
+    const apply = () =>
+      flushSync(() => {
+        document.documentElement.dataset.theme = next;
+        setTheme(next);
+      });
+    if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return apply();
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const root = document.documentElement;
+    root.classList.add("theme-switching");
+    const vt = document.startViewTransition(apply);
+    vt.ready.then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        { duration: 750, easing: "cubic-bezier(0.16, 1, 0.3, 1)", pseudoElement: "::view-transition-new(root)" },
+      );
+    });
+    vt.finished.finally(() => root.classList.remove("theme-switching"));
+  };
   useHudProgress(progress);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -58,7 +83,7 @@ export function Nav() {
         <LangSwitch />
         <button
           className="theme mono"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={(e) => toggleTheme(e)}
           aria-label={theme === "dark" ? "Tema claro" : "Tema escuro"}
         >
           <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
