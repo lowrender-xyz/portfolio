@@ -51,7 +51,11 @@ const FX = [
     return { t: `perspective(1600px) rotateX(${(1 - e) * 16}deg) scale(${0.9 + e * 0.1})` };
   }],
   // rodapé: o "sorry." final cresce até o fim da página
-  [".footer", ".footer__big", ({ p }) => ({ t: `translate3d(0,${(1 - p) * 80}px,0) scale(${0.85 + p * 0.15})` })],
+  // (o rodapé nunca sai por cima da tela: o efeito termina, parado no lugar, antes do fim da página)
+  [".footer", ".footer__big", ({ p }) => {
+    const e = clamp(p * 3);
+    return { t: `translate3d(0,${(1 - e) * 70}px,0) scale(${0.9 + e * 0.1})`, o: 0.2 + e * 0.8 };
+  }],
 ];
 
 export function startFilm() {

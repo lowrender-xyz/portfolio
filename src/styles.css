@@ -684,17 +684,29 @@ p {
   z-index: 1;
   width: min(var(--max), calc(100% - 2 * var(--gutter)));
   margin: 0 auto;
-  padding: 56px 0 32px;
-  border-top: 1px solid var(--line);
+  /* termina acima da moldura fixa do HUD */
+  padding: 56px 0 calc(var(--inset) + 34px);
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 24px 40px;
   align-items: end;
 }
+/* linha de cima só na área do conteúdo (não entra no trilho lateral do HUD) */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: calc(var(--rail) + var(--inset));
+  border-top: 1px solid var(--line);
+}
 .footer__big {
+  grid-column: 1 / -1;
   font: 700 clamp(4rem, 13vw, 11rem) / 0.8 var(--display);
   letter-spacing: -0.06em;
   margin-left: -0.04em;
+  /* espaço para a perna do "y" não encostar nas linhas de baixo */
+  padding-bottom: 0.2em;
 }
 .footer__socials {
   margin: 0;
@@ -719,7 +731,7 @@ p {
 }
 .footer__credit {
   grid-column: 1 / -1;
-  margin-top: -16px;
+  margin-top: -14px;
   font-size: 0.6rem;
   opacity: 0.6;
 }
