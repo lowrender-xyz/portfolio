@@ -127,7 +127,7 @@ export default function Landing() {
                   <span>{on ? <b className="game__live">● {L.games.now}</b> : pick(g.genre)}</span>
                 </span>
                 {g.art ? (
-                  <img className="game__img" src={g.art} alt="" loading="lazy" referrerPolicy="no-referrer" />
+                  <img className="game__img" src={g.art} alt="" loading="lazy" referrerPolicy="no-referrer" style={g.artPos ? { objectPosition: g.artPos } : undefined} />
                 ) : (
                   <span className="game__art" aria-hidden="true">
                     {g.title.replace(/[^A-Za-z0-9]/g, "").slice(0, 2)}

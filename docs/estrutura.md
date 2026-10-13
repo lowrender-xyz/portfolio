@@ -20,7 +20,7 @@ Botão **Entrar** vira a moldura do cabeçalho (View Transitions).
 | 05 | `#sobre` | Dev · Design · Motion + ferramentas |
 | 06 | `#contato` | GitHub, TikTok, Discord |
 
-Gostos em `src/data/me.js`, na grafia do Keven. Sem capas oficiais: os cartões são desenhados pelo site.
+Gostos em `src/data/me.js`, na grafia do Keven. Artes dos jogos: Steam e Microsoft Store (CDN delas). Filmes e séries: TMDB (`scripts/fetch-tmdb.mjs`).
 
 `/projetos/*` e `/skills` (endereços antigos) redirecionam para as âncoras.
 
