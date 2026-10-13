@@ -26,6 +26,7 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Perfil (Discord ao vivo + links) | `src/components/Profile.jsx` · `src/lib/lanyard.js` |
 | Rolagem de filme (efeitos amarrados ao scroll) | `src/lib/film.js` (lista `FX`) |
 | Moldura de interface (trilho, mira, progresso) | `src/components/Hud.jsx` |
+| Cursor (mira que trava em links e botões) | `src/components/Cursor.jsx` |
 | Linha de terminal ao vivo · tela de carregamento | `src/components/Ticker.jsx` · `src/components/Loader.jsx` |
 | Cores, fontes, layout | `src/styles.css` (tokens no topo) |
 | Direção de arte e estrutura | `docs/style_guide.md` · `docs/estrutura.md` |

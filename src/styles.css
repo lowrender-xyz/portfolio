@@ -2777,3 +2777,52 @@ html.lenis body {
 .theme-switching::view-transition-group(*) {
   animation-duration: 0s;
 }
+
+/* cursor do site (Cursor.jsx): só com mouse; o cursor do sistema some */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+html.cursor-on .cursor {
+  opacity: 1;
+}
+.cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--volt);
+}
+.cursor__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+}
+.cursor__frame i {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 0 solid var(--paper);
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+.cursor__frame i:nth-child(1) { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
+.cursor__frame i:nth-child(2) { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; }
+.cursor__frame i:nth-child(3) { bottom: 0; right: 0; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+.cursor__frame i:nth-child(4) { bottom: 0; left: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+/* travado num alvo: cantos maiores e em azul */
+.cursor__frame.is-locked i {
+  width: 12px;
+  height: 12px;
+  border-color: var(--volt);
+}

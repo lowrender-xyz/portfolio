@@ -8,6 +8,7 @@ import Landing from "./pages/Landing.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Hud from "./components/Hud.jsx";
 import Loader from "./components/Loader.jsx";
+import Cursor from "./components/Cursor.jsx";
 import { startFilm, getLenis } from "./lib/film.js";
 import "./styles.css";
 
@@ -39,6 +40,7 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Grain />
         <CursorLight />
+        <Cursor />
         <Routes>
           <Route path="/" element={<Opening />} />
           <Route path="/inicio" element={<Site><Landing /></Site>} />
