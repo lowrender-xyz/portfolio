@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useLocale } from "../i18n.jsx";
 import { site } from "../data/site.js";
 import { SHOTS, STATS, MODULES } from "../data/smart7.js";
-import { GAMES, SCREEN, NOLAN, TOOLS, ARTISTS, sameArtist } from "../data/me.js";
+import { GAMES, SCREEN, TOOLS, ARTISTS, sameArtist } from "../data/me.js";
 import DiscordCard from "../components/DiscordCard.jsx";
 import Halftone from "../components/Halftone.jsx";
 import Catalog from "../components/Catalog.jsx";
 import Shot from "../components/Shot.jsx";
 import NowPlaying from "../components/NowPlaying.jsx";
 import TornPaper from "../components/TornPaper.jsx";
+import ScreenRows from "../components/ScreenRows.jsx";
 import { Reveal } from "../components/Chrome.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 
@@ -161,31 +162,14 @@ export default function Landing() {
             ))}
           </span>
         </div>
-        <div className="shelf" key={shelf}>
-          {SCREEN[shelf].map((s, i) => (
-            <Reveal key={pick(s.title)} delay={i * 70} className={`poster ${s.wide ? "poster--wide" : ""}`}>
-              <span className="poster__top mono">
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                {s.tag && <span>{pick(s.tag)}</span>}
-              </span>
-              <span className="poster__title">{pick(s.title)}</span>
-              <span className="poster__meta mono">{pick(s.meta)}</span>
-              {s.list === "nolan" && (
-                <ol className="poster__list mono">
-                  {NOLAN.map(([pt, en, y]) => (
-                    <li key={en}>
-                      <span>{lang === "pt" ? pt : en}</span>
-                      <span>{y}</span>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </Reveal>
-          ))}
-        </div>
-        <Reveal as="p" className="shelf-note mono">
-          {L.screen.note}
-        </Reveal>
+        <ScreenRows tab={shelf} key={shelf} />
+        <p className="shelf-note mono">
+          {L.screen.note}{" "}
+          <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
+            TMDB
+          </a>
+          . {L.screen.credit}
+        </p>
       </section>
 
       {/* ── 03 · música ──────────────────────────────────── */}

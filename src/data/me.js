@@ -16,31 +16,8 @@ export const GAMES = [
   { title: "New World", art: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1063730/library_hero.jpg", by: "Amazon Games", year: 2021, genre: { pt: "MMO", en: "MMO" }, match: ["new world"] },
 ];
 
-export const NOLAN = [
-  ["Amnésia", "Memento", 2000],
-  ["Batman Begins", "Batman Begins", 2005],
-  ["O Grande Truque", "The Prestige", 2006],
-  ["O Cavaleiro das Trevas", "The Dark Knight", 2008],
-  ["A Origem", "Inception", 2010],
-  ["Interestelar", "Interstellar", 2014],
-  ["Dunkirk", "Dunkirk", 2017],
-  ["Tenet", "Tenet", 2020],
-  ["Oppenheimer", "Oppenheimer", 2023],
-];
-
+// Filmes e séries vêm do TMDB (src/data/screen.json, gerado por scripts/fetch-tmdb.mjs)
 export const SCREEN = {
-  films: [
-    { title: "Jumper", meta: "Doug Liman · 2008", tag: { pt: "Favorito", en: "Favorite" } },
-    { title: "Christopher Nolan", meta: { pt: "todos os filmes", en: "every film" }, list: "nolan", wide: true },
-    { title: "Marvel", meta: { pt: "todos os filmes", en: "every film" }, tag: { pt: "Universo", en: "Universe" } },
-    { title: "DC", meta: { pt: "todos os filmes", en: "every film" }, tag: { pt: "Universo", en: "Universe" } },
-  ],
-  series: [
-    { title: "Suits", meta: "USA Network · 2011–2019" },
-    { title: { pt: "Território da Máfia", en: "Território da Máfia" }, meta: { pt: "série", en: "series" } },
-    { title: "HBO", meta: { pt: "as séries novas", en: "the new series" }, tag: { pt: "Canal", en: "Network" } },
-    { title: { pt: "Marvel & DC", en: "Marvel & DC" }, meta: { pt: "as séries também", en: "the series too" }, tag: { pt: "Universo", en: "Universe" } },
-  ],
   genres: [
     { pt: "Ficção científica", en: "Science fiction" },
     { pt: "Viagens espaciais", en: "Space travel" },

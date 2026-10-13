@@ -1137,46 +1137,169 @@ p {
   letter-spacing: 0.1em;
   font-size: 0.66rem;
 }
-.shelf {
+/* favoritos em destaque: cena ao fundo, pôster e título */
+.screen-rows {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 56px);
+}
+/* sem isto, a fileira pede a largura de todos os pôsteres e estica a seção */
+.screen-rows > * {
+  min-width: 0;
+}
+.spot {
+  display: grid;
   gap: 16px;
 }
-.poster {
-  min-height: 300px;
+.spot--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.poster--wide {
-  grid-row: span 2;
+.spot__card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(16px, 2.4vw, 28px);
+  min-height: clamp(260px, 30vw, 380px);
+  padding: clamp(18px, 2.6vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--panel);
 }
-.poster__title {
-  margin-top: auto;
-  font: 600 clamp(1.6rem, 2.4vw, 2.2rem) / 1 var(--display);
-  letter-spacing: -0.035em;
+.spot__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--heavy);
 }
-.poster--wide .poster__title {
-  margin-top: 40px;
+/* escurecimento por cima da cena (vem depois da imagem na ordem de pintura) */
+.spot__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #07080bee 0%, #07080b99 45%, #07080b33 100%), linear-gradient(0deg, #07080bcc, transparent 60%);
 }
-.poster__list {
-  margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
+.spot__card:hover .spot__bg {
+  transform: scale(1.04);
+}
+.spot__poster {
+  width: clamp(96px, 11vw, 150px);
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 24px 50px -20px #000;
+}
+.spot__info {
+  color: #eceef2;
+}
+.spot__info .kicker {
+  color: #8fb0ff;
+}
+.spot__info h3 {
+  margin-top: 10px;
+  font: 700 clamp(2rem, 4vw, 3.4rem) / 0.95 var(--display);
+  letter-spacing: -0.045em;
+}
+.spot__info .mono {
+  margin-top: 10px;
+  color: #c4c9d4;
+}
+
+/* fileiras em carrossel */
+.row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.row__head > p {
+  color: var(--paper);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   font-size: 0.74rem;
 }
-.poster__list li {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 9px 0;
-  border-top: 1px solid var(--line);
-  color: var(--paper);
-}
-.poster__list li span:last-child {
+.row__count {
   color: var(--mute);
+}
+.row__nav {
+  display: flex;
+  gap: 8px;
+}
+.row__nav .ring-btn {
+  width: 40px;
+  height: 40px;
+}
+.row__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(132px, 13vw, 176px);
+  gap: 14px;
+  margin: 0 calc(var(--gutter) * -1);
+  padding: 6px var(--gutter) 14px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  mask-image: linear-gradient(90deg, transparent, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent);
+}
+.row__track::-webkit-scrollbar {
+  display: none;
+}
+.poster-card {
+  scroll-snap-align: start;
+}
+.poster-card__img {
+  display: block;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0) 0 0 / 10px 10px,
+    var(--panel);
+  transition: transform 0.5s var(--snappy), border-color 0.3s, box-shadow 0.4s;
+}
+.poster-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.poster-card:hover .poster-card__img {
+  transform: translateY(-6px);
+  border-color: var(--volt);
+  box-shadow: 0 24px 40px -24px #3d7bffaa;
+}
+.poster-card__title {
+  display: -webkit-box;
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.25;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.poster-card__year {
+  display: block;
+  margin-top: 4px;
+  color: var(--mute);
+  font-size: 0.66rem;
 }
 .shelf-note {
-  margin-top: 20px;
+  margin-top: 28px;
   color: var(--mute);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
+}
+.shelf-note a {
+  color: var(--volt);
 }
 
 /* música */
@@ -1519,8 +1642,7 @@ p {
 }
 
 @media (max-width: 1080px) {
-  .games,
-  .shelf {
+  .games {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1549,11 +1671,11 @@ p {
     display: block;
     margin-top: 4px;
   }
-  .shelf {
+  .spot--2 {
     grid-template-columns: 1fr;
   }
-  .poster--wide {
-    grid-row: auto;
+  .row__nav {
+    display: none;
   }
   .shelf-tabs__genres {
     margin-left: 0;

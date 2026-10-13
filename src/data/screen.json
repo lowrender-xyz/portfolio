@@ -1,0 +1,1007 @@
+{
+ "updated": "2026-10-13",
+ "rows": {
+  "films": [
+   {
+    "id": "favoritos",
+    "items": [
+     {
+      "id": 8247,
+      "kind": "movie",
+      "pt": "Jumper",
+      "en": "Jumper",
+      "year": "2008",
+      "poster": "/s5Ons7z4fQcRK9xWIrWrBZ225Vc.jpg",
+      "backdrop": "/1R4DZbEwWTPnRShBumJsOwsfAiB.jpg"
+     }
+    ]
+   },
+   {
+    "id": "nolan",
+    "items": [
+     {
+      "id": 77,
+      "kind": "movie",
+      "pt": "Amnésia",
+      "en": "Memento",
+      "year": "2000",
+      "poster": "/7leBWM27Q0TUnvmhw6WnFNgGn4G.jpg",
+      "backdrop": "/7Wev9JMo6R5XAfz2KDvXb7oPMmy.jpg"
+     },
+     {
+      "id": 272,
+      "kind": "movie",
+      "pt": "Batman Begins",
+      "en": "Batman Begins",
+      "year": "2005",
+      "poster": "/7EyhcdfiLtH0xa6CZkyYuoWL2GJ.jpg",
+      "backdrop": "/9IIBboV7MCT0bTxzXHmWK1Hq558.jpg"
+     },
+     {
+      "id": 1124,
+      "kind": "movie",
+      "pt": "O Grande Truque",
+      "en": "The Prestige",
+      "year": "2006",
+      "poster": "/4AUW2bGbQjWACUREckGJWXmyF0d.jpg",
+      "backdrop": "/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg"
+     },
+     {
+      "id": 155,
+      "kind": "movie",
+      "pt": "Batman: O Cavaleiro das Trevas",
+      "en": "The Dark Knight",
+      "year": "2008",
+      "poster": "/4lj1ikfsSmMZNyfdi8R8Tv5tsgb.jpg",
+      "backdrop": "/9FE5eD92WfVCiivM9Pq9GVSrlWk.jpg"
+     },
+     {
+      "id": 27205,
+      "kind": "movie",
+      "pt": "A Origem",
+      "en": "Inception",
+      "year": "2010",
+      "poster": "/9e3Dz7aCANy5aRUQF745IlNloJ1.jpg",
+      "backdrop": "/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg"
+     },
+     {
+      "id": 157336,
+      "kind": "movie",
+      "pt": "Interestelar",
+      "en": "Interstellar",
+      "year": "2014",
+      "poster": "/tR1XVa5bxgdh2bRw2u0DzrgkO2l.jpg",
+      "backdrop": "/8sNiAPPYU14PUepFNeSNGUTiHW.jpg"
+     },
+     {
+      "id": 374720,
+      "kind": "movie",
+      "pt": "Dunkirk",
+      "en": "Dunkirk",
+      "year": "2017",
+      "poster": "/mXJOgvCZm4PJ9I4zEbAH3CVCjfa.jpg",
+      "backdrop": "/pTwF9hLkqAtuOqXMdOyPwz4AgnI.jpg"
+     },
+     {
+      "id": 577922,
+      "kind": "movie",
+      "pt": "Tenet",
+      "en": "Tenet",
+      "year": "2020",
+      "poster": "/Ae0pbv4E6YfqfN3UjKWIfQSzP9v.jpg",
+      "backdrop": "/mQOUyqDybTqxl73hO5LujCZsM1o.jpg"
+     },
+     {
+      "id": 872585,
+      "kind": "movie",
+      "pt": "Oppenheimer",
+      "en": "Oppenheimer",
+      "year": "2023",
+      "poster": "/dUPQszWoRSE9FucJTbVp2bwEi9G.jpg",
+      "backdrop": "/neeNHeXjMF5fXoCJRsOmkNGC7q.jpg"
+     }
+    ]
+   },
+   {
+    "id": "marvel",
+    "items": [
+     {
+      "id": 1726,
+      "kind": "movie",
+      "pt": "Homem de Ferro",
+      "en": "Iron Man",
+      "year": "2008",
+      "poster": "/mqN7RxojEiPoh3FTSTwOtwg7KAu.jpg",
+      "backdrop": "/cKvDv2LpwVEqbdXWoQl4XgGN6le.jpg"
+     },
+     {
+      "id": 1724,
+      "kind": "movie",
+      "pt": "O Incrível Hulk",
+      "en": "The Incredible Hulk",
+      "year": "2008",
+      "poster": "/v1UXe9WlwkkZ5YrffUSPdYNeJz3.jpg",
+      "backdrop": "/xfBnQ4mgf1jYZsscJGJjr6ce0Ar.jpg"
+     },
+     {
+      "id": 10138,
+      "kind": "movie",
+      "pt": "Homem de Ferro 2",
+      "en": "Iron Man 2",
+      "year": "2010",
+      "poster": "/vzROjQbgKWMVf2EldXipCcjpuBL.jpg",
+      "backdrop": "/7lmBufEG7P7Y1HClYK3gCxYrkgS.jpg"
+     },
+     {
+      "id": 10195,
+      "kind": "movie",
+      "pt": "Thor",
+      "en": "Thor",
+      "year": "2011",
+      "poster": "/aEV9QmgBqjRTdjsvdCgdK89tavQ.jpg",
+      "backdrop": "/cDJ61O1STtbWNBwefuqVrRe3d7l.jpg"
+     },
+     {
+      "id": 1771,
+      "kind": "movie",
+      "pt": "Capitão América: O Primeiro Vingador",
+      "en": "Captain America: The First Avenger",
+      "year": "2011",
+      "poster": "/19wxfSXHhuJBRbbfUweCsfXFhpv.jpg",
+      "backdrop": "/yFuKvT4Vm3sKHdFY4eG6I4ldAnn.jpg"
+     },
+     {
+      "id": 24428,
+      "kind": "movie",
+      "pt": "Os Vingadores: The Avengers",
+      "en": "The Avengers",
+      "year": "2012",
+      "poster": "/PtSapjHdDjlVcsqdEo0u7rDE6i.jpg",
+      "backdrop": "/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg"
+     },
+     {
+      "id": 68721,
+      "kind": "movie",
+      "pt": "Homem de Ferro 3",
+      "en": "Iron Man 3",
+      "year": "2013",
+      "poster": "/C7MZwRTjvEy7gkWcLJeBGZFE1w.jpg",
+      "backdrop": "/iVped1djsF0tvGkvnHbzsE3ZPTF.jpg"
+     },
+     {
+      "id": 76338,
+      "kind": "movie",
+      "pt": "Thor: O Mundo Sombrio",
+      "en": "Thor: The Dark World",
+      "year": "2013",
+      "poster": "/9qdqXIx2neypuT1kWKCTI2vsO4q.jpg",
+      "backdrop": "/5o88bbqcV5STn56jqOeovaaWbAE.jpg"
+     },
+     {
+      "id": 100402,
+      "kind": "movie",
+      "pt": "Capitão América: O Soldado Invernal",
+      "en": "Captain America: The Winter Soldier",
+      "year": "2014",
+      "poster": "/9sTDXtIIfHza1rAbmHU2djyzEXA.jpg",
+      "backdrop": "/1RWLMyC9KcFfcaoViMiJGSSZzzr.jpg"
+     },
+     {
+      "id": 118340,
+      "kind": "movie",
+      "pt": "Guardiões da Galáxia",
+      "en": "Guardians of the Galaxy",
+      "year": "2014",
+      "poster": "/xaY92XMToaSnBuvCui3LHzNGqZB.jpg",
+      "backdrop": "/uLtVbjvS1O7gXL8lUOwsFOH4man.jpg"
+     },
+     {
+      "id": 99861,
+      "kind": "movie",
+      "pt": "Vingadores: Era de Ultron",
+      "en": "Avengers: Age of Ultron",
+      "year": "2015",
+      "poster": "/uvzqTsRmUzk9mJVzX8cMSWMyM5l.jpg",
+      "backdrop": "/kIBK5SKwgqIIuRKhhWrJn3XkbPq.jpg"
+     },
+     {
+      "id": 102899,
+      "kind": "movie",
+      "pt": "Homem-Formiga",
+      "en": "Ant-Man",
+      "year": "2015",
+      "poster": "/lsiy4IcnbtChkayPMxLda2fq4xM.jpg",
+      "backdrop": "/1K3JmSNUN8OpjYsCjc0Hy0SYxAb.jpg"
+     },
+     {
+      "id": 271110,
+      "kind": "movie",
+      "pt": "Capitão América: Guerra Civil",
+      "en": "Captain America: Civil War",
+      "year": "2016",
+      "poster": "/dsvUR5aEVSkB1Sro7nT6Khqik71.jpg",
+      "backdrop": "/7FWlcZq3r6525LWOcvO9kNWurN1.jpg"
+     },
+     {
+      "id": 284052,
+      "kind": "movie",
+      "pt": "Doutor Estranho",
+      "en": "Doctor Strange",
+      "year": "2016",
+      "poster": "/pb4clPWRJ5AKlSFu1HrrHdt5uAw.jpg",
+      "backdrop": "/kkoiH8ZWxJ9WSAjOadGtuHUQxbm.jpg"
+     },
+     {
+      "id": 283995,
+      "kind": "movie",
+      "pt": "Guardiões da Galáxia - Vol. 2",
+      "en": "Guardians of the Galaxy Vol. 2",
+      "year": "2017",
+      "poster": "/jGtBLu0JAKf5JxhWgmF68HROzCA.jpg",
+      "backdrop": "/aJn9XeesqsrSLKcHfHP4u5985hn.jpg"
+     },
+     {
+      "id": 315635,
+      "kind": "movie",
+      "pt": "Homem-Aranha: De Volta ao Lar",
+      "en": "Spider-Man: Homecoming",
+      "year": "2017",
+      "poster": "/1nkwRL17cAGO8A1yu3miRBdvOsl.jpg",
+      "backdrop": "/tPpYGm2mVecue7Bk3gNVoSPA5qn.jpg"
+     },
+     {
+      "id": 284053,
+      "kind": "movie",
+      "pt": "Thor: Ragnarok",
+      "en": "Thor: Ragnarok",
+      "year": "2017",
+      "poster": "/2K45Fp6koAVoeeYS6aMb9BeNt4F.jpg",
+      "backdrop": "/vLmHH8jAy8Jq8uBsLucd3592WGh.jpg"
+     },
+     {
+      "id": 284054,
+      "kind": "movie",
+      "pt": "Pantera Negra",
+      "en": "Black Panther",
+      "year": "2018",
+      "poster": "/ubXNpxL2ASSzY0f8Hxv08pOsV2L.jpg",
+      "backdrop": "/b6ZJZHUdMEFECvGiDpJjlfUWela.jpg"
+     },
+     {
+      "id": 299536,
+      "kind": "movie",
+      "pt": "Vingadores: Guerra Infinita",
+      "en": "Avengers: Infinity War",
+      "year": "2018",
+      "poster": "/A4kvp7vY1BDLrrQIagRCffLKj1t.jpg",
+      "backdrop": "/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg"
+     },
+     {
+      "id": 363088,
+      "kind": "movie",
+      "pt": "Homem-Formiga e a Vespa",
+      "en": "Ant-Man and the Wasp",
+      "year": "2018",
+      "poster": "/5BKRuGVxx8qsB7WGSJ0oWRCHsgN.jpg",
+      "backdrop": "/iYdgEUE2W2aJkgqfSjf1x3gFfuV.jpg"
+     },
+     {
+      "id": 299537,
+      "kind": "movie",
+      "pt": "Capitã Marvel",
+      "en": "Captain Marvel",
+      "year": "2019",
+      "poster": "/n3BisLdTMceUWcdP1ooP5VwN9JF.jpg",
+      "backdrop": "/qAzYK4YPSWDc7aa4R43LcwRIAyb.jpg"
+     },
+     {
+      "id": 299534,
+      "kind": "movie",
+      "pt": "Vingadores: Ultimato",
+      "en": "Avengers: Endgame",
+      "year": "2019",
+      "poster": "/q6725aR8Zs4IwGMXzZT8aC8lh41.jpg",
+      "backdrop": "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg"
+     },
+     {
+      "id": 429617,
+      "kind": "movie",
+      "pt": "Homem-Aranha: Longe de Casa",
+      "en": "Spider-Man: Far From Home",
+      "year": "2019",
+      "poster": "/tX0o4AdHpidgniTWwfzK0dNTKrc.jpg",
+      "backdrop": "/wqBW5ltBJu0gs26yCc8shQQV82d.jpg"
+     },
+     {
+      "id": 497698,
+      "kind": "movie",
+      "pt": "Viúva Negra",
+      "en": "Black Widow",
+      "year": "2021",
+      "poster": "/lrJ9QI2HMbO8N2S2r2v7fjtou5c.jpg",
+      "backdrop": "/keIxh0wPr2Ymj0Btjh4gW7JJ89e.jpg"
+     },
+     {
+      "id": 566525,
+      "kind": "movie",
+      "pt": "Shang-Chi e a Lenda dos Dez Anéis",
+      "en": "Shang-Chi and the Legend of the Ten Rings",
+      "year": "2021",
+      "poster": "/d3wNegI8XJF8Kto6KhlqPicBRAp.jpg",
+      "backdrop": "/r7K6Xt0RX4Mw0cAbZVw5cyb1Tux.jpg"
+     },
+     {
+      "id": 524434,
+      "kind": "movie",
+      "pt": "Eternos",
+      "en": "Eternals",
+      "year": "2021",
+      "poster": "/2IgZIYa8iTQuLNIcVERwXmh8pUj.jpg",
+      "backdrop": "/c6H7Z4u73ir3cIoCteuhJh7UCAR.jpg"
+     },
+     {
+      "id": 634649,
+      "kind": "movie",
+      "pt": "Homem-Aranha: Sem Volta Para Casa",
+      "en": "Spider-Man: No Way Home",
+      "year": "2021",
+      "poster": "/xaKydnMw6wR1MBAjS5seGPVusbs.jpg",
+      "backdrop": "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg"
+     },
+     {
+      "id": 453395,
+      "kind": "movie",
+      "pt": "Doutor Estranho no Multiverso da Loucura",
+      "en": "Doctor Strange in the Multiverse of Madness",
+      "year": "2022",
+      "poster": "/7pLIVfovuIf2KQOOvMsKx3Lanrg.jpg",
+      "backdrop": "/lv3TXqhpaIxkclIHbhN2MRMOemQ.jpg"
+     },
+     {
+      "id": 616037,
+      "kind": "movie",
+      "pt": "Thor: Amor e Trovão",
+      "en": "Thor: Love and Thunder",
+      "year": "2022",
+      "poster": "/wSE3IdCWSrsAXkNC9XwnxgJJqIq.jpg",
+      "backdrop": "/jsoz1HlxczSuTx0mDl2h0lxy36l.jpg"
+     },
+     {
+      "id": 505642,
+      "kind": "movie",
+      "pt": "Pantera Negra: Wakanda para Sempre",
+      "en": "Black Panther: Wakanda Forever",
+      "year": "2022",
+      "poster": "/cryEN3sWlgB2wTzcUNVtDGI8bkM.jpg",
+      "backdrop": "/83H0C66AcvkwpG2738VCTHMY9uv.jpg"
+     },
+     {
+      "id": 640146,
+      "kind": "movie",
+      "pt": "Homem-Formiga e a Vespa: Quantumania",
+      "en": "Ant-Man and the Wasp: Quantumania",
+      "year": "2023",
+      "poster": "/qZDafbofrZn46MmDwJS8fCSCe6l.jpg",
+      "backdrop": "/m8JTwHFwX7I7JY5fPe4SjqejWag.jpg"
+     },
+     {
+      "id": 447365,
+      "kind": "movie",
+      "pt": "Guardiões da Galáxia: Vol. 3",
+      "en": "Guardians of the Galaxy Vol. 3",
+      "year": "2023",
+      "poster": "/4yycSPnchdNAZirGkmCYQwTd3cr.jpg",
+      "backdrop": "/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg"
+     },
+     {
+      "id": 609681,
+      "kind": "movie",
+      "pt": "As Marvels",
+      "en": "The Marvels",
+      "year": "2023",
+      "poster": "/wpp5KIwjtrKoWj5H0TSsJdqsDx7.jpg",
+      "backdrop": "/feSiISwgEpVzR1v3zv2n2AU4ANJ.jpg"
+     },
+     {
+      "id": 533535,
+      "kind": "movie",
+      "pt": "Deadpool & Wolverine",
+      "en": "Deadpool & Wolverine",
+      "year": "2024",
+      "poster": "/cJFqqiDYprqExaXatu4AaoMzDG2.jpg",
+      "backdrop": "/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg"
+     },
+     {
+      "id": 822119,
+      "kind": "movie",
+      "pt": "Capitão América: Admirável Mundo Novo",
+      "en": "Captain America: Brave New World",
+      "year": "2025",
+      "poster": "/5nbSgP8f5LMCI0PwVRRaHJaUmR3.jpg",
+      "backdrop": "/ce3prrjh9ZehEl5JinNqr4jIeaB.jpg"
+     },
+     {
+      "id": 986056,
+      "kind": "movie",
+      "pt": "Thunderbolts*",
+      "en": "Thunderbolts*",
+      "year": "2025",
+      "poster": "/zkysYSX51ddSPQuiDTjkGCS6vyh.jpg",
+      "backdrop": "/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg"
+     },
+     {
+      "id": 617126,
+      "kind": "movie",
+      "pt": "Quarteto Fantástico: Primeiros Passos",
+      "en": "The Fantastic 4: First Steps",
+      "year": "2025",
+      "poster": "/8F2vIxWycANHW763lnx2hJVtjDC.jpg",
+      "backdrop": "/s94NjfKkcSczZ1FembwmQZwsuwY.jpg"
+     },
+     {
+      "id": 969681,
+      "kind": "movie",
+      "pt": "Homem-Aranha: Um Novo Dia",
+      "en": "Spider-Man: Brand New Day",
+      "year": "2026",
+      "poster": "/x0nvYzQpyJc5pdT9lMnkMuYAg0O.jpg",
+      "backdrop": "/4tjxYg2AbOzzG9G1YuiT2NzYhlH.jpg"
+     }
+    ]
+   },
+   {
+    "id": "dc",
+    "items": [
+     {
+      "id": 49521,
+      "kind": "movie",
+      "pt": "O Homem de Aço",
+      "en": "Man of Steel",
+      "year": "2013",
+      "poster": "/cheo9jDPfyW1GevfPjXtnO91KNe.jpg",
+      "backdrop": "/69EFgWWPFWbRNHmQgYdSnyJ94Ge.jpg"
+     },
+     {
+      "id": 297761,
+      "kind": "movie",
+      "pt": "Esquadrão Suicida",
+      "en": "Suicide Squad",
+      "year": "2016",
+      "poster": "/6hU2HAUpgBZ295sYzSkr8F5VxbS.jpg",
+      "backdrop": "/wAk0yKrhAmvsoMvlKs4QImhvK5X.jpg"
+     },
+     {
+      "id": 209112,
+      "kind": "movie",
+      "pt": "Batman vs Superman: A Origem da Justiça",
+      "en": "Batman v Superman: Dawn of Justice",
+      "year": "2016",
+      "poster": "/vh6pjeGH0GQupLepPCZn5PylcRg.jpg",
+      "backdrop": "/5fX1oSGuYdKgwWmUTAN5MNSQGzr.jpg"
+     },
+     {
+      "id": 297762,
+      "kind": "movie",
+      "pt": "Mulher-Maravilha",
+      "en": "Wonder Woman",
+      "year": "2017",
+      "poster": "/ujQthWB6c0ojlARk28NSTmqidbF.jpg",
+      "backdrop": "/AaABt75ZzfMGrscUR2seabz4PEX.jpg"
+     },
+     {
+      "id": 141052,
+      "kind": "movie",
+      "pt": "Liga da Justiça",
+      "en": "Justice League",
+      "year": "2017",
+      "poster": "/vQIwxoGxW46Skq5ipu0pBFKZTKd.jpg",
+      "backdrop": "/2nyaeISu2xIxIgZYNpX4UayY8PN.jpg"
+     },
+     {
+      "id": 297802,
+      "kind": "movie",
+      "pt": "Aquaman",
+      "en": "Aquaman",
+      "year": "2018",
+      "poster": "/wbo0CYG6SOFxFkoe9BiqvivLggN.jpg",
+      "backdrop": "/9QusGjxcYvfPD1THg6oW3RLeNn7.jpg"
+     },
+     {
+      "id": 287947,
+      "kind": "movie",
+      "pt": "Shazam!",
+      "en": "Shazam!",
+      "year": "2019",
+      "poster": "/rwkriXzzP9FoiIF5nTdxBsUcds4.jpg",
+      "backdrop": "/o7JVhqMmrex1TPbmuxl8YXVlcfl.jpg"
+     },
+     {
+      "id": 475557,
+      "kind": "movie",
+      "pt": "Coringa",
+      "en": "Joker",
+      "year": "2019",
+      "poster": "/xLxgVxFWvb9hhUyCDDXxRPPnFck.jpg",
+      "backdrop": "/rlay2M5QYvi6igbGcFjq8jxeusY.jpg"
+     },
+     {
+      "id": 495764,
+      "kind": "movie",
+      "pt": "Aves de Rapina: Arlequina e sua Emancipação Fantabulosa",
+      "en": "Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn)",
+      "year": "2020",
+      "poster": "/A50Ngq9lh9aCTGHC6kttrppHNoF.jpg",
+      "backdrop": "/3zBjU7mXlzxJKAStRzlNDZRGT0m.jpg"
+     },
+     {
+      "id": 464052,
+      "kind": "movie",
+      "pt": "Mulher-Maravilha 1984",
+      "en": "Wonder Woman 1984",
+      "year": "2020",
+      "poster": "/qDA95ebiy3W3m8hTRB3xZNZVVBM.jpg",
+      "backdrop": "/egg7KFi18TSQc1s24RMmR9i2zO6.jpg"
+     },
+     {
+      "id": 791373,
+      "kind": "movie",
+      "pt": "Liga da Justiça de Zack Snyder",
+      "en": "Zack Snyder's Justice League",
+      "year": "2021",
+      "poster": "/lsZ5dmMuvZVNMBrkozvJedujbgU.jpg",
+      "backdrop": "/9WoLTsRgrupkvCgs3bhsl2EjLhs.jpg"
+     },
+     {
+      "id": 436969,
+      "kind": "movie",
+      "pt": "O Esquadrão Suicida",
+      "en": "The Suicide Squad",
+      "year": "2021",
+      "poster": "/wTS3dS2DJiMFFgqKDz5fxMTri.jpg",
+      "backdrop": "/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg"
+     },
+     {
+      "id": 414906,
+      "kind": "movie",
+      "pt": "Batman",
+      "en": "The Batman",
+      "year": "2022",
+      "poster": "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
+      "backdrop": "/rvtdN5XkWAfGX6xDuPL6yYS2seK.jpg"
+     },
+     {
+      "id": 436270,
+      "kind": "movie",
+      "pt": "Adão Negro",
+      "en": "Black Adam",
+      "year": "2022",
+      "poster": "/ZTzxi5aKXua2eIlmaMbxxcoW7v.jpg",
+      "backdrop": "/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg"
+     },
+     {
+      "id": 594767,
+      "kind": "movie",
+      "pt": "Shazam! Fúria dos Deuses",
+      "en": "Shazam! Fury of the Gods",
+      "year": "2023",
+      "poster": "/mTXxYgJ8UE7N6XIxIaesAqvMG4S.jpg",
+      "backdrop": "/kQV9sV0IbastbU5FYxuYwxfMawz.jpg"
+     },
+     {
+      "id": 298618,
+      "kind": "movie",
+      "pt": "The Flash",
+      "en": "The Flash",
+      "year": "2023",
+      "poster": "/itYONYDHpJqTuu8BCXAtHxgpglq.jpg",
+      "backdrop": "/yF1eOkaYvwiORauRCPWznV9xVvi.jpg"
+     },
+     {
+      "id": 565770,
+      "kind": "movie",
+      "pt": "Besouro Azul",
+      "en": "Blue Beetle",
+      "year": "2023",
+      "poster": "/y5sdkgO4IJMTnkjh9PG7kREPWrP.jpg",
+      "backdrop": "/bVyFGnX8kt0XtJXdx2F1HyOkIic.jpg"
+     },
+     {
+      "id": 572802,
+      "kind": "movie",
+      "pt": "Aquaman 2: O Reino Perdido",
+      "en": "Aquaman and the Lost Kingdom",
+      "year": "2023",
+      "poster": "/2Mys5JCHhUH6DE9YxLFFZaCsOHu.jpg",
+      "backdrop": "/bckxSN9ueOgm0gJpVJmPQrecWul.jpg"
+     },
+     {
+      "id": 1061474,
+      "kind": "movie",
+      "pt": "Superman",
+      "en": "Superman",
+      "year": "2025",
+      "poster": "/1ZLhjqbNgd0jzczAQtqMbwuMJKB.jpg",
+      "backdrop": "/yRBc6WY3r1Fz5Cjd6DhSvzqunED.jpg"
+     },
+     {
+      "id": 1081003,
+      "kind": "movie",
+      "pt": "Supergirl",
+      "en": "Supergirl",
+      "year": "2026",
+      "poster": "/pgKFmJ4mvohpI6LUdRj6uIn6wQR.jpg",
+      "backdrop": "/heZQmyNvkH236ha2M3JckdUQQqb.jpg"
+     }
+    ]
+   }
+  ],
+  "series": [
+   {
+    "id": "favoritas",
+    "items": [
+     {
+      "id": 37680,
+      "kind": "tv",
+      "pt": "Homens de Terno",
+      "en": "Suits",
+      "year": "2011",
+      "poster": "/ubEYUaE1EOBnSgb1OteAeGJP1E5.jpg",
+      "backdrop": "/or0E36KfzJYZwqXeiCfm1JgepKF.jpg"
+     },
+     {
+      "id": 247718,
+      "kind": "tv",
+      "pt": "Terra da Máfia",
+      "en": "MobLand",
+      "year": "2025",
+      "poster": "/jM7bH9b9QT22PtkTyHzxbXx4lDI.jpg",
+      "backdrop": "/h0OC7ouop8YLwbAVfS3UUE2Lw4T.jpg"
+     }
+    ]
+   },
+   {
+    "id": "hbo",
+    "items": [
+     {
+      "id": 95350,
+      "kind": "tv",
+      "pt": "Lanternas",
+      "en": "Lanterns",
+      "year": "2026",
+      "poster": "/oQkXyLAYO5YWyU6gA99TynguYwL.jpg",
+      "backdrop": "/6gqezQJ2mkm4jreWwLyOZy2Vf6i.jpg"
+     },
+     {
+      "id": 100088,
+      "kind": "tv",
+      "pt": "The Last of Us",
+      "en": "The Last of Us",
+      "year": "2023",
+      "poster": "/qWo5TP7mBijoZrfxBJkUMctkBt0.jpg",
+      "backdrop": "/lY2DhbA7Hy44fAKddr06UrXWWaQ.jpg"
+     },
+     {
+      "id": 200875,
+      "kind": "tv",
+      "pt": "IT: Bem-Vindos a Derry",
+      "en": "IT: Welcome to Derry",
+      "year": "2025",
+      "poster": "/gMTfrLvrDaD0zrhpLZ7zXIIpKfJ.jpg",
+      "backdrop": "/2fOKVDoc2O3eZmBZesWPuE5kgPN.jpg"
+     },
+     {
+      "id": 224372,
+      "kind": "tv",
+      "pt": "O Cavaleiro dos Sete Reinos",
+      "en": "A Knight of the Seven Kingdoms",
+      "year": "2026",
+      "poster": "/whIZtYminSyVOwjxhjxYcOaCuBg.jpg",
+      "backdrop": "/7mkUu1F2hVUNgz24xO8HPx0D6mK.jpg"
+     },
+     {
+      "id": 194764,
+      "kind": "tv",
+      "pt": "Pinguim",
+      "en": "The Penguin",
+      "year": "2024",
+      "poster": "/pPUNmQZUh7h6w2423VvtzUeg1LD.jpg",
+      "backdrop": "/4TdmuuwiIiKw3JOjIuhdgYxRXnN.jpg"
+     },
+     {
+      "id": 90228,
+      "kind": "tv",
+      "pt": "Duna: A Profecia",
+      "en": "Dune: Prophecy",
+      "year": "2024",
+      "poster": "/9kyqa103Ih22hT955ZaZdipAOAD.jpg",
+      "backdrop": "/lBoHzOgft2QfpjkVVvZCqeM4ttT.jpg"
+     },
+     {
+      "id": 228305,
+      "kind": "tv",
+      "pt": "Task: Unidade Especial",
+      "en": "Task",
+      "year": "2025",
+      "poster": "/8TVdCXyTUBT0PyqrD4svlIVlJJT.jpg",
+      "backdrop": "/hEE8TV5jLQZQnpPN4QmYZ1lCJNq.jpg"
+     },
+     {
+      "id": 135251,
+      "kind": "tv",
+      "pt": "The Idol",
+      "en": "The Idol",
+      "year": "2023",
+      "poster": "/gO9k7t9jSdkkWVG0deMZDpELZGw.jpg",
+      "backdrop": "/jbFkZSsmFFLjqZzxQHTBYyQb0RR.jpg"
+     },
+     {
+      "id": 271267,
+      "kind": "tv",
+      "pt": "A Cadeira",
+      "en": "The Chair Company",
+      "year": "2025",
+      "poster": "/qsRpFcDoIXqzUQsgktIWV9vToj5.jpg",
+      "backdrop": "/jq9biQdGSL0GIUyDaLLl7x8rgzm.jpg"
+     },
+     {
+      "id": 206828,
+      "kind": "tv",
+      "pt": "DTF St. Louis",
+      "en": "DTF St. Louis",
+      "year": "2026",
+      "poster": "/xHfafw9UmomDc7jO25s9MpiL4Zs.jpg",
+      "backdrop": "/7aWCYXHvnc9m71iTDmLF4DW4cr4.jpg"
+     },
+     {
+      "id": 254953,
+      "kind": "tv",
+      "pt": "Rooster",
+      "en": "Rooster",
+      "year": "2026",
+      "poster": "/aikvD4Nu7N6ekbrXNua8vJlO8JU.jpg",
+      "backdrop": "/mhZAT8ktiNi7YwuL50kmumsau69.jpg"
+     },
+     {
+      "id": 96237,
+      "kind": "tv",
+      "pt": "Os Encanadores da Casa Branca",
+      "en": "White House Plumbers",
+      "year": "2023",
+      "poster": "/o2u2xxBheItpP2m1KQgxaPRqxs8.jpg",
+      "backdrop": "/yJ3QpM6rFZOVObsqvKQOl4KOYWG.jpg"
+     },
+     {
+      "id": 129398,
+      "kind": "tv",
+      "pt": "O Simpatizante",
+      "en": "The Sympathizer",
+      "year": "2024",
+      "poster": "/mCkFmproxlyCPSwpo2AQ8J1fp5e.jpg",
+      "backdrop": "/yBYkOSSNwd5Vrh0rF18RlJbyooF.jpg"
+     },
+     {
+      "id": 216619,
+      "kind": "tv",
+      "pt": "A Franquia",
+      "en": "The Franchise",
+      "year": "2024",
+      "poster": "/2JqfBDYBWAsZ0DyZ4yxciih1JKD.jpg",
+      "backdrop": "/5bkxQ4fXDMhfF8CAToNxmz0gC7O.jpg"
+     },
+     {
+      "id": 206829,
+      "kind": "tv",
+      "pt": "O Regime",
+      "en": "The Regime",
+      "year": "2024",
+      "poster": "/rmbFAtgpaAMIcifEzQXxiPWY95O.jpg",
+      "backdrop": "/lp6Rsgid52BIlzYxWDURFSZZU6m.jpg"
+     }
+    ]
+   },
+   {
+    "id": "herois",
+    "items": [
+     {
+      "id": 95350,
+      "kind": "tv",
+      "pt": "Lanternas",
+      "en": "Lanterns",
+      "year": "2026",
+      "poster": "/oQkXyLAYO5YWyU6gA99TynguYwL.jpg",
+      "backdrop": "/6gqezQJ2mkm4jreWwLyOZy2Vf6i.jpg"
+     },
+     {
+      "id": 198178,
+      "kind": "tv",
+      "pt": "Magnum",
+      "en": "Wonder Man",
+      "year": "2026",
+      "poster": "/zf6P1MoickMplupklydA2zfCguO.jpg",
+      "backdrop": "/ldz9THIHaV4orMsUrPT1nlQF51T.jpg"
+     },
+     {
+      "id": 138505,
+      "kind": "tv",
+      "pt": "Marvel Zumbis",
+      "en": "Marvel Zombies",
+      "year": "2025",
+      "poster": "/aTgFMz0CSVCDCgq0e93X0oNT2Dp.jpg",
+      "backdrop": "/lxQMxqao3vs2ehxESrkQU6acU86.jpg"
+     },
+     {
+      "id": 241388,
+      "kind": "tv",
+      "pt": "Olhos de Wakanda",
+      "en": "Eyes of Wakanda",
+      "year": "2025",
+      "poster": "/fcK54YvKdMTAugHOsBBK4kfrjb4.jpg",
+      "backdrop": "/cWO5NDkKqpOuwxu4vFc4PtL8aNF.jpg"
+     },
+     {
+      "id": 114471,
+      "kind": "tv",
+      "pt": "Coração de Ferro",
+      "en": "Ironheart",
+      "year": "2025",
+      "poster": "/yRanvKZhy5NdF64amF0WNOAIuQu.jpg",
+      "backdrop": "/vno2LrEQr3lTOk3U1G1ihZsy64b.jpg"
+     },
+     {
+      "id": 202555,
+      "kind": "tv",
+      "pt": "Demolidor: Renascido",
+      "en": "Daredevil: Born Again",
+      "year": "2025",
+      "poster": "/r5hNFtkNAauxc2G4VUlnJOaVIb0.jpg",
+      "backdrop": "/qrTAc0ZtQ859Qu5O8cixJzNJpQs.jpg"
+     },
+     {
+      "id": 138503,
+      "kind": "tv",
+      "pt": "Seu Amigão da Vizinhança: Homem-Aranha",
+      "en": "Your Friendly Neighborhood Spider-Man",
+      "year": "2025",
+      "poster": "/fEhEJowHEcWgqWknxwbdsiHyGty.jpg",
+      "backdrop": "/kkT2B2gmynoh9kZMo1gromLNeqy.jpg"
+     },
+     {
+      "id": 219543,
+      "kind": "tv",
+      "pt": "Comando das Criaturas",
+      "en": "Creature Commandos",
+      "year": "2024",
+      "poster": "/8my6Pj4DdR4CrJtDxFtG6upNzvM.jpg",
+      "backdrop": "/y8T8BhptuHFPR0hCGcUSMyUfUfm.jpg"
+     },
+     {
+      "id": 138501,
+      "kind": "tv",
+      "pt": "Agatha Desde Sempre",
+      "en": "Agatha All Along",
+      "year": "2024",
+      "poster": "/4TnWiIc9VFqX1HKU4HJ8vNWKHvX.jpg",
+      "backdrop": "/tYLXJW1sZQU09VWY1BhSVPKGIwc.jpg"
+     },
+     {
+      "id": 138502,
+      "kind": "tv",
+      "pt": "X-Men '97",
+      "en": "X-Men '97",
+      "year": "2024",
+      "poster": "/yvqC5hw3rkW9vputtZ8PlwYhJRp.jpg",
+      "backdrop": "/jIyEmnBrZtl6SEWyBoMO2hZnzMa.jpg"
+     },
+     {
+      "id": 122226,
+      "kind": "tv",
+      "pt": "Eco",
+      "en": "Echo",
+      "year": "2024",
+      "poster": "/sxjbIAIPKB8sPQ9s1yBPsANf8tj.jpg",
+      "backdrop": "/u3ySnWqSjM3jedYgJZTR7RWRDDm.jpg"
+     },
+     {
+      "id": 114472,
+      "kind": "tv",
+      "pt": "Invasão Secreta",
+      "en": "Secret Invasion",
+      "year": "2023",
+      "poster": "/2N892H3CirkrFC4vulZfMVSUbAZ.jpg",
+      "backdrop": "/6mOK9j99OFlxGc3ird2jWUeUha9.jpg"
+     },
+     {
+      "id": 92783,
+      "kind": "tv",
+      "pt": "Mulher-Hulk: Defensora de Heróis",
+      "en": "She-Hulk: Attorney at Law",
+      "year": "2022",
+      "poster": "/5o8Nw4mBCqyO5dtfpPAZXjv5XJ2.jpg",
+      "backdrop": "/eljErfkQUcFUgQkI4I1soZcH8MW.jpg"
+     },
+     {
+      "id": 232125,
+      "kind": "tv",
+      "pt": "Eu Sou Groot",
+      "en": "I Am Groot",
+      "year": "2022",
+      "poster": "/5MVybYeuZY7HSt3FhYvk4dMmYbD.jpg",
+      "backdrop": "/bAnHzJ6AMhOhnV3C0kTxkpCqpgM.jpg"
+     },
+     {
+      "id": 92782,
+      "kind": "tv",
+      "pt": "Ms. Marvel",
+      "en": "Ms. Marvel",
+      "year": "2022",
+      "poster": "/8Rzkt43GnMyTN0srvn3Z4u7C7VU.jpg",
+      "backdrop": "/mfcLUWASJghU8MTNK38eYktfE83.jpg"
+     },
+     {
+      "id": 92749,
+      "kind": "tv",
+      "pt": "Cavaleiro da Lua",
+      "en": "Moon Knight",
+      "year": "2022",
+      "poster": "/tkc7AVyUoG9VEeDvukN0TVqa24C.jpg",
+      "backdrop": "/1uegR4uAxRxiMyX4nQnpzbXhrTw.jpg"
+     },
+     {
+      "id": 110492,
+      "kind": "tv",
+      "pt": "Pacificador",
+      "en": "Peacemaker",
+      "year": "2022",
+      "poster": "/fbW4ym5rgMRkNjNAzpZQX5vkxMf.jpg",
+      "backdrop": "/aJcUU3LMlqMKBi8L3eaxGfAbd4G.jpg"
+     },
+     {
+      "id": 88329,
+      "kind": "tv",
+      "pt": "Gavião Arqueiro",
+      "en": "Hawkeye",
+      "year": "2021",
+      "poster": "/yPRl1dvc0FHi8Syy1XhsoMumw9J.jpg",
+      "backdrop": "/uHESULlKh7VSc0MRcqfyIf9Alk4.jpg"
+     },
+     {
+      "id": 91363,
+      "kind": "tv",
+      "pt": "What If...?",
+      "en": "What If...?",
+      "year": "2021",
+      "poster": "/kJQWrrwtu0TAsIKq8Adgzeg4bFt.jpg",
+      "backdrop": "/jnzoh5qoxRLFRIQAxnl6D3RStPC.jpg"
+     },
+     {
+      "id": 84958,
+      "kind": "tv",
+      "pt": "Loki",
+      "en": "Loki",
+      "year": "2021",
+      "poster": "/2TwPJfPiBI2lVrofggw3H0b4cDC.jpg",
+      "backdrop": "/q3jHCb4dMfYF6ojikKuHd6LscxC.jpg"
+     },
+     {
+      "id": 88396,
+      "kind": "tv",
+      "pt": "Falcão e o Soldado Invernal",
+      "en": "The Falcon and the Winter Soldier",
+      "year": "2021",
+      "poster": "/oF9njYCN6lBdrsi6wfulcxTggvn.jpg",
+      "backdrop": "/aTjbqMONy77fHJrIYu14g1F0d5h.jpg"
+     },
+     {
+      "id": 85271,
+      "kind": "tv",
+      "pt": "WandaVision",
+      "en": "WandaVision",
+      "year": "2021",
+      "poster": "/8mAyDNSCZDiejPTm4lwgbztut7y.jpg",
+      "backdrop": "/cq62fLH3vwOmiaLKMqkDI86tPtH.jpg"
+     }
+    ]
+   }
+  ]
+ }
+}
