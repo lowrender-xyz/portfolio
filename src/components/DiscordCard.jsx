@@ -32,7 +32,8 @@ export default function DiscordCard({ presence }) {
   const own = useLanyard(presence === undefined);
   const d = presence === undefined ? own : presence;
   const user = d?.discord_user;
-  const status = d?.discord_status ?? "offline";
+  // sem resposta do Lanyard ainda: "conectando", nunca um "offline" falso
+  const status = d ? d.discord_status : "loading";
   const custom = d?.activities?.find((a) => a.type === 4);
   const spotify = d?.listening_to_spotify ? d.spotify : null;
   const game = d?.activities?.find((a) => a.type !== 4 && a.type !== 2) ?? null;
@@ -91,7 +92,7 @@ export default function DiscordCard({ presence }) {
               <p className="act__kind mono">{t.discord.listening}</p>
               <p className="act__title">{spotify.song}</p>
               <p className="act__sub">
-                {t.discord.by} {spotify.artist}
+                {t.discord.by} {spotify.artist.replace(/;\s*/g, ", ")}
               </p>
               <div className="act__bar">
                 <span

@@ -16,7 +16,8 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Parte | Arquivo |
 |---|---|
 | Nome, Discord, redes | `src/data/site.js` |
-| Smart7: números, destaques A–D, método, módulos do catálogo | `src/data/smart7.js` |
+| Jogos, filmes, séries, artistas, ferramentas | `src/data/me.js` |
+| Smart7: números, telas e módulos do catálogo | `src/data/smart7.js` |
 | Textos da landing e da interface PT/EN | `src/i18n.jsx` |
 | Landing (seções) | `src/pages/Landing.jsx` |
 | Catálogo em anel + painel do módulo | `src/components/Catalog.jsx` |

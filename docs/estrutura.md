@@ -8,17 +8,19 @@ serifado, cartões A–D e catálogo em anel (velmax.llc). Só os princípios; c
 Showreel em canvas (`src/lib/reel.js`), 12 s em loop, 4 takes: Código, Design, Motion, Produto (Smart7).
 Botão **Entrar** vira a moldura do cabeçalho (View Transitions).
 
-## `/inicio` Landing (uma página só)
+## `/inicio` Landing (uma página só, centrada no Keven)
 | # | Âncora | Conteúdo |
 |---|---|---|
-| — | `#inicio` | "Do código / ao *balcão*." · meio-tom do "s." que reage ao cursor · faixa com o status do Discord ao vivo |
-| — | — | faixa rolando com os módulos do Smart7 |
-| 01 | `#smart7` | O produto: dashboard real em moldura + 82 permissões · 5 perfis · 30 relatórios · 24 h de contingência |
-| 02 | `#destaques` | A PDV · B Fiscal (fluxo da contingência) · C Estoque · D Permissões (chaves reais do perfil vendedor) |
-| 03 | `#metodo` | Banco → API → App → Balcão |
-| 04 | `#sobre` | Dev · Design · Motion + cartão do Discord (Lanyard) + ferramentas |
-| 05 | `#catalogo` | **Anel de 8 módulos** (arrasta, ← →, Enter). Cada cartão abre um painel com funções e telas reais |
+| — | `#inicio` | "Oi, eu sou o *sorry.*" · meio-tom do "s." · cartão do Discord ao vivo · faixa com status e jogo aberto |
+| — | — | faixa rolando com jogos, filmes, artistas e interesses |
+| 01 | `#jogos` | 8 jogos; o cartão acende sozinho quando o Discord mostra o jogo aberto |
+| 02 | `#tela` | Filmes (Jumper, Nolan com a filmografia, Marvel, DC) e séries (Suits, Território da Máfia, HBO, Marvel & DC) |
+| 03 | `#musica` | 7 artistas favoritos; o artista acende quando está tocando no Spotify |
+| 04 | `#projetos` | IA e projetos pessoais · Smart7 (tela real que segue o tema) · anel com os 8 módulos (`#catalogo`) |
+| 05 | `#sobre` | Dev · Design · Motion + ferramentas |
 | 06 | `#contato` | GitHub, TikTok, Discord |
+
+Gostos em `src/data/me.js`, na grafia do Keven. Sem capas oficiais: os cartões são desenhados pelo site.
 
 `/projetos/*` e `/skills` (endereços antigos) redirecionam para as âncoras.
 

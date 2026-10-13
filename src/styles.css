@@ -810,10 +810,6 @@ p {
 }
 .lhero__copy {
   position: relative;
-  max-width: var(--max);
-  width: 100%;
-  margin: 0 auto;
-  align-self: center;
 }
 .lhero__title {
   margin-top: 22px;
@@ -968,200 +964,370 @@ p {
   letter-spacing: 0.1em;
 }
 
-/* 02 · destaques A–D */
-.hl {
+/* hero pessoal: texto à esquerda, Discord ao vivo à direita */
+.lhero__grid {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 400px);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: end;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  align-self: center;
 }
-.hl__card {
+.lhero__card .discord {
+  background: color-mix(in srgb, var(--panel) 97%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 80px -30px #000c;
+}
+
+/* cartões de jogo e de filme: desenhados pelo site, sem capas oficiais */
+.games {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.game,
+.poster {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: clamp(24px, 3vw, 40px);
+  min-height: 250px;
+  padding: 18px;
   border: 1px solid var(--line);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0) 0 0 / 14px 14px,
-    var(--panel);
+  border-radius: 18px;
   overflow: hidden;
-  transition: border-color 0.3s;
+  background:
+    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0) 0 0 / 12px 12px,
+    var(--panel);
+  transition: border-color 0.3s, transform 0.5s var(--snappy);
 }
-.hl__card:hover {
-  border-color: color-mix(in srgb, var(--volt) 55%, var(--line));
+.game:hover,
+.poster:hover {
+  border-color: color-mix(in srgb, var(--volt) 60%, var(--line));
+  transform: translateY(-4px);
 }
-.hl__tag {
+.game__top > span:last-child,
+.poster__top > span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.game__top,
+.poster__top {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 8px;
   color: var(--mute);
+  font-size: 0.64rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.68rem;
+  letter-spacing: 0.1em;
 }
-.hl__letter {
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  background: var(--volt);
-  color: #fff;
-  font-weight: 600;
+.game__art {
+  position: absolute;
+  right: -0.06em;
+  bottom: 0.18em;
+  font: 700 clamp(5rem, 9vw, 8rem) / 0.8 var(--display);
+  letter-spacing: -0.07em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--mute) 45%, transparent);
+  pointer-events: none;
+  transition: -webkit-text-stroke-color 0.4s;
+}
+.game:hover .game__art {
+  -webkit-text-stroke-color: var(--volt);
+}
+.game__title {
+  position: relative;
+  margin-top: auto;
+  font: 600 1.45rem/1.05 var(--display);
+  letter-spacing: -0.03em;
+}
+.game__title small {
+  font-size: 0.7em;
+  color: var(--volt);
   letter-spacing: 0;
 }
-.hl__card h3 {
-  margin-top: 22px;
-  font: 600 clamp(1.6rem, 2.6vw, 2.3rem) / 1.05 var(--display);
-  letter-spacing: -0.035em;
-}
-.hl__text {
-  margin-top: 14px;
-  color: var(--mute);
-  max-width: 520px;
-}
-.hl__shot {
-  margin: 28px calc(clamp(24px, 3vw, 40px) * -1) calc(clamp(24px, 3vw, 40px) * -1);
-  margin-top: auto;
-  padding-top: 28px;
-}
-.hl__shot img {
-  width: 100%;
-  aspect-ratio: 16 / 8;
-  object-fit: cover;
-  object-position: top left;
-  border-top: 1px solid var(--line);
-  filter: saturate(0.85);
-  transition: filter 0.4s, transform 0.9s var(--heavy);
-}
-.hl__card:hover .hl__shot img {
-  filter: none;
-  transform: scale(1.02);
-}
-.hl__flow {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin: auto 0 0;
-  padding: 32px 0 0;
-  list-style: none;
-  counter-reset: f;
-}
-.hl__flow li {
+.game__meta,
+.poster__meta {
   position: relative;
-  padding: 14px 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--ink);
-  font-size: 0.68rem;
-  text-transform: uppercase;
+  margin-top: 8px;
+  color: var(--mute);
+  font-size: 0.66rem;
   letter-spacing: 0.06em;
-  color: var(--paper);
 }
-.hl__flow li::before {
-  counter-increment: f;
-  content: "0" counter(f);
-  display: block;
-  margin-bottom: 18px;
-  color: var(--mute);
-}
-.hl__flow li:last-child {
+.game.is-live {
   border-color: var(--volt);
+  box-shadow: 0 0 0 1px var(--volt), 0 30px 80px -40px #3d7bff99;
+}
+.game.is-live .game__art {
+  -webkit-text-stroke-color: var(--volt);
+}
+.game__live {
   color: var(--volt);
-}
-.reveal.is-in .hl__flow li {
-  animation: rise 0.8s var(--heavy) both;
-  animation-delay: calc(0.3s + var(--k) * 0.12s);
-}
-.hl__perms {
-  margin: auto 0 0;
-  padding: 22px;
-  margin-top: 28px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--ink);
-  font-size: 0.78rem;
-  line-height: 1.75;
-  overflow-x: auto;
-  color: var(--paper);
-}
-.hl__perms .c {
-  color: var(--mute);
-}
-.hl__perms .ok {
-  color: var(--volt);
-}
-.hl__perms .no {
-  color: var(--mute);
-  text-decoration: line-through;
-  text-decoration-color: #f23f4399;
+  font-weight: 500;
+  animation: rec 1.6s steps(2, jump-none) infinite;
 }
 
-/* 03 · método */
-.method {
+/* prateleira de filmes e séries */
+.shelf-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.shelf-tabs button {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--mute);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  transition: color 0.2s, background 0.3s var(--snappy), border-color 0.2s;
+}
+.shelf-tabs button[aria-selected="true"] {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+.shelf-tabs__genres {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  color: var(--volt);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.66rem;
+}
+.shelf {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.poster {
+  min-height: 300px;
+}
+.poster--wide {
+  grid-row: span 2;
+}
+.poster__title {
+  margin-top: auto;
+  font: 600 clamp(1.6rem, 2.4vw, 2.2rem) / 1 var(--display);
+  letter-spacing: -0.035em;
+}
+.poster--wide .poster__title {
+  margin-top: 40px;
+}
+.poster__list {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.74rem;
+}
+.poster__list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+  color: var(--paper);
+}
+.poster__list li span:last-child {
+  color: var(--mute);
+}
+.shelf-note {
+  margin-top: 20px;
+  color: var(--mute);
+  font-size: 0.68rem;
+}
+
+/* música */
+.music {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.artists {
   margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--line);
 }
-.method > li {
-  position: relative;
-  padding: 28px 24px 32px 0;
+.artists li {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding 0.4s var(--snappy);
 }
-.method > li + li {
-  padding-left: 24px;
-  border-left: 1px solid var(--line);
+.artists li:hover {
+  padding-left: 10px;
 }
-.method > li::after {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--volt);
-  transition: width 1s var(--heavy) calc(var(--d) + 0.2s);
-}
-.method > li.is-in::after {
-  width: 100%;
-}
-.method__n {
+.artists li > .mono {
   color: var(--volt);
 }
-.method h3 {
-  margin-top: 16px;
-  font: 600 1.6rem/1.1 var(--display);
-  letter-spacing: -0.03em;
+.artists__name {
+  font: 600 clamp(1.8rem, 4.4vw, 3.6rem) / 1 var(--display);
+  letter-spacing: -0.045em;
+  transition: color 0.3s;
 }
-.method p {
+.artists li:hover .artists__name,
+.artists li.is-live .artists__name {
+  color: var(--volt);
+}
+.artists li .game__live {
+  margin-left: auto;
+}
+.music__now {
+  position: sticky;
+  top: 96px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+}
+.music__track {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+.music__track img {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.music__song {
+  font: 600 1.25rem/1.15 var(--display);
+  letter-spacing: -0.02em;
+}
+.music__artist {
+  margin-top: 4px;
+  color: var(--mute);
+}
+.music__album {
   margin-top: 10px;
   color: var(--mute);
-  font-size: 0.95rem;
+  font-size: 0.66rem;
+}
+.music__idle {
+  margin-top: 14px;
+  color: var(--mute);
 }
 
-/* 04 · sobre */
-.about {
+/* projeto em destaque (Smart7) */
+.project {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.9fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: start;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.4fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
 }
+.project__name {
+  margin-top: 14px;
+  font: 700 clamp(3rem, 6vw, 5rem) / 0.9 var(--display);
+  letter-spacing: -0.05em;
+}
+.project__line {
+  margin-top: 16px;
+  color: var(--mute);
+}
+.project__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 20px;
+  margin: 26px 0 28px;
+}
+.project__stats div {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.project__stats dt {
+  font: 700 1.8rem/1 var(--display);
+  letter-spacing: -0.04em;
+}
+.project__stats div:first-child dt {
+  color: var(--volt);
+}
+.project__stats dd {
+  margin: 6px 0 0;
+  color: var(--mute);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.catalog-wrap {
+  margin-top: clamp(56px, 8vw, 96px);
+  scroll-margin-top: 80px;
+}
+.catalog-wrap__k {
+  justify-content: center;
+}
+
+/* sobre */
 .crafts--landing {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .about__tools {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 20px;
-  margin: 22px 0 0;
+  gap: 8px 22px;
+  margin: 28px 0 0;
   padding: 0;
   list-style: none;
   color: var(--paper);
 }
 
-/* 05 · catálogo em anel */
+@media (max-width: 1080px) {
+  .games,
+  .shelf {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 960px) {
+  .lhero__grid,
+  .music,
+  .project {
+    grid-template-columns: 1fr;
+  }
+  .music__now {
+    position: static;
+  }
+}
+@media (max-width: 520px) {
+  .games {
+    gap: 10px;
+  }
+  .game {
+    min-height: 200px;
+    padding: 14px;
+  }
+  .game__title {
+    font-size: 1.15rem;
+  }
+  .game__title small {
+    display: block;
+    margin-top: 4px;
+  }
+  .shelf {
+    grid-template-columns: 1fr;
+  }
+  .poster--wide {
+    grid-row: auto;
+  }
+  .shelf-tabs__genres {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* catálogo em anel */
 .lsec--catalog .lsec__head {
   margin-bottom: 8px;
 }
@@ -1489,8 +1655,7 @@ p {
   }
 }
 @media (max-width: 960px) {
-  .lsec__head,
-  .about {
+  .lsec__head {
     grid-template-columns: 1fr;
   }
   .lhero__dots {
@@ -1516,16 +1681,8 @@ p {
   .lstats > div:nth-child(4) {
     border-top: 1px solid var(--line);
   }
-  .hl,
   .panel__features {
     grid-template-columns: 1fr;
-  }
-  .method {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .method > li:nth-child(3) {
-    padding-left: 0;
-    border-left: 0;
   }
   .crafts,
   .crafts--landing {
@@ -1553,17 +1710,6 @@ p {
   }
   .nav__talk {
     padding: 0 12px;
-  }
-  .method {
-    grid-template-columns: 1fr;
-  }
-  .method > li,
-  .method > li + li {
-    padding: 24px 0;
-    border-left: 0;
-  }
-  .hl__flow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .ring-stage {
     /* raio ≥ cartão / sen(30°): os laterais ficam ao lado do cartão da frente, nunca por cima */

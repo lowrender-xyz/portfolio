@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useLocale } from "../i18n.jsx";
 import { site } from "../data/site.js";
-import { SHOTS, STATS, HIGHLIGHTS, METHOD, MODULES } from "../data/smart7.js";
+import { SHOTS, STATS, MODULES } from "../data/smart7.js";
+import { GAMES, SCREEN, NOLAN, TOOLS, ARTISTS, sameArtist } from "../data/me.js";
 import DiscordCard from "../components/DiscordCard.jsx";
 import Halftone from "../components/Halftone.jsx";
 import Catalog from "../components/Catalog.jsx";
@@ -8,18 +10,11 @@ import Shot from "../components/Shot.jsx";
 import { Reveal } from "../components/Chrome.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 
-// Título com uma palavra de destaque em itálico: "Do código / ao *balcão*."
+// Título com uma palavra de destaque em itálico: "Oi, eu sou o / *sorry.*"
 function Title({ as: Tag = "h2", parts, className = "" }) {
-  const { pick } = useLocale();
   return (
     <Tag className={`ltitle ${className}`}>
-      {pick(parts).map((p, i) =>
-        typeof p === "string" ? (
-          <span key={i}>{p}</span>
-        ) : (
-          <em key={i}>{p.em}</em>
-        ),
-      )}
+      {parts.map((p, i) => (typeof p === "string" ? <span key={i}>{p}</span> : <em key={i}>{p.em}</em>))}
     </Tag>
   );
 }
@@ -34,44 +29,76 @@ function Kicker({ n, children }) {
   );
 }
 
-const TOOLS = ["VS Code", "Photoshop", "Python", "Claude", "TypeScript", "React", "Node.js"];
+function Head({ n, k, title, lead }) {
+  return (
+    <div className="lsec__head">
+      <div>
+        <Kicker n={n}>{k}</Kicker>
+        <Reveal>
+          <Title parts={title} />
+        </Reveal>
+      </div>
+      {lead && (
+        <Reveal as="p" delay={120} className="lsec__lead">
+          {lead}
+        </Reveal>
+      )}
+    </div>
+  );
+}
+
+// jogo que o Discord diz que está aberto agora (atividade do tipo "Jogando")
+function playingNow(presence) {
+  const names = (presence?.activities ?? []).filter((a) => a.type === 0).map((a) => a.name.toLowerCase());
+  return GAMES.find((g) => g.match.some((m) => names.some((n) => n.includes(m))))?.title ?? null;
+}
 
 export default function Landing() {
   const { t, pick, lang } = useLocale();
   const L = t.landing;
   const presence = useLanyard();
-  const marquee = MODULES.map((m) => pick(m.title));
+  const live = playingNow(presence);
+  const spotify = presence?.listening_to_spotify ? presence.spotify : null;
+  // o Spotify manda os artistas separados por "; "
+  const hearing = spotify ? spotify.artist.split(/;\s*/) : [];
+  const [shelf, setShelf] = useState("films");
+  const marquee = [...GAMES.map((g) => g.title), "Interestelar", "Suits", "Jumper", ...ARTISTS.slice(0, 4), pick(SCREEN.genres[1]), L.marqueeAi];
 
   return (
     <main className="landing">
       {/* ── hero ─────────────────────────────────────────── */}
       <section className="lhero" id="inicio">
         <Halftone className="lhero__dots" />
-        <div className="lhero__copy">
-          <Reveal as="p" className="lkicker mono">
-            <span className="pulse" /> {L.hero.kicker}
-          </Reveal>
-          <Reveal delay={80}>
-            <Title as="h1" parts={L.hero.title} className="lhero__title" />
-          </Reveal>
-          <Reveal as="p" delay={180} className="lhero__lead">
-            {L.hero.lead}
-          </Reveal>
-          <Reveal delay={260} className="lhero__cta">
-            <a className="btn btn--volt" href="#smart7">
-              {L.hero.cta} →
-            </a>
-            <a className="btn" href="#catalogo">
-              {L.hero.cta2}
-            </a>
+        <div className="lhero__grid">
+          <div className="lhero__copy">
+            <Reveal as="p" className="lkicker mono">
+              <span className="pulse" /> {L.hero.kicker}
+            </Reveal>
+            <Reveal delay={80}>
+              <Title as="h1" parts={L.hero.title} className="lhero__title" />
+            </Reveal>
+            <Reveal as="p" delay={180} className="lhero__lead">
+              {L.hero.lead}
+            </Reveal>
+            <Reveal delay={260} className="lhero__cta">
+              <a className="btn btn--volt" href="#jogos">
+                {L.hero.cta} →
+              </a>
+              <a className="btn" href="#projetos">
+                {L.hero.cta2}
+              </a>
+            </Reveal>
+          </div>
+          <Reveal delay={220} className="lhero__card">
+            <DiscordCard presence={presence} />
           </Reveal>
         </div>
         <div className="lhero__strip mono">
           <span>FIG. 01 · {L.hero.fig}</span>
           <span>
-            DISCORD · <b data-status={presence?.discord_status ?? "offline"}>{t.discord[presence?.discord_status ?? "offline"]}</b>
+            DISCORD · <b data-status={presence?.discord_status ?? "loading"}>{t.discord[presence?.discord_status ?? "loading"]}</b>
           </span>
-          <span>SMART7 · 82 {L.hero.perms}</span>
+          <span>{live ? `${L.games.now} · ${live}` : L.hero.idle}</span>
           <span>({L.hero.scroll})</span>
         </div>
       </section>
@@ -84,184 +111,170 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* ── 01 · produto ─────────────────────────────────── */}
-      <section className="lsec" id="smart7">
-        <div className="lsec__head">
-          <div>
-            <Kicker n="01">{L.product.kicker}</Kicker>
-            <Reveal>
-              <Title parts={L.product.title} />
-            </Reveal>
-          </div>
-          <Reveal as="p" delay={120} className="lsec__lead">
-            {L.product.lead}
-          </Reveal>
+      {/* ── 01 · jogos ───────────────────────────────────── */}
+      <section className="lsec" id="jogos">
+        <Head n="01" k={L.games.kicker} title={L.games.title} lead={L.games.lead} />
+        <div className="games">
+          {GAMES.map((g, i) => {
+            const on = live === g.title;
+            return (
+              <Reveal key={g.title} delay={(i % 4) * 70} className={`game ${on ? "is-live" : ""}`}>
+                <span className="game__top mono">
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                  <span>{on ? <b className="game__live">● {L.games.now}</b> : pick(g.genre)}</span>
+                </span>
+                <span className="game__art" aria-hidden="true">
+                  {g.title.replace(/[^A-Za-z0-9]/g, "").slice(0, 2)}
+                </span>
+                <span className="game__title">
+                  {g.title}
+                  {g.sub && <small> {g.sub}</small>}
+                </span>
+                <span className="game__meta mono">
+                  {g.by}
+                  {g.year ? ` · ${g.year}` : ""}
+                </span>
+              </Reveal>
+            );
+          })}
         </div>
-        <Reveal className="screen">
-          <div className="screen__bar mono">
-            <span>smart7 · {L.product.screen}</span>
-            <span>{L.product.demo}</span>
-          </div>
-          <Shot shot={SHOTS.dashboard} loading="eager" />
-        </Reveal>
-        <dl className="lstats">
-          {STATS.map((s, i) => (
-            <Reveal key={s.value} delay={i * 70}>
-              <dt>{s.value}</dt>
-              <dd className="mono">{pick(s.label)}</dd>
-            </Reveal>
-          ))}
-        </dl>
       </section>
 
-      {/* ── 02 · destaques ───────────────────────────────── */}
-      <section className="lsec" id="destaques">
-        <div className="lsec__head">
-          <div>
-            <Kicker n="02">{L.highlights.kicker}</Kicker>
-            <Reveal>
-              <Title parts={L.highlights.title} />
-            </Reveal>
-          </div>
-          <Reveal as="p" delay={120} className="lsec__lead">
-            {L.highlights.lead}
-          </Reveal>
+      {/* ── 02 · filmes e séries ─────────────────────────── */}
+      <section className="lsec" id="tela">
+        <Head n="02" k={L.screen.kicker} title={L.screen.title} lead={L.screen.lead} />
+        <div className="shelf-tabs" role="tablist">
+          {["films", "series"].map((k) => (
+            <button key={k} role="tab" aria-selected={shelf === k} className="mono" onClick={() => setShelf(k)}>
+              {L.screen.tabs[k]}
+            </button>
+          ))}
+          <span className="shelf-tabs__genres mono">
+            {SCREEN.genres.map((g) => (
+              <span key={g.pt}>✦ {pick(g)}</span>
+            ))}
+          </span>
         </div>
-        <div className="hl">
-          {HIGHLIGHTS.map((h, i) => (
-            <Reveal key={h.letter} delay={(i % 2) * 90} className={`hl__card hl__card--${h.letter.toLowerCase()}`}>
-              <p className="hl__tag mono">
-                <span className="hl__letter">{h.letter}</span>
-                {pick(h.tag)}
-              </p>
-              <h3>{pick(h.title)}</h3>
-              <p className="hl__text">{pick(h.text)}</p>
-              {h.chips && (
-                <ul className="chips">
-                  {h.chips.map((c) => (
-                    <li key={c} className="mono">
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {h.shot && (
-                <div className="hl__shot">
-                  <Shot shot={SHOTS[h.shot]} />
-                </div>
-              )}
-              {h.flow && (
-                <ol className="hl__flow mono">
-                  {(lang === "pt" ? h.flow : h.flowEn).map((f, k) => (
-                    <li key={f} style={{ "--k": k }}>
-                      {f}
+        <div className="shelf" key={shelf}>
+          {SCREEN[shelf].map((s, i) => (
+            <Reveal key={pick(s.title)} delay={i * 70} className={`poster ${s.wide ? "poster--wide" : ""}`}>
+              <span className="poster__top mono">
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                {s.tag && <span>{pick(s.tag)}</span>}
+              </span>
+              <span className="poster__title">{pick(s.title)}</span>
+              <span className="poster__meta mono">{pick(s.meta)}</span>
+              {s.list === "nolan" && (
+                <ol className="poster__list mono">
+                  {NOLAN.map(([pt, en, y]) => (
+                    <li key={en}>
+                      <span>{lang === "pt" ? pt : en}</span>
+                      <span>{y}</span>
                     </li>
                   ))}
                 </ol>
               )}
-              {h.perms && (
-                <pre className="hl__perms mono" aria-label={L.highlights.permsAria}>
-                  <span className="c">// {L.highlights.permsNote}</span>
-                  {"\n"}
-                  {"{"}
-                  {"\n"}
-                  {'  "perfil": "vendedor",'}
-                  {"\n"}
-                  {h.perms.map(([k, ok]) => (
-                    <span key={k} className={ok ? "ok" : "no"}>
-                      {`  "${k}": ${ok},`}
-                      {"\n"}
-                    </span>
-                  ))}
-                  {"}"}
-                </pre>
-              )}
             </Reveal>
           ))}
         </div>
+        <Reveal as="p" className="shelf-note mono">
+          {L.screen.note}
+        </Reveal>
       </section>
 
-      {/* ── 03 · método ──────────────────────────────────── */}
-      <section className="lsec" id="metodo">
-        <div className="lsec__head">
-          <div>
-            <Kicker n="03">{L.method.kicker}</Kicker>
-            <Reveal>
-              <Title parts={L.method.title} />
-            </Reveal>
-          </div>
-          <Reveal as="p" delay={120} className="lsec__lead">
-            {L.method.lead}
+      {/* ── 03 · música ──────────────────────────────────── */}
+      <section className="lsec" id="musica">
+        <Head n="03" k={L.music.kicker} title={L.music.title} lead={L.music.lead} />
+        <div className="music">
+          <ol className="artists">
+            {ARTISTS.map((a, i) => {
+              const on = hearing.some((h) => sameArtist(h, a));
+              return (
+                <Reveal as="li" key={a} delay={i * 60} className={on ? "is-live" : ""}>
+                  <span className="mono">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="artists__name">{a}</span>
+                  {on && <b className="game__live mono">● {L.music.now}</b>}
+                </Reveal>
+              );
+            })}
+          </ol>
+          <Reveal delay={150} className="music__now">
+            <p className="mono kicker">{L.music.nowKicker}</p>
+            {spotify ? (
+              <div className="music__track">
+                <img src={spotify.album_art_url} alt="" />
+                <div>
+                  <p className="music__song">{spotify.song}</p>
+                  <p className="music__artist">{spotify.artist.replace(/;\s*/g, ", ")}</p>
+                  <p className="mono music__album">{spotify.album}</p>
+                </div>
+              </div>
+            ) : (
+              <p className="music__idle">{L.music.idle}</p>
+            )}
           </Reveal>
         </div>
-        <ol className="method">
-          {METHOD.map((m, i) => (
-            <Reveal as="li" key={m.n} delay={i * 90}>
-              <span className="method__n mono">{m.n}</span>
-              <h3>{pick(m.title)}</h3>
-              <p>{pick(m.text)}</p>
-              <ul className="chips">
-                {m.tags.map((x) => (
-                  <li key={x} className="mono">
-                    {x}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </ol>
       </section>
 
-      {/* ── 04 · quem fez ────────────────────────────────── */}
-      <section className="lsec" id="sobre">
-        <div className="lsec__head">
-          <div>
-            <Kicker n="04">{L.about.kicker}</Kicker>
-            <Reveal>
-              <Title parts={L.about.title} />
-            </Reveal>
-          </div>
-          <Reveal as="p" delay={120} className="lsec__lead">
-            {L.about.lead}
-          </Reveal>
-        </div>
-        <div className="about">
-          <div className="crafts crafts--landing">
-            {L.about.crafts.map((c, i) => (
-              <Reveal as="div" key={c.name} delay={i * 80} className="craft">
-                <p className="craft__num mono">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="craft__title">{c.name}</h3>
-                <p className="craft__lead">{c.text}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={150} className="about__side">
-            <DiscordCard presence={presence} />
-            <ul className="about__tools mono">
-              {TOOLS.map((x, i) => (
-                <li key={x}>
-                  <span className="dot">{String(i + 1).padStart(2, "0")}</span> {x}
-                </li>
+      {/* ── 04 · IA e projetos ───────────────────────────── */}
+      <section className="lsec" id="projetos">
+        <Head n="04" k={L.lab.kicker} title={L.lab.title} lead={L.lab.lead} />
+        <div className="project">
+          <Reveal className="project__copy">
+            <p className="mono kicker">{L.lab.projectKicker}</p>
+            <h3 className="project__name">
+              Smart<span className="dot">7</span>
+            </h3>
+            <p className="project__line">{L.lab.projectLine}</p>
+            <dl className="project__stats">
+              {STATS.map((s) => (
+                <div key={s.value}>
+                  <dt>{s.value}</dt>
+                  <dd className="mono">{pick(s.label)}</dd>
+                </div>
               ))}
-            </ul>
+            </dl>
+            <a className="btn btn--volt" href="#catalogo">
+              {L.lab.explore} →
+            </a>
           </Reveal>
+          <Reveal delay={120} className="screen">
+            <div className="screen__bar mono">
+              <span>smart7 · {L.lab.screen}</span>
+              <span>{L.lab.demo}</span>
+            </div>
+            <Shot shot={SHOTS.dashboard} />
+          </Reveal>
+        </div>
+        <div className="catalog-wrap" id="catalogo">
+          <Reveal as="p" className="lkicker mono catalog-wrap__k">
+            <span className="dot">{String(MODULES.length).padStart(2, "0")}</span>
+            <i />
+            {L.catalog.kicker}
+          </Reveal>
+          <Catalog />
         </div>
       </section>
 
-      {/* ── 05 · catálogo ────────────────────────────────── */}
-      <section className="lsec lsec--catalog" id="catalogo">
-        <div className="lsec__head">
-          <div>
-            <Kicker n="05">{L.catalog.kicker}</Kicker>
-            <Reveal>
-              <Title parts={L.catalog.title} />
+      {/* ── 05 · sobre ───────────────────────────────────── */}
+      <section className="lsec" id="sobre">
+        <Head n="05" k={L.about.kicker} title={L.about.title} lead={L.about.lead} />
+        <div className="crafts crafts--landing">
+          {L.about.crafts.map((c, i) => (
+            <Reveal as="div" key={c.name} delay={i * 80} className="craft">
+              <p className="craft__num mono">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="craft__title">{c.name}</h3>
+              <p className="craft__lead">{c.text}</p>
             </Reveal>
-          </div>
-          <Reveal as="p" delay={120} className="lsec__lead">
-            {L.catalog.lead}
-          </Reveal>
+          ))}
         </div>
-        <Catalog />
+        <Reveal as="ul" className="about__tools mono">
+          {TOOLS.map((x, i) => (
+            <li key={x}>
+              <span className="dot">{String(i + 1).padStart(2, "0")}</span> {x}
+            </li>
+          ))}
+        </Reveal>
       </section>
 
       {/* ── contato ──────────────────────────────────────── */}
