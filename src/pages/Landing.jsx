@@ -9,7 +9,8 @@ import Catalog from "../components/Catalog.jsx";
 import Shot from "../components/Shot.jsx";
 import NowPlaying from "../components/NowPlaying.jsx";
 import TornPaper from "../components/TornPaper.jsx";
-import ScreenRows from "../components/ScreenRows.jsx";
+import Decks from "../components/Decks.jsx";
+import GameCover from "../components/GameCover.jsx";
 import { Reveal } from "../components/Chrome.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 
@@ -117,34 +118,18 @@ export default function Landing() {
       {/* ── 01 · jogos ───────────────────────────────────── */}
       <section className="lsec" id="jogos">
         <Head n="01" k={L.games.kicker} title={L.games.title} lead={L.games.lead} />
-        <div className="games">
-          {GAMES.map((g, i) => {
-            const on = live === g.title;
-            return (
-              <Reveal key={g.title} delay={(i % 4) * 70} className={`game ${on ? "is-live" : ""} ${g.art ? "game--art" : ""}`}>
-                <span className="game__top mono">
-                  <span>{String(i + 1).padStart(2, "0")}</span>
-                  <span>{on ? <b className="game__live">● {L.games.now}</b> : pick(g.genre)}</span>
-                </span>
-                {g.art ? (
-                  <img className="game__img" src={g.art} alt="" loading="lazy" referrerPolicy="no-referrer" style={g.artPos ? { objectPosition: g.artPos } : undefined} />
-                ) : (
-                  <span className="game__art" aria-hidden="true">
-                    {g.title.replace(/[^A-Za-z0-9]/g, "").slice(0, 2)}
-                  </span>
-                )}
-                <span className="game__title">
-                  {g.title}
-                  {g.sub && <small> {g.sub}</small>}
-                </span>
-                <span className="game__meta mono">
-                  {g.by}
-                  {g.year ? ` · ${g.year}` : ""}
-                </span>
-              </Reveal>
-            );
-          })}
-        </div>
+        <ol className="shelf-games">
+          {GAMES.map((g, i) => (
+            <Reveal as="li" key={g.title} delay={(i % 8) * 60} className={`gcard ${live === g.title ? "is-live" : ""}`}>
+              <GameCover game={g} live={live === g.title} label={L.games.now} />
+              <p className="gcard__title">
+                {g.title}
+                {g.sub && <span> {g.sub}</span>}
+              </p>
+              <p className="gcard__meta mono">{pick(g.genre)}</p>
+            </Reveal>
+          ))}
+        </ol>
       </section>
 
       {/* ── 02 · filmes e séries ─────────────────────────── */}
@@ -162,7 +147,7 @@ export default function Landing() {
             ))}
           </span>
         </div>
-        <ScreenRows tab={shelf} key={shelf} />
+        <Decks tab={shelf} key={shelf} />
         <p className="shelf-note mono">
           {L.screen.note}{" "}
           <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
