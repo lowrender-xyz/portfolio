@@ -5,7 +5,7 @@ import { SHOTS, STATS, MODULES } from "../data/smart7.js";
 import { GAMES, SCREEN, TOOLS, ARTISTS, sameArtist } from "../data/me.js";
 import DiscordCard from "../components/DiscordCard.jsx";
 import Halftone from "../components/Halftone.jsx";
-import Catalog from "../components/Catalog.jsx";
+import ModuleExplorer from "../components/ModuleExplorer.jsx";
 import Shot from "../components/Shot.jsx";
 import NowPlaying from "../components/NowPlaying.jsx";
 import TornPaper from "../components/TornPaper.jsx";
@@ -181,41 +181,26 @@ export default function Landing() {
       {/* ── 04 · IA e projetos ───────────────────────────── */}
       <section className="lsec" id="projetos">
         <Head n="04" k={L.lab.kicker} title={L.lab.title} lead={L.lab.lead} />
-        <div className="project">
-          <Reveal className="project__copy">
+        <Reveal className="project">
+          <div>
             <p className="mono kicker">{L.lab.projectKicker}</p>
             <h3 className="project__name">
               Smart<span className="dot">7</span>
             </h3>
             <p className="project__line">{L.lab.projectLine}</p>
-            <dl className="project__stats">
-              {STATS.map((s) => (
-                <div key={s.value}>
-                  <dt>{s.value}</dt>
-                  <dd className="mono">{pick(s.label)}</dd>
-                </div>
-              ))}
-            </dl>
-            <a className="btn btn--volt" href="#catalogo">
-              {L.lab.explore} →
-            </a>
-          </Reveal>
-          <Reveal delay={120} className="screen">
-            <div className="screen__bar mono">
-              <span>smart7 · {L.lab.screen}</span>
-              <span>{L.lab.demo}</span>
-            </div>
-            <Shot shot={SHOTS.dashboard} />
-          </Reveal>
-        </div>
-        <div className="catalog-wrap" id="catalogo">
-          <Reveal as="p" className="lkicker mono catalog-wrap__k">
-            <span className="dot">{String(MODULES.length).padStart(2, "0")}</span>
-            <i />
-            {L.catalog.kicker}
-          </Reveal>
-          <Catalog />
-        </div>
+          </div>
+          <dl className="project__stats">
+            {STATS.map((s) => (
+              <div key={s.value}>
+                <dt>{s.value}</dt>
+                <dd className="mono">{pick(s.label)}</dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+        <Reveal delay={100} id="catalogo" className="catalog-wrap">
+          <ModuleExplorer />
+        </Reveal>
       </section>
 
       {/* ── 05 · sobre ───────────────────────────────────── */}

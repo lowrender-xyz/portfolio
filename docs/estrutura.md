@@ -16,7 +16,7 @@ Botão **Entrar** vira a moldura do cabeçalho (View Transitions).
 | 01 | `#jogos` | 8 jogos; o cartão acende sozinho quando o Discord mostra o jogo aberto |
 | 02 | `#tela` | Filmes (Jumper, Nolan com a filmografia, Marvel, DC) e séries (Suits, Território da Máfia, HBO, Marvel & DC) |
 | 03 | `#musica` | 7 artistas favoritos; o artista acende quando está tocando no Spotify |
-| 04 | `#projetos` | IA e projetos pessoais · Smart7 (tela real que segue o tema) · anel com os 8 módulos (`#catalogo`) |
+| 04 | `#projetos` | IA e projetos pessoais · Smart7 (tela real que segue o tema) · 8 módulos em abas com temporizador e a tela real de cada um (`#catalogo`) |
 | 05 | `#sobre` | Dev · Design · Motion + ferramentas |
 | 06 | `#contato` | GitHub, TikTok, Discord |
 

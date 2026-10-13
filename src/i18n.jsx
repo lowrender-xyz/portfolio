@@ -83,6 +83,7 @@ const dict = {
         close: "Fechar",
         enlarge: "Ampliar",
         demo: "Telas reais do Smart7 rodando num ambiente local com dados de demonstração fictícios.",
+        demoShort: "dados de demonstração",
       },
       contact: {
         kicker: "Contato",
@@ -210,6 +211,7 @@ const dict = {
         close: "Close",
         enlarge: "Enlarge",
         demo: "Real Smart7 screens running locally with fictional demo data.",
+        demoShort: "demo data",
       },
       contact: {
         kicker: "Contact",

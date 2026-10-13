@@ -20,7 +20,7 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Smart7: números, telas e módulos do catálogo | `src/data/smart7.js` |
 | Textos da landing e da interface PT/EN | `src/i18n.jsx` |
 | Landing (seções) | `src/pages/Landing.jsx` |
-| Catálogo em anel + painel do módulo | `src/components/Catalog.jsx` |
+| Módulos do Smart7 (abas com temporizador + tela real) | `src/components/ModuleExplorer.jsx` |
 | Meio-tom do hero | `src/components/Halftone.jsx` |
 | Reel da abertura (canvas) | `src/lib/reel.js` · `src/components/Opening.jsx` |
 | Cartão do Discord ao vivo | `src/components/DiscordCard.jsx` · `src/lib/lanyard.js` |
