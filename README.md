@@ -25,7 +25,8 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Reel da abertura (canvas) | `src/lib/reel.js` · `src/components/Opening.jsx` |
 | Cartão do Discord ao vivo | `src/components/DiscordCard.jsx` · `src/lib/lanyard.js` |
 | Rolagem de filme (efeitos amarrados ao scroll) | `src/lib/film.js` (lista `FX`) |
-| Barra de reprodução | `src/components/PlayerBar.jsx` |
+| Moldura de interface (trilho, mira, progresso) | `src/components/Hud.jsx` |
+| Linha de terminal ao vivo · tela de carregamento | `src/components/Ticker.jsx` · `src/components/Loader.jsx` |
 | Cores, fontes, layout | `src/styles.css` (tokens no topo) |
 | Direção de arte e estrutura | `docs/style_guide.md` · `docs/estrutura.md` |
 

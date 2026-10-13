@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLocale } from "../i18n.jsx";
 import { mulberry32 } from "../lib/motion.js";
 import LangSwitch from "./LangSwitch.jsx";
+import { useHudProgress } from "./Hud.jsx";
 
 // Seção visível agora (para marcar o item do menu)
 function useActiveSection(ids) {
@@ -24,6 +25,8 @@ export function Nav() {
   const { t } = useLocale();
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || "dark");
   const active = useActiveSection(t.landingNav.map(([h]) => h));
+  const progress = useRef(null);
+  useHudProgress(progress);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
@@ -33,12 +36,17 @@ export function Nav() {
 
   return (
     <header className="nav" style={{ viewTransitionName: "frame" }}>
+      {/* bloco que enche com o progresso da página */}
+      <span className="nav__progress" aria-hidden="true">
+        <i ref={progress} />
+      </span>
       <Link to="/" className="nav__brand" style={{ viewTransitionName: "brand" }} aria-label="sorry · abertura">
         sorry<span className="dot">.</span>
       </Link>
       <nav className="nav__links">
         {t.landingNav.map(([href, label]) => (
           <a key={href} href={href} className={active === href ? "active" : ""}>
+            <span className="nav__sq" aria-hidden="true" />
             {label}
           </a>
         ))}

@@ -6,7 +6,8 @@ import Opening from "./components/Opening.jsx";
 import { Nav, Footer, Grain, CursorLight } from "./components/Chrome.jsx";
 import Landing from "./pages/Landing.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import PlayerBar from "./components/PlayerBar.jsx";
+import Hud from "./components/Hud.jsx";
+import Loader from "./components/Loader.jsx";
 import { startFilm, getLenis } from "./lib/film.js";
 import "./styles.css";
 
@@ -26,7 +27,8 @@ function Site({ children }) {
       <Nav />
       {children}
       <Footer />
-      <PlayerBar />
+      <Hud />
+      <Loader />
     </>
   );
 }

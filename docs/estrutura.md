@@ -22,8 +22,11 @@ Botão **Entrar** vira a moldura do cabeçalho (View Transitions).
 
 Gostos em `src/data/me.js`, na grafia do Keven. Artes dos jogos: Steam e Microsoft Store (CDN delas). Filmes e séries: TMDB (`scripts/fetch-tmdb.mjs`).
 
-**Fluxo:** rolagem suave (Lenis) e cada seção animada pelo scroll como quadros de um vídeo; barra de
-reprodução fixa com timecode, capítulo atual e linha do tempo clicável.
+**Fluxo:** rolagem suave (Lenis) e cada seção animada pelo scroll.
+**Linguagem de interface** (princípios de kprverse.com, não o conteúdo): moldura fixa com trilho lateral (mira que
+gira com a rolagem e um marcador por seção), bloco de progresso na barra de cima, cabeçalhos em ficha técnica
+(■ 001, régua, numeral gigante na vertical), cantos chanfrados, linha de terminal com dados reais do Discord e
+tela de carregamento com progresso real.
 
 `/projetos/*` e `/skills` (endereços antigos) redirecionam para as âncoras.
 

@@ -15,6 +15,8 @@ const dict = {
     ],
     talk: "Contato",
     landing: {
+      loading: "CARREGANDO ARQUIVOS",
+      ticker: { sync: "SINCRONIZANDO PERFIL AO VIVO", none: "NENHUM", online: "NO AR" },
       marqueeAi: "Projetos com IA",
       hero: {
         kicker: "Keven · dev, design & motion",
@@ -143,6 +145,8 @@ const dict = {
     ],
     talk: "Contact",
     landing: {
+      loading: "LOADING FILES",
+      ticker: { sync: "SYNCING LIVE PROFILE", none: "NONE", online: "ONLINE" },
       marqueeAi: "AI projects",
       hero: {
         kicker: "Keven · dev, design & motion",

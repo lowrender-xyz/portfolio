@@ -9,6 +9,7 @@ import ModuleExplorer from "../components/ModuleExplorer.jsx";
 import Shot from "../components/Shot.jsx";
 import NowPlaying from "../components/NowPlaying.jsx";
 import TornPaper from "../components/TornPaper.jsx";
+import Ticker from "../components/Ticker.jsx";
 import Decks from "../components/Decks.jsx";
 import GameCover from "../components/GameCover.jsx";
 import { Reveal } from "../components/Chrome.jsx";
@@ -26,6 +27,7 @@ function Title({ as: Tag = "h2", parts, className = "" }) {
 function Kicker({ n, children }) {
   return (
     <Reveal as="p" className="lkicker mono">
+      <span className="lkicker__sq" aria-hidden="true" />
       <span className="dot">{n}</span>
       <i />
       {children}
@@ -33,19 +35,33 @@ function Kicker({ n, children }) {
   );
 }
 
-function Head({ n, k, title, lead }) {
+// cabeçalho de seção em ficha técnica: ■ 001 · nome, título, régua e um numeral gigante na vertical
+function Head({ n, k, title, lead, big }) {
   return (
     <div className="lsec__head">
       <div>
-        <Kicker n={n}>{k}</Kicker>
+        <Kicker n={`0${n}`}>{k}</Kicker>
         <Reveal>
           <Title parts={title} />
         </Reveal>
       </div>
       {lead && (
         <Reveal as="p" delay={120} className="lsec__lead">
+          <span className="lsec__spec mono">■ {k}</span>
           {lead}
         </Reveal>
+      )}
+      <span className="ruler" aria-hidden="true">
+        {[0, 25, 50, 75, 100].map((v) => (
+          <b key={v} className="mono" style={{ left: `${v}%` }}>
+            {String(v).padStart(3, "0")}
+          </b>
+        ))}
+      </span>
+      {big && (
+        <span className="lsec__big" aria-hidden="true">
+          {big}
+        </span>
       )}
     </div>
   );
@@ -109,6 +125,8 @@ export default function Landing() {
         </div>
       </section>
 
+      <Ticker presence={presence} live={live} />
+
       <div className="marquee mono" aria-hidden="true">
         <div>
           {[...marquee, ...marquee].map((m, i) => (
@@ -119,7 +137,7 @@ export default function Landing() {
 
       {/* ── 01 · jogos ───────────────────────────────────── */}
       <section className="lsec" id="jogos" data-scene data-chapter={chapter(1)}>
-        <Head n="01" k={L.games.kicker} title={L.games.title} lead={L.games.lead} />
+        <Head n="01" k={L.games.kicker} title={L.games.title} lead={L.games.lead} big={String(GAMES.length).padStart(2, "0")} />
         <ol className="shelf-games" data-scene>
           {GAMES.map((g, i) => (
             <li key={g.title} className={`gcard ${live === g.title ? "is-live" : ""}`} style={{ "--i": i }}>
@@ -136,7 +154,7 @@ export default function Landing() {
 
       {/* ── 02 · filmes e séries ─────────────────────────── */}
       <section className="lsec" id="tela" data-scene data-chapter={chapter(2)}>
-        <Head n="02" k={L.screen.kicker} title={L.screen.title} lead={L.screen.lead} />
+        <Head n="02" k={L.screen.kicker} title={L.screen.title} lead={L.screen.lead} big="♠" />
         <div className="shelf-tabs" role="tablist">
           {["films", "series"].map((k) => (
             <button key={k} role="tab" aria-selected={shelf === k} className="mono" onClick={() => setShelf(k)}>
@@ -154,7 +172,7 @@ export default function Landing() {
 
       {/* ── 03 · música ──────────────────────────────────── */}
       <section className="lsec" id="musica" data-scene data-chapter={chapter(3)}>
-        <Head n="03" k={L.music.kicker} title={L.music.title} lead={L.music.lead} />
+        <Head n="03" k={L.music.kicker} title={L.music.title} lead={L.music.lead} big={String(ARTISTS.length).padStart(2, "0")} />
         <div className="music" data-scene>
           <ol className="artists">
             {ARTISTS.map((a, i) => {
@@ -182,7 +200,7 @@ export default function Landing() {
 
       {/* ── 04 · IA e projetos ───────────────────────────── */}
       <section className="lsec" id="projetos" data-scene data-chapter={chapter(4)}>
-        <Head n="04" k={L.lab.kicker} title={L.lab.title} lead={L.lab.lead} />
+        <Head n="04" k={L.lab.kicker} title={L.lab.title} lead={L.lab.lead} big="S7" />
         <Reveal className="project">
           <div>
             <p className="mono kicker">{L.lab.projectKicker}</p>
@@ -207,7 +225,7 @@ export default function Landing() {
 
       {/* ── 05 · sobre ───────────────────────────────────── */}
       <section className="lsec" id="sobre" data-scene data-chapter={chapter(5)}>
-        <Head n="05" k={L.about.kicker} title={L.about.title} lead={L.about.lead} />
+        <Head n="05" k={L.about.kicker} title={L.about.title} lead={L.about.lead} big="03" />
         <div className="crafts crafts--landing">
           {L.about.crafts.map((c, i) => (
             <Reveal as="div" key={c.name} delay={i * 80} className="craft">
@@ -228,7 +246,7 @@ export default function Landing() {
 
       {/* ── contato ──────────────────────────────────────── */}
       <section className="lcontact" id="contato" data-scene data-chapter={chapter(6)}>
-        <Kicker n="06">{L.contact.kicker}</Kicker>
+        <Kicker n="006">{L.contact.kicker}</Kicker>
         <Reveal>
           <Title parts={L.contact.title} />
         </Reveal>

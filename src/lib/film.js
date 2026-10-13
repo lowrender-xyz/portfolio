@@ -26,6 +26,8 @@ const FX = [
   // títulos: a palavra em destaque chega deslizando da direita e para quando a cena chega ao meio da tela
   ["[data-chapter]", ".lsec__head .ltitle > em", ({ c }) => ({ t: `translate3d(${Math.max(0, 0.5 - c) * 18}vw,0,0)`, o: 0.35 + Math.min(c, 0.5) * 1.3 })],
   ["[data-chapter]", ".lsec__lead", ({ c }) => ({ t: `translate3d(0,${(0.5 - c) * 60}px,0)` })],
+  // numeral gigante na vertical: corre mais devagar que a página (profundidade)
+  ["[data-chapter]", ".lsec__big", ({ c }) => ({ t: `translate3d(0,${(c - 0.5) * 160}px,0)` })],
   // jogos: as capas sobem em sequência, deitadas para trás, e se endireitam
   ["#jogos", ".shelf-games > li", ({ p }, i) => {
     const e = clamp((p - 0.08 - i * 0.03) * 4);
