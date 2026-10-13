@@ -22,7 +22,7 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Landing (seções) | `src/pages/Landing.jsx` |
 | Módulos do Smart7 (abas com temporizador + tela real) | `src/components/ModuleExplorer.jsx` |
 | Meio-tom do hero | `src/components/Halftone.jsx` |
-| Abertura (pontos formam "sorry.") | `src/lib/boot.js` · `src/components/Opening.jsx` |
+| Abertura (pontos formam "sorry.") | `src/lib/boot.js` · `src/components/Opening.jsx` · fontes sorteadas em `src/lib/bootFonts.js` |
 | Perfil (Discord ao vivo + links) | `src/components/Profile.jsx` · `src/lib/lanyard.js` |
 | Rolagem de filme (efeitos amarrados ao scroll) | `src/lib/film.js` (lista `FX`) |
 | Moldura de interface (trilho, mira, progresso) | `src/components/Hud.jsx` |

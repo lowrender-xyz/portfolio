@@ -2,26 +2,27 @@
 // drawBoot(ctx, scene, t, extra) pinta o quadro t sem estado acumulado: a montagem (0 → INTRO s) é função
 // pura do tempo; depois dela os pontos "respiram" e fogem do ponteiro, e a saída (exit 0 → 1) os espalha.
 import { clamp, spring, mulberry32, easeInOut } from "./motion.js";
+import { DEFAULT_FONT, fontString } from "./bootFonts.js";
 
 export const INTRO = 3.6; // segundos até o "sorry." estar montado e a mira travada
 
 const C = { ink: "#07080b", line: "#1c2029", paper: "#eceef2", mute: "#7a8394", volt: "#3d7bff" };
 
 // amostra o texto numa grade e devolve os pontos (alvo, origem espalhada, atraso)
-export function buildScene(W, H) {
+export function buildScene(W, H, font = DEFAULT_FONT) {
   const off = document.createElement("canvas");
   off.width = W;
   off.height = H;
   const o = off.getContext("2d");
   const mobile = W / H < 1.1;
-  let fs = mobile ? W * 0.36 : Math.min(W * 0.26, H * 0.5);
-  o.font = `700 ${fs}px "Space Grotesk"`;
+  let fs = (mobile ? W * 0.36 : Math.min(W * 0.26, H * 0.5)) * (font.scale ?? 1);
+  o.font = fontString(font, fs);
   const body = "sorry", dot = ".";
   // a palavra inteira (com o ponto) cabe em 84% da largura, com folga para a mira
   const fit = (W * (mobile ? 0.8 : 0.84)) / o.measureText(body + dot).width;
   if (fit < 1) {
     fs *= fit;
-    o.font = `700 ${fs}px "Space Grotesk"`;
+    o.font = fontString(font, fs);
   }
   const wBody = o.measureText(body).width, wDot = o.measureText(dot).width;
   const x0 = (W - (wBody + wDot)) / 2;
@@ -63,6 +64,22 @@ export function buildScene(W, H) {
   };
 }
 
+// troca de fonte com a tela parada: a cena nova parte de onde os pontos da antiga estão, em ordem da
+// esquerda para a direita, e chega em ~1 s; a mira trava de novo no ponto azul novo
+export function morphScene(prev, next, t0) {
+  const old = [...prev.pts].sort((a, b) => a.x - b.x || a.y - b.y);
+  const rnd = mulberry32(next.pts.length);
+  [...next.pts].sort((a, b) => a.x - b.x || a.y - b.y).forEach((p, j) => {
+    const o = old[Math.floor((j / next.pts.length) * old.length)] ?? old[0];
+    p.sx = o.x + (rnd() - 0.5) * 30;
+    p.sy = o.y + (rnd() - 0.5) * 30;
+    p.delay = (p.x / next.W) * 0.45 + rnd() * 0.25;
+  });
+  next.t0 = t0;
+  next.lockAt = 0.9;
+  return next;
+}
+
 export function drawBoot(ctx, S, t, { dpr = 1, pointer = null, exit = 0 } = {}) {
   const { W, H, pts, step } = S;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -78,7 +95,7 @@ export function drawBoot(ctx, S, t, { dpr = 1, pointer = null, exit = 0 } = {}) 
   const idle = Math.max(0, t - INTRO);
   const ex = easeInOut(clamp(exit));
   for (const p of pts) {
-    const k = spring(t - p.delay, 90, 13); // chega com um leve balanço
+    const k = spring(t - (S.t0 ?? 0) - p.delay, 90, 13); // chega com um leve balanço
     let x = p.sx + (p.x - p.sx) * k, y = p.sy + (p.y - p.sy) * k;
     // parado: uma onda lenta atravessa a palavra
     const wave = idle > 0 ? Math.sin(p.x * 0.012 - idle * 2.2 + p.ph * 0.15) : 0;
@@ -109,7 +126,7 @@ export function drawBoot(ctx, S, t, { dpr = 1, pointer = null, exit = 0 } = {}) 
   ctx.globalAlpha = 1;
 
   // mira: quatro cantos que se fecham sobre o ponto azul
-  const lock = spring(t - 2.7, 170, 22);
+  const lock = spring(t - (S.t0 ?? 0) - (S.lockAt ?? 2.7), 170, 22);
   if (lock > 0.01 && ex < 1) {
     const { x, y, r } = S.dot;
     const s = r * (1.9 + (1 - lock) * 5), arm = r * 0.7;

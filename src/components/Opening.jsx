@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { buildScene, drawBoot, INTRO } from "../lib/boot.js";
+import { buildScene, drawBoot, morphScene, INTRO } from "../lib/boot.js";
+import { DEFAULT_FONT, BOOT_FONTS, RANDOM_CHANCE, loadFont, pickFont } from "../lib/bootFonts.js";
 import { useLocale } from "../i18n.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 import { GAMES, ARTISTS } from "../data/me.js";
@@ -29,6 +30,7 @@ export default function Opening() {
     [B.games, String(GAMES.length).padStart(2, "0")],
     [B.artists, String(ARTISTS.length).padStart(2, "0")],
     [B.project, "SMART7"],
+    [B.font, "…"],
     ["//", B.ok],
   ];
   const linesRef = useRef(lines);
@@ -41,6 +43,10 @@ export default function Opening() {
     const frozen = params.has("t") ? Number(params.get("t")) : null;
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let scene = null, raf = 0, alive = true, start = 0, shown = false;
+    // fonte: ?font=Bungee força uma; quadro congelado usa a padrão; senão RANDOM_CHANCE de sortear
+    const forced = BOOT_FONTS.find((f) => f.name.toLowerCase() === (params.get("font") || "").toLowerCase());
+    let font = forced ?? (frozen === null && Math.random() < RANDOM_CHANCE ? pickFont() : DEFAULT_FONT);
+    let nextSwap = INTRO + 7 + Math.random() * 4, swapping = false;
     const pointer = { x: -9999, y: -9999 };
     let dpr = 1;
 
@@ -49,7 +55,17 @@ export default function Opening() {
       const W = cv.clientWidth, H = cv.clientHeight;
       cv.width = Math.round(W * dpr);
       cv.height = Math.round(H * dpr);
-      scene = buildScene(W, H);
+      scene = buildScene(W, H, font);
+    };
+    // de tempos em tempos, com a tela parada, os pontos se remontam noutra fonte
+    const swap = async (time) => {
+      swapping = true;
+      const next = await loadFont(pickFont(font));
+      if (!alive || exitAt.current) return;
+      font = next;
+      scene = morphScene(scene, buildScene(cv.clientWidth, cv.clientHeight, font), (performance.now() - start) / 1000);
+      nextSwap = time + 8 + Math.random() * 4;
+      swapping = false;
     };
     // o terminal acompanha a montagem: uma linha a cada ~0,42 s, digitada caractere a caractere
     const type = (time) => {
@@ -57,7 +73,8 @@ export default function Opening() {
       if (!el) return;
       const ls = linesRef.current;
       el.querySelectorAll("li").forEach((li, i) => {
-        const [k, v] = ls[i];
+        const [k, v0] = ls[i];
+        const v = k === B.font ? font.name.toUpperCase() : v0;
         const full = k === "//" ? `// ${v}` : `> ${k.padEnd(10, ".")} ${v}`;
         const n = Math.floor(Math.max(0, time - 0.15 - i * 0.42) * 60);
         li.textContent = full.slice(0, n);
@@ -78,6 +95,7 @@ export default function Opening() {
       if (!alive) return;
       const time = (now - start) / 1000;
       const exit = exitAt.current ? (now - exitAt.current) / 1000 / EXIT : 0;
+      if (!reduce && !swapping && !exitAt.current && time > nextSwap) swap(time);
       paint(time, exit);
       if (exit >= 1) {
         try {
@@ -99,7 +117,7 @@ export default function Opening() {
       if (frozen !== null) paint(frozen);
     };
 
-    document.fonts.ready.then(() => {
+    Promise.all([document.fonts.ready, loadFont(font)]).then(() => {
       if (!alive) return;
       build();
       window.ready = true;
