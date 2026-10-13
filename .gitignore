@@ -3,4 +3,4 @@ dist
 .env
 .netlify
 out
-github-profile/.git
+github-profile/
