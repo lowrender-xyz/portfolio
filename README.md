@@ -28,6 +28,11 @@ npm run preview    # http://127.0.0.1:4301 (versão de produção)
 | Moldura de interface (trilho, mira, progresso) | `src/components/Hud.jsx` |
 | Cursor (mira que trava em links e botões) | `src/components/Cursor.jsx` |
 | Linha de terminal ao vivo · tela de carregamento | `src/components/Ticker.jsx` · `src/components/Loader.jsx` |
+| "Agora" (frase e data) | `src/data/now.js` |
+| Som (efeitos sintetizados) · botão | `src/lib/sfx.js` · `src/components/SoundToggle.jsx` |
+| Transição entre seções | `src/components/SectionWipe.jsx` |
+| Konami code (↑↑↓↓←→←→BA) | `src/components/Konami.jsx` |
+| Ouvidas recentemente | `src/lib/recent.js` (lê `recent.json` do perfil no GitHub) |
 | Cores, fontes, layout | `src/styles.css` (tokens no topo) |
 | Direção de arte e estrutura | `docs/style_guide.md` · `docs/estrutura.md` |
 

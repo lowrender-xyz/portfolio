@@ -27,6 +27,7 @@ const dict = {
     talk: "Contato",
     landing: {
       loading: "CARREGANDO ARQUIVOS",
+      now: "AGORA",
       ticker: { sync: "SINCRONIZANDO PERFIL AO VIVO", none: "NENHUM", online: "NO AR" },
       marqueeAi: "Projetos com IA",
       hero: {
@@ -64,6 +65,7 @@ const dict = {
         nowKicker: "Tocando agora no Spotify",
         idle: "Nada tocando no momento.",
         progress: "Progresso da música",
+        recent: "OUVIDAS RECENTEMENTE",
         open: "Ouvir no Spotify",
       },
       lab: {
@@ -148,6 +150,7 @@ const dict = {
       profile: "Ver perfil",
     },
     footer: "Feito em código, quadro a quadro.",
+    konami: "GRAVIDADE ATIVADA · CLIQUE OU ESC PARA RESTAURAR",
     tmdb: "Filmes e séries: TMDB. Este site usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.",
     notFound: "Essa cena não existe.",
   },
@@ -177,6 +180,7 @@ const dict = {
     talk: "Contact",
     landing: {
       loading: "LOADING FILES",
+      now: "NOW",
       ticker: { sync: "SYNCING LIVE PROFILE", none: "NONE", online: "ONLINE" },
       marqueeAi: "AI projects",
       hero: {
@@ -214,6 +218,7 @@ const dict = {
         nowKicker: "Playing now on Spotify",
         idle: "Nothing playing right now.",
         progress: "Track progress",
+        recent: "RECENTLY PLAYED",
         open: "Listen on Spotify",
       },
       lab: {
@@ -298,6 +303,7 @@ const dict = {
       profile: "View profile",
     },
     footer: "Made in code, frame by frame.",
+    konami: "GRAVITY ON · CLICK OR ESC TO RESTORE",
     tmdb: "Movies and series: TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.",
     notFound: "This scene doesn't exist.",
   },

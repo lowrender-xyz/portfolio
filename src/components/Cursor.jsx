@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { tick, blip } from "../lib/sfx.js";
 
 // Cursor do site no estilo da mira do HUD: um ponto que segue o mouse na hora e quatro cantos que vão atrás
 // com atraso suave. Sobre links e botões, os cantos se abrem e enquadram o elemento (a mira trava no alvo).
@@ -27,11 +28,16 @@ export default function Cursor() {
         root.classList.add("cursor-on");
       }
       const el = e.target.closest?.(TARGETS);
-      target = el && !el.disabled ? el : null;
+      const next = el && !el.disabled ? el : null;
+      if (next && next !== target) tick(); // a mira travou num alvo novo
+      target = next;
     };
     const leave = () => root.classList.remove("cursor-on");
     const enter = () => p.seen && root.classList.add("cursor-on");
-    const press = () => (down = true);
+    const press = () => {
+      down = true;
+      if (target) blip();
+    };
     const release = () => (down = false);
 
     const loop = (now) => {

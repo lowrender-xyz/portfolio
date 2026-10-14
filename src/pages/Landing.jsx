@@ -10,6 +10,7 @@ import Shot from "../components/Shot.jsx";
 import NowPlaying from "../components/NowPlaying.jsx";
 import TornPaper from "../components/TornPaper.jsx";
 import Ticker from "../components/Ticker.jsx";
+import { NOW } from "../data/now.js";
 import Decks from "../components/Decks.jsx";
 import GameCover from "../components/GameCover.jsx";
 import { Reveal } from "../components/Chrome.jsx";
@@ -101,6 +102,13 @@ export default function Landing() {
             </Reveal>
             <Reveal as="p" delay={180} className="lhero__lead">
               {L.hero.lead}
+            </Reveal>
+            <Reveal as="p" delay={220} className="lhero__now mono">
+              <span className="lhero__now-k">■ {L.now}</span>
+              <span className="lhero__now-v">{pick(NOW.text)}</span>
+              <span className="lhero__now-d">
+                {new Date(`${NOW.updated}T12:00:00`).toLocaleDateString(lang === "pt" ? "pt-BR" : "en-US", { day: "2-digit", month: "short" })}
+              </span>
             </Reveal>
             <Reveal delay={260} className="lhero__cta">
               <a className="btn btn--volt" href="#jogos">

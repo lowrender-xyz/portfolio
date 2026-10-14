@@ -1,9 +1,10 @@
 import { useLocale } from "../i18n.jsx";
 import { useNow, fmt } from "../lib/lanyard.js";
+import { useRecent, ago } from "../lib/recent.js";
 
 // Player do que está tocando agora no Spotify (dados do Lanyard). A capa tinge o fundo do cartão,
 // a barra anda em tempo real e o equalizador só se mexe enquanto há música.
-export default function NowPlaying({ spotify }) {
+function Player({ spotify }) {
   const { t } = useLocale();
   const M = t.landing.music;
   const now = useNow(Boolean(spotify));
@@ -72,5 +73,35 @@ export default function NowPlaying({ spotify }) {
         </a>
       )}
     </div>
+  );
+}
+
+// player + "ouvidas recentemente" (histórico da automação do GitHub + o que este navegador viu tocar)
+export default function NowPlaying({ spotify }) {
+  const { t, lang } = useLocale();
+  const recent = useRecent(spotify).slice(0, 5);
+  return (
+    <>
+      <Player spotify={spotify} />
+      {recent.length > 0 && (
+        <div className="recent">
+          <p className="recent__k mono">■ {t.landing.music.recent}</p>
+          <ol>
+            {recent.map((x) => (
+              <li key={x.id}>
+                <a href={`https://open.spotify.com/track/${x.id}`} target="_blank" rel="noreferrer">
+                  <img src={x.art} alt="" loading="lazy" />
+                  <span className="recent__txt">
+                    <b>{x.song}</b>
+                    <span>{x.artist}</span>
+                  </span>
+                  <span className="recent__ago mono">{ago(x.at, lang)}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+    </>
   );
 }

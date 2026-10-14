@@ -7,6 +7,8 @@ import { useLocale } from "../i18n.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 import { GAMES, ARTISTS } from "../data/me.js";
 import LangSwitch from "./LangSwitch.jsx";
+import SoundToggle from "./SoundToggle.jsx";
+import { whoosh, chime, thud } from "../lib/sfx.js";
 
 const EXIT = 0.95; // segundos da saída (pontos se espalham, o azul cobre a tela)
 
@@ -128,9 +130,12 @@ export default function Opening() {
         mode = nextEffect;
         nextEffect = mode === "fall" ? "planet" : "fall";
         mode === "fall" ? startFall(scene) : startPlanet(scene);
+        whoosh();
+        if (mode === "fall") [0.9, 1.15, 1.4].forEach((d, k) => setTimeout(() => thud(0.8 + k * 0.2), d * 1000));
       } else {
         // qualquer clique devolve as partículas ao nome
         backToName(scene, time);
+        whoosh();
         mode = "name";
         nextSwap = time + 9;
       }
@@ -169,6 +174,7 @@ export default function Opening() {
     if (exitAt.current) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return navigate("/inicio");
     exitAt.current = performance.now();
+    chime();
   };
 
   return (
@@ -180,7 +186,10 @@ export default function Opening() {
         <span className="boot__clock">
           <i /> <span ref={clock}>BOOT 00:00:00:00</span>
         </span>
-        <LangSwitch />
+        <span className="boot__tools">
+          <SoundToggle />
+          <LangSwitch />
+        </span>
       </header>
 
       <ol className="boot__term mono" ref={term} aria-hidden="true">

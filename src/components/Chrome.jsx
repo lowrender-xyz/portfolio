@@ -5,6 +5,8 @@ import { useLocale } from "../i18n.jsx";
 import { mulberry32 } from "../lib/motion.js";
 import LangSwitch from "./LangSwitch.jsx";
 import { useHudProgress } from "./Hud.jsx";
+import SoundToggle from "./SoundToggle.jsx";
+import { sweep } from "../lib/sfx.js";
 
 // Seção visível agora (para marcar o item do menu)
 function useActiveSection(ids) {
@@ -31,6 +33,7 @@ export function Nav() {
   // sem suporte ou com "reduzir movimento", troca na hora
   const toggleTheme = (e) => {
     const next = theme === "dark" ? "light" : "dark";
+    sweep(next === "light");
     const apply = () =>
       flushSync(() => {
         document.documentElement.dataset.theme = next;
@@ -81,6 +84,7 @@ export function Nav() {
           {t.talk}
         </a>
         <LangSwitch />
+        <SoundToggle />
         <button
           className="theme mono"
           onClick={(e) => toggleTheme(e)}

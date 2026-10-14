@@ -58,7 +58,7 @@ export default function Profile({ presence }) {
 
         <dl className="pf__spec">
           <div>
-            <dt className="mono">{P.now}</dt>
+            <dt className="mono">DISCORD</dt>
             <dd>{doing}</dd>
           </div>
           <div>

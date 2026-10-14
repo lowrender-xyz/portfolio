@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLocale } from "../i18n.jsx";
-import { subscribe, getLenis } from "../lib/film.js";
+import { subscribe } from "../lib/film.js";
 
 // Moldura de interface do site: borda fina em volta da tela, trilho lateral com a mira (gira com a rolagem)
 // e um marcador por seção, e o bloco de progresso da barra de cima. Tudo atualizado direto no DOM, a cada
@@ -47,10 +47,6 @@ export default function Hud() {
               key={href}
               href={href}
               title={label}
-              onClick={(e) => {
-                const el = document.querySelector(href), lenis = getLenis();
-                if (el && lenis) (e.preventDefault(), lenis.scrollTo(el, { offset: -80 }));
-              }}
             >
               <span className="mono">{String(i + 1).padStart(2, "0")}</span>
               <i />

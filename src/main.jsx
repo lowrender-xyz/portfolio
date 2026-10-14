@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound.jsx";
 import Hud from "./components/Hud.jsx";
 import Loader from "./components/Loader.jsx";
 import Cursor from "./components/Cursor.jsx";
+import SectionWipe from "./components/SectionWipe.jsx";
+import Konami from "./components/Konami.jsx";
 import { startFilm, getLenis } from "./lib/film.js";
 import "./styles.css";
 
@@ -29,6 +31,8 @@ function Site({ children }) {
       {children}
       <Footer />
       <Hud />
+      <SectionWipe />
+      <Konami />
       <Loader />
     </>
   );

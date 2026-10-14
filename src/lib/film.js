@@ -15,6 +15,13 @@ const listeners = new Set();
 let state = { progress: 0, velocity: 0, chapter: null, lenis: null };
 
 export const subscribe = (fn) => (listeners.add(fn), () => listeners.delete(fn));
+// o Konami assume os transforms por um tempo: enquanto congelado, os efeitos de scroll não escrevem nada
+let frozen = false;
+export const setFrozen = (v) => {
+  frozen = v;
+  if (!v) forceWrite = true;
+};
+let forceWrite = false;
 export const getLenis = () => state.lenis;
 
 // [cena, alvo dentro da cena, efeito(progresso, índice do alvo, alvo)] → { t: transform, o: opacity }
@@ -108,7 +115,8 @@ export function startFilm() {
     const vh = innerHeight, y = scrollY;
     const max = Math.max(1, document.documentElement.scrollHeight - vh);
     const vel = clamp(lenis ? lenis.velocity : y - (lastY < 0 ? y : lastY), -40, 40);
-    const moved = y !== lastY || tick < 4 || tick % 45 === 1;
+    const moved = y !== lastY || tick < 4 || tick % 45 === 1 || forceWrite;
+    if (!frozen) forceWrite = false;
     lastY = y;
 
     if (moved) {
@@ -118,7 +126,7 @@ export function startFilm() {
       for (const el of chapters) if (el.getBoundingClientRect().top <= vh * 0.5) chapter = el.dataset.chapter;
       state.chapter = chapter;
       // 2) escritas, só nos alvos e só do que mudou
-      if (!reduce) {
+      if (!reduce && !frozen) {
         scenes.forEach((s, k) => {
           const r = rects[k];
           if (r.bottom < -vh * 0.5 || r.top > vh * 1.5) return; // longe da tela: não mexe
@@ -129,7 +137,7 @@ export function startFilm() {
           };
           for (const tg of s.targets) {
             const { t: tr, o, v } = tg.fx(prog, tg.i, tg.el);
-            if (tr !== undefined && tr !== tg.last.t) tg.el.style.transform = tg.last.t = tr;
+            if (tr !== undefined && (tr !== tg.last.t || tg.el.style.transform !== tr)) tg.el.style.transform = tg.last.t = tr;
             if (o !== undefined) {
               const os = clamp(o).toFixed(3);
               if (os !== tg.last.o) tg.el.style.opacity = tg.last.o = os;
