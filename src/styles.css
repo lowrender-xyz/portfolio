@@ -2826,3 +2826,11 @@ html.cursor-on .cursor {
   height: 12px;
   border-color: var(--volt);
 }
+
+/* abertura: o nome é clicável (gravidade / planeta) */
+.boot__canvas {
+  cursor: pointer;
+}
+.boot__play {
+  color: var(--paper);
+}

@@ -9,6 +9,8 @@ Inicialização do sistema (`src/lib/boot.js`): o terminal digita dados reais (p
 7 artistas, Smart7) enquanto milhares de pontos convergem e formam "sorry."; a mira trava no ponto azul e o
 botão Entrar aparece. Parado, os pontos respiram e fogem do ponteiro. Ao entrar, eles se espalham, o ponto
 azul cobre a tela e recolhe como cortina sobre a landing. `?t=2.4` congela um quadro da montagem.
+Clicar no nome alterna dois efeitos (`src/lib/play.js`): gravidade (as partículas caem e se empilham no chão
+da moldura) e planeta (esfera com faixas, anéis e o ponto azul como lua). Outro clique remonta o nome.
 
 ## `/inicio` Landing (uma página só, centrada no Keven)
 | # | Âncora | Conteúdo |

@@ -12,7 +12,8 @@ const dict = {
       font: "FONTE",
       ok: "PRONTO",
       role: "CÓDIGO, DESIGN E MOVIMENTO",
-      counts: "■ 06 SEÇÕES · DISCORD AO VIVO",
+      counts: "06 SEÇÕES · DISCORD AO VIVO",
+      play: "■ CLIQUE NO NOME",
     },
     nav: { home: "Início", projects: "Projetos", skills: "Skills" },
     landingNav: [
@@ -161,7 +162,8 @@ const dict = {
       font: "FONT",
       ok: "READY",
       role: "CODE, DESIGN AND MOTION",
-      counts: "■ 06 SECTIONS · LIVE DISCORD",
+      counts: "06 SECTIONS · LIVE DISCORD",
+      play: "■ CLICK THE NAME",
     },
     nav: { home: "Home", projects: "Projects", skills: "Skills" },
     landingNav: [

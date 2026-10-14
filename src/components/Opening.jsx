@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { buildScene, drawBoot, morphScene, INTRO } from "../lib/boot.js";
 import { DEFAULT_FONT, BOOT_FONTS, RANDOM_CHANCE, loadFont, pickFont } from "../lib/bootFonts.js";
+import { startFall, startPlanet, drawPlay, backToName, hitName } from "../lib/play.js";
 import { useLocale } from "../i18n.jsx";
 import { useLanyard } from "../lib/lanyard.js";
 import { GAMES, ARTISTS } from "../data/me.js";
@@ -20,6 +21,7 @@ export default function Opening() {
   const term = useRef(null);
   const clock = useRef(null);
   const exitAt = useRef(null);
+  const clickRef = useRef(null); // tratador de clique no canvas (definido dentro do efeito)
   const [ready, setReady] = useState(false);
 
   const status = presence ? t.discord[presence.discord_status] : t.discord.loading;
@@ -47,6 +49,8 @@ export default function Opening() {
     const forced = BOOT_FONTS.find((f) => f.name.toLowerCase() === (params.get("font") || "").toLowerCase());
     let font = forced ?? (frozen === null && Math.random() < RANDOM_CHANCE ? pickFont() : DEFAULT_FONT);
     let nextSwap = INTRO + 7 + Math.random() * 4, swapping = false;
+    // modos do clique no nome: nome → gravidade → nome → planeta → nome …
+    let mode = "name", nextEffect = "fall", lastNow = 0;
     const pointer = { x: -9999, y: -9999 };
     let dpr = 1;
 
@@ -95,8 +99,15 @@ export default function Opening() {
       if (!alive) return;
       const time = (now - start) / 1000;
       const exit = exitAt.current ? (now - exitAt.current) / 1000 / EXIT : 0;
-      if (!reduce && !swapping && !exitAt.current && time > nextSwap) swap(time);
-      paint(time, exit);
+      const dt = lastNow ? (now - lastNow) / 1000 : 0;
+      lastNow = now;
+      if (mode === "name") {
+        if (!reduce && !swapping && !exitAt.current && time > nextSwap) swap(time);
+        paint(time, exit);
+      } else {
+        drawPlay(ctx, scene, mode, time, dt, { dpr, exit });
+        type(time);
+      }
       if (exit >= 1) {
         try {
           sessionStorage.setItem("loaded", "1");
@@ -106,6 +117,24 @@ export default function Opening() {
         return;
       }
       raf = requestAnimationFrame(loop);
+    };
+    clickRef.current = (e) => {
+      if (!scene || !shown || exitAt.current || frozen !== null) return;
+      const r = cv.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const time = (performance.now() - start) / 1000;
+      if (mode === "name") {
+        if (!hitName(scene, x, y)) return;
+        mode = nextEffect;
+        nextEffect = mode === "fall" ? "planet" : "fall";
+        mode === "fall" ? startFall(scene) : startPlanet(scene);
+      } else {
+        // qualquer clique devolve as partículas ao nome
+        backToName(scene, time);
+        mode = "name";
+        nextSwap = time + 9;
+      }
+      cv.dataset.mode = mode;
     };
     const move = (e) => {
       const r = cv.getBoundingClientRect();
@@ -144,7 +173,7 @@ export default function Opening() {
 
   return (
     <main className={`boot ${ready ? "is-ready" : ""}`} onKeyDown={(e) => e.key === "Enter" && ready && enter()}>
-      <canvas ref={canvas} className="boot__canvas" aria-hidden="true" />
+      <canvas ref={canvas} className="boot__canvas" aria-hidden="true" onClick={(e) => clickRef.current?.(e)} />
       <div className="boot__frame" aria-hidden="true" />
 
       <header className="boot__top mono">
@@ -171,7 +200,9 @@ export default function Opening() {
           {t.enter} <span aria-hidden="true">→</span>
         </button>
       </div>
-      <p className="boot__hint mono">{B.counts}</p>
+      <p className="boot__hint mono">
+        <span className="boot__play">{B.play}</span> · {B.counts}
+      </p>
     </main>
   );
 }

@@ -116,6 +116,9 @@ export function drawBoot(ctx, S, t, { dpr = 1, pointer = null, exit = 0 } = {}) 
       y += (dy / d) * ex * (300 + p.ph * 60);
       r *= 1 - ex * 0.7;
     }
+    // posição desenhada agora: é daqui que a gravidade e o planeta partem
+    p.cx = x;
+    p.cy = y;
     if (r < 0.3) continue;
     ctx.globalAlpha = clamp(0.25 + k) * (1 - ex * 0.6);
     ctx.fillStyle = p.dot ? C.volt : C.paper;
