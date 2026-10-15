@@ -3008,6 +3008,3 @@ html.cursor-on .cursor {
   padding-top: clamp(40px, 5vw, 64px);
   border-top: 1px solid var(--line);
 }
-.project__cta {
-  margin-top: 26px;
-}

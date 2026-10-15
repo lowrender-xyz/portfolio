@@ -21,8 +21,6 @@ export const STATS = [
   { value: "0", label: { pt: "texto gravado", en: "text recorded" } },
 ];
 
-export const DOWNLOAD = "https://github.com/77sorryz/sorry-mech-releases/releases/latest";
-
 export const MODULES = [
   {
     code: "HUB-01",

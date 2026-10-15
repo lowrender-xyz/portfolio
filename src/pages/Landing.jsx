@@ -240,9 +240,6 @@ export default function Landing() {
               sorry<span className="dot">.</span> hub
             </h3>
             <p className="project__line">{L.lab.hubLine}</p>
-            <a className="btn project__cta" href={HUB.DOWNLOAD} target="_blank" rel="noreferrer">
-              {L.lab.hubDownload} <span aria-hidden="true">↓</span>
-            </a>
           </div>
           <dl className="project__stats">
             {HUB.STATS.map((s) => (
