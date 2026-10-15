@@ -112,8 +112,8 @@ export default function Opening() {
       }
       if (exit >= 1) {
         try {
-          sessionStorage.setItem("loaded", "1");
-          sessionStorage.setItem("boot", "1");
+          sessionStorage.setItem("sorry:loaded", "1");
+          sessionStorage.setItem("sorry:boot", "1");
         } catch (e) {}
         navigate("/inicio");
         return;

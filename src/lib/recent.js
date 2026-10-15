@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // "Ouvidas recentemente": junta o histórico gravado pela automação do perfil no GitHub (a cada ~10 min,
 // em recent.json no branch output) com o que este navegador viu tocar ao vivo pelo Lanyard.
 const URL = "https://raw.githubusercontent.com/77sorryz/77sorryz/output/recent.json";
-const KEY = "recent-tracks";
+const KEY = "sorry:recent-tracks";
 const MAX = 12;
 
 const read = () => {
