@@ -7,7 +7,7 @@ import { useLocale } from "../i18n.jsx";
 function BootCurtain() {
   const [on, setOn] = useState(() => {
     try {
-      return sessionStorage.getItem("boot") === "1";
+      return sessionStorage.getItem("sorry:boot") === "1";
     } catch (e) {
       return false;
     }
@@ -15,7 +15,7 @@ function BootCurtain() {
   useEffect(() => {
     if (!on) return;
     try {
-      sessionStorage.removeItem("boot");
+      sessionStorage.removeItem("sorry:boot");
     } catch (e) {}
   }, [on]);
   if (!on) return null;
@@ -36,7 +36,7 @@ function FileLoader() {
   const [pct, setPct] = useState(0);
   const [done, setDone] = useState(() => {
     try {
-      return sessionStorage.getItem("loaded") === "1";
+      return sessionStorage.getItem("sorry:loaded") === "1";
     } catch (e) {
       return false;
     }
@@ -50,7 +50,7 @@ function FileLoader() {
       setPct(100);
       setTimeout(() => alive && setDone(true), 650);
       try {
-        sessionStorage.setItem("loaded", "1");
+        sessionStorage.setItem("sorry:loaded", "1");
       } catch (e) {}
     };
     const imgs = [...document.images].filter((i) => i.loading !== "lazy");

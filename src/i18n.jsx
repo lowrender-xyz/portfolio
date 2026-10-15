@@ -314,7 +314,7 @@ const Ctx = createContext(null);
 export function LocaleProvider({ children }) {
   const [lang, setLang] = useState(() => {
     try {
-      const saved = localStorage.getItem("lang");
+      const saved = localStorage.getItem("sorry:lang");
       if (saved === "pt" || saved === "en") return saved;
     } catch (e) {}
     return navigator.language?.startsWith("pt") ? "pt" : "en";
@@ -322,7 +322,7 @@ export function LocaleProvider({ children }) {
   useEffect(() => {
     document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
     try {
-      localStorage.setItem("lang", lang);
+      localStorage.setItem("sorry:lang", lang);
     } catch (e) {}
   }, [lang]);
   // pick(): escolhe a versão do idioma quando o valor é {pt, en}

@@ -58,7 +58,7 @@ export function Nav() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
-      localStorage.setItem("theme", theme);
+      localStorage.setItem("sorry:theme", theme);
     } catch (e) {}
   }, [theme]);
 

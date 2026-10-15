@@ -41,7 +41,8 @@ function Site({ children }) {
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <LocaleProvider>
-      <BrowserRouter>
+      {/* As rotas continuam as mesmas (/, /inicio...), dentro da base do site (/sorry). */}
+      <BrowserRouter basename={import.meta.env.BASE_URL.slice(0, -1)}>
         <Grain />
         <CursorLight />
         <Cursor />

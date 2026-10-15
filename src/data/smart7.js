@@ -1,8 +1,8 @@
 // Conteúdo do Smart7 tirado do README do repositório privado 77sorryz/Smart-Site, de backend/src/config/permissions.ts
 // (82 permissões) e das telas capturadas (scripts/capture-smartloja.mjs, dados de demonstração fictícios).
 const shot = (name, pt, en) => ({
-  src: `/projects/smart-loja/${name}.jpg`,
-  srcLight: `/projects/smart-loja/${name}-claro.jpg`, // mesma tela no tema claro do app
+  src: `${import.meta.env.BASE_URL}projects/smart-loja/${name}.jpg`,
+  srcLight: `${import.meta.env.BASE_URL}projects/smart-loja/${name}-claro.jpg`, // mesma tela no tema claro do app
   alt: { pt, en },
 });
 

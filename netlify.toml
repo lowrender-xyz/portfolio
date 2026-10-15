@@ -2,7 +2,14 @@
   command = "npm run build"
   publish = "dist"
 
+# O site mora em /sorry/ (lowrender.xyz/sorry/ repassa para cá). A raiz leva para lá, e qualquer
+# endereço dentro de /sorry/ abre o app (as rotas são do React Router).
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/"
+  to = "/sorry/"
+  status = 301
+
+[[redirects]]
+  from = "/sorry/*"
+  to = "/sorry/index.html"
   status = 200
