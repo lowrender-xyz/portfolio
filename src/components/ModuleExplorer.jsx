@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "../i18n.jsx";
-import { MODULES, SHOTS } from "../data/smart7.js";
+import * as SMART7 from "../data/smart7.js";
 import Shot from "./Shot.jsx";
 
 const DURATION = 7000; // ms em cada módulo antes de passar para o próximo
 
-// Módulos do Smart7 em abas com temporizador: a lista à esquerda, a tela real do módulo numa janela à direita.
+// Módulos de um projeto (Smart7 por padrão, ou o sorry hub) em abas com temporizador: a lista à esquerda, a tela real do módulo numa janela à direita.
 // A barra do módulo ativo enche em DURATION e o próximo entra sozinho; mouse em cima, foco no teclado ou a
 // seção fora da tela pausam o ciclo. Clicar na tela amplia.
-export default function ModuleExplorer() {
+export default function ModuleExplorer({ modules = SMART7.MODULES, shots = SMART7.SHOTS, app = "smart7", aria }) {
+  const MODULES = modules;
+  const SHOTS = shots;
   const { t, pick, lang } = useLocale();
   const C = t.landing.catalog;
   const [active, setActive] = useState(0);
@@ -46,7 +48,7 @@ export default function ModuleExplorer() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <ol className="mx__tabs" role="tablist" aria-label={C.aria}>
+      <ol className="mx__tabs" role="tablist" aria-label={aria ?? C.aria}>
         {MODULES.map((mod, i) => (
           <li key={mod.code}>
             <button
@@ -89,7 +91,7 @@ export default function ModuleExplorer() {
               <i />
               <i />
             </span>
-            <span>smart7 · {pick(m.title).toLowerCase()}</span>
+            <span>{app} · {pick(m.title).toLowerCase()}</span>
             <span className="mx__demo">{C.demoShort}</span>
           </div>
           {main ? (

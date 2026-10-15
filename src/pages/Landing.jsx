@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocale } from "../i18n.jsx";
 import { site } from "../data/site.js";
 import { SHOTS, STATS, MODULES } from "../data/smart7.js";
+import * as HUB from "../data/sorryhub.js";
 import { GAMES, SCREEN, TOOLS, ARTISTS, sameArtist } from "../data/me.js";
 import Profile from "../components/Profile.jsx";
 import Halftone from "../components/Halftone.jsx";
@@ -205,10 +206,12 @@ export default function Landing() {
 
       {/* ── 04 · IA e projetos ───────────────────────────── */}
       <section className="lsec" id="projetos" data-scene data-chapter={chapter(4)}>
-        <Head n="04" k={L.lab.kicker} title={L.lab.title} lead={L.lab.lead} big="S7" />
+        <Head n="04" k={L.lab.kicker} title={L.lab.title} lead={L.lab.lead} big="02" />
         <Reveal className="project">
           <div>
-            <p className="mono kicker">{L.lab.projectKicker}</p>
+            <p className="mono kicker">
+              <span className="dot">01</span> · {L.lab.projectKicker}
+            </p>
             <h3 className="project__name">
               Smart<span className="dot">7</span>
             </h3>
@@ -225,6 +228,33 @@ export default function Landing() {
         </Reveal>
         <Reveal delay={100} id="catalogo" className="catalog-wrap" data-scene>
           <ModuleExplorer />
+        </Reveal>
+
+        {/* segundo projeto: o app desktop sorry hub */}
+        <Reveal className="project project--next">
+          <div>
+            <p className="mono kicker">
+              <span className="dot">02</span> · {L.lab.hubKicker}
+            </p>
+            <h3 className="project__name">
+              sorry<span className="dot">.</span> hub
+            </h3>
+            <p className="project__line">{L.lab.hubLine}</p>
+            <a className="btn project__cta" href={HUB.DOWNLOAD} target="_blank" rel="noreferrer">
+              {L.lab.hubDownload} <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+          <dl className="project__stats">
+            {HUB.STATS.map((s) => (
+              <div key={s.label.en}>
+                <dt>{s.value}</dt>
+                <dd className="mono">{pick(s.label)}</dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+        <Reveal delay={100} className="catalog-wrap" data-scene>
+          <ModuleExplorer modules={HUB.MODULES} shots={HUB.SHOTS} app="sorry hub" aria={L.lab.hubAria} />
         </Reveal>
       </section>
 

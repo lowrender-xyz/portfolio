@@ -3001,3 +3001,13 @@ html.cursor-on .cursor {
 .recent a:hover b {
   color: #2456d6;
 }
+
+/* segundo projeto (sorry hub): separado do Smart7 por uma linha e respiro */
+.project--next {
+  margin-top: clamp(72px, 10vw, 140px);
+  padding-top: clamp(40px, 5vw, 64px);
+  border-top: 1px solid var(--line);
+}
+.project__cta {
+  margin-top: 26px;
+}
